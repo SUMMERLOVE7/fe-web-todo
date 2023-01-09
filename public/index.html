@@ -57,28 +57,45 @@
                             <div class="list-title-modal" id="list-title-modal-todo">
                                 <input type="text" id="title-input" class="todo-title-input" name="todo-title-input" placeholder="제목을 입력하세요."> </input>
                             </div>
-                            <div class="caption-modal" id="caption-modal-todo">
-                                <input type="text" id="caption-input" class="todo-caption-input" name="todo-caption-input" placeholder="내용을 입력하세요."> </input>
-                            </div>
-                            <div class="modal-button">
-                                <button type="button" id="cancel-button" class="todo-cancel-button"> 취소 </button>
-                                <button type="button" id = "add-button" class="todo-add-button"> 등록 </button>                    
-                            </div>
+                            <form>
+                                <div class="caption-modal" id="caption-modal-todo">
+                                    <input type="text" id="caption-input" class="todo-caption-input" name="todo-caption-input" placeholder="내용을 입력하세요."> </input>
+                                </div>
+                                <div class="modal-button">
+                                    <button type="button" id="cancel-button" class="todo-cancel-button"> 취소 </button>
+                                    <button type="submit" id = "add-button" class="todo-add-button"> 등록 </button>                    
+                                </div>
+                            </form>
+                            
                         </section>
                     </div> 
                 </div>
                 <section class="todolist" id="todolist-todo">
-                    <div class="list-title" id="list-title-todo">
-                        GITHUB 공부하기
-                    </div>
+                    <div class = "list-header">
+                        <div class="list-title" id="list-title-todo">
+                            GITHUB 공부하기
+                        </div>
+                        <button type="button" class="x-content-button" id="x-todo-content-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
+                            </svg>
+                        </button>
+                    </div>                    
                     <div class="caption" id="caption-todo">
                         add, commit, push
                     </div>                    
                 </section>
                 <section class="todolist" id="todolist-todo">
-                    <div class="list-title" id="list-title-todo">
-                        블로그에 포스팅할 것
-                    </div>
+                    <div class = "list-header">
+                        <div class="list-title" id="list-title-todo">
+                            블로그에 포스팅할 것
+                        </div>
+                        <button class="x-content-button" id="x-todo-content-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
+                            </svg>
+                        </button>
+                    </div>                   
                     <div class="caption" id="caption-todo">
                         <li>Github 공부내용</li>
                         <li>모던자바스크립트 1장 공부내용</li>
@@ -110,22 +127,30 @@
                                 <input type="text" id="title-input" class="doing-title-input" placeholder="제목을 입력하세요."> </input>
                             </div>
                             <form>
-                            <div class="caption-modal" id="caption-modal-doing">
-                                <input name="a" type="text" id="caption-input" class="doing-caption-input" placeholder="내용을 입력하세요."> </input>
-                            </div>
-                            <div class="modal-button">
-                                <button type="button" id="cancel-button" class="doing-cancel-button"> 취소 </button>
-                                <button type="submit" id = "add-button" class="doing-add-button"> 등록 </button>                    
-                            </div>
+                                <div class="caption-modal" id="caption-modal-doing">
+                                    <input name="a" type="text" id="caption-input" class="doing-caption-input" placeholder="내용을 입력하세요."> </input>
+                                </div>
+                                <div class="modal-button">
+                                    <button type="button" id="cancel-button" class="doing-cancel-button"> 취소 </button>
+                                    <button type="submit" id = "add-button" class="doing-add-button"> 등록 </button>                    
+                                </div>
                             </form>
                         </section>
                     </div> 
                 </div>
                 
                 <section class="todolist" id="todolist-doing">
-                    <div class="list-title" id="list-title-doing">
-                        HTML/CSS 공부하기
+                    <div class="list-header">
+                        <div class="list-title" id="list-title-doing">
+                            HTML/CSS 공부하기
+                        </div>
+                        <button class="x-content-button" id="x-todo-content-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
+                            </svg>
+                        </button>
                     </div>
+                    
                     <div class="caption" id="caption-doing">
                         input 태그 실습
                     </div>
@@ -154,13 +179,16 @@
                             <div class="list-title-modal" id="list-title-modal-done">
                                 <input type="text" id="title-input" class="done-title-input" placeholder="제목을 입력하세요."> </input>
                             </div>
-                            <div class="caption-modal" id="caption-modal-done">
-                                <input type="text" id="caption-input" class="done-caption-input" placeholder="내용을 입력하세요."> </input>
-                            </div>
-                            <div class="modal-button">
-                                <button type="button" id="cancel-button" class="done-cancel-button"> 취소 </button>
-                                <button type="button" id = "add-button" class="done-add-button"> 등록 </button>                    
-                            </div>
+                            <form>
+                                <div class="caption-modal" id="caption-modal-done">
+                                    <input type="text" id="caption-input" class="done-caption-input" placeholder="내용을 입력하세요."> </input>
+                                </div>
+                                <div class="modal-button">
+                                    <button type="button" id="cancel-button" class="done-cancel-button"> 취소 </button>
+                                    <button type="submit" id = "add-button" class="done-add-button"> 등록 </button>                    
+                                </div>
+                            </form>
+                            
                         </section>
                     </div> 
                 </div>
@@ -175,5 +203,6 @@
     <script src = "../src/index.js" charset="utf-8" type="module" defer></script>
     <script src = "../src/inputContent.js" charset="utf-8" type="module" defer></script>
     <script src = "../src/registerContent.js" charset="utf-8" type="module" defer></script>
+    <script src = "../src/deleteContent.js" charset="utf-8" defer></script>
 </body>
 </html>

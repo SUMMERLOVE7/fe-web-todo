@@ -179,6 +179,19 @@ header {
     color: #333;
 }
 
+.x-content-button{
+    width: 25px;
+    height: 25px;
+    justify-content: center;
+    background: none;
+    border-radius: 20px;
+    border: none;
+}
+
+.x-content-button svg:hover > path {
+    fill: rgb(244, 10, 10);
+}
+
 .todolist{
     display: flex;
     flex-direction:column;
@@ -190,6 +203,10 @@ header {
     height: 108px;
     background: #FFFFFF;
     border-radius: 6px;
+}
+
+.list-header{
+    display: flex;
 }
 
 .list-title{
