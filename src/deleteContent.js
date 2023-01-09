@@ -9,22 +9,13 @@ function deleteList(element){
     //target.addEventListner('click', grandParentSection.style.display = 'none');
     let parentDiv = element.parentElement;
     let grandParentSection = parentDiv.parentElement;
-    console.log(parentDiv);
+    //console.log(parentDiv);
     grandParentSection.style.display = 'none';
-    console.log('1');
 }
 
-/*
-deleteContent.forEach(element => {
-    element.addEventListner('click', deleteList(element));
-});
-*/
 for (let del of deleteContent){
     del.addEventListener('click', (e) => {
         e.preventDefault();
         deleteList(del);
-    //del.onclick = function(){
-
-    //}
-});
+    });
 }

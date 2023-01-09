@@ -203,6 +203,8 @@ header {
     height: 108px;
     background: #FFFFFF;
     border-radius: 6px;
+    border-style: solid;
+    border-color: white;
 }
 
 .list-header{
