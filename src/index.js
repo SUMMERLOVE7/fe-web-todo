@@ -1,7 +1,9 @@
 //const manipulateModal = require('./inputContent.js');
-
+//import { addTodoButton } from "./registerContent";
+//import { manageContent } from "./deleteContent";
 //const openDo = manipulateModal.openDoModal
 
+/*
 let todoCard = document.querySelectorAll('.todolist');
 
 function hoverRed(target) {
@@ -23,5 +25,14 @@ for(let card of todoCard){
 for(let card of todoCard){
     card.addEventListener('mouseout', () =>{
         mouseOut(card);
-    })
+    });
 }
+*/
+
+/*
+const column = document.querySelector(".havetodo-container");
+column.addEventListener("click", ({ target }) => {
+  const isTarget = target.querySelectorAll(".x-content-button");
+  console.log(isTarget);
+});
+*/

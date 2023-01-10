@@ -43,6 +43,33 @@ header {
 .menu-button svg:hover > path {
     fill: rgb(227, 122, 10);
 }
+
+
+.menu-screen{
+    background-color: white;
+    float: right;
+    width: 400px;
+    height:1000px;
+    z-index: 1;
+    position: relative;
+}
+
+.close-button{
+    border: none;
+    background: none;
+    float: right;
+    margin: 20px;
+    padding-right: 10px;
+}
+
+.close-button svg:hover > path{
+    fill: red;
+}
+
+.menu-content{
+    margin-top: 50px;
+    margin-left: 30px;
+}
   
 .column-container {
     display: flex;  
@@ -227,12 +254,6 @@ header {
     color: #010101;
 }
 
-.popup-screen{
-    background-color: white;
-    float: right;
-    width: 400px;
-    height:100%;
-}
 
 .modal-button{
     display: flex;

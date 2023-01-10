@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "fe-web-todo",
   "version": "1.0.0",
   "description": "todo webpage",
@@ -15,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/SUMMERLOVE7/fe-web-todo/issues"
   },
-  "homepage": "https://github.com/SUMMERLOVE7/fe-web-todo#readme"
+  "homepage": "https://github.com/SUMMERLOVE7/fe-web-todo#readme",
+  "keywords": []
 }
