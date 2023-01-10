@@ -46,24 +46,15 @@ function registerModal(target) {
     newTitle = document.querySelector(".todo-title-input").value;
     newContent = document.querySelector(".todo-caption-input").value;
     todo_list.push({ title: newTitle, caption: newContent });
-    //console.log(todo_list.length);
-    //console.log(todo_list);
   } else if (target === contentDoing) {
-    //console.log(document.querySelector('#title-input'));
     newTitle = document.querySelector(".doing-title-input").value;
     newContent = document.querySelector(".doing-caption-input").value;
     doing_list.push({ title: newTitle, caption: newContent });
-    //console.log(doing_list.length);
-    //console.log(doing_list);
   } else if (target == contentDone) {
     newTitle = document.querySelector(".done-title-input").value;
     newContent = document.querySelector(".done-caption-input").value;
     done_list.push({ title: newTitle, caption: newContent });
-    //console.log(done_list.length);
-    //console.log(done_list);
   }
-
-  //todo_list[newTitle] = newContent;
 
   let newSection = document.createElement("section");
   let newClass = document.createAttribute("class");
@@ -113,7 +104,9 @@ function registerModal(target) {
   newDiv2.innerText = newContent;
   newSection.appendChild(newDiv2);
 
-  target.appendChild(newSection);
+  //target.appendChild(newSection);
+  let firstchild = target.querySelector(".todolist");
+  target.insertBefore(newSection, firstchild);
 }
 
 /*
@@ -132,7 +125,7 @@ addTodoButton.addEventListener("click", (e) => {
 
     contentTodo.addEventListener("click", () => {
       let isTarget = contentTodo.querySelectorAll(".x-content-button");
-      console.log(isTarget);
+
       //if (isTarget.classList.contains("x-content-button")) {
       //if (isTarget !== null) {
       for (let ele of isTarget) {

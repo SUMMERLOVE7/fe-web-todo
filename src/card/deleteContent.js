@@ -1,5 +1,8 @@
 //let deleteContent = document.getElementsByClassName("x-content-button");
 let deleteContent = document.querySelectorAll(".x-content-button");
+let deletePopup = document.querySelector(".delPopup");
+let deletePopupBtn = document.querySelector(".del-popup");
+let cancelDelBtn = document.querySelector(".undo-popup");
 
 function hoverRed(target) {
   let parentDiv = target.parentElement;
@@ -33,9 +36,24 @@ for (let del of deleteContent) {
   });
   del.addEventListener("click", (e) => {
     e.preventDefault();
-    deleteList(del);
+    showDelPopup();
+    rmDelPopup(del);
+    //deleteList(del);
   });
 }
+
+// export function manageContent(target) {
+//   target.addEventListener("mouseover", (e) => {
+//     hoverRed(target);
+//   });
+//   target.addEventListener("mouseout", (e) => {
+//     mouseOut(target);
+//   });
+//   // target.addEventListener("click", (e) => {
+//   //   e.preventDefault();
+//   //   deleteList(target);
+//   // });
+// }
 
 export function manageContent(target) {
   target.addEventListener("mouseover", (e) => {
@@ -46,6 +64,24 @@ export function manageContent(target) {
   });
   target.addEventListener("click", (e) => {
     e.preventDefault();
-    deleteList(target);
+    showDelPopup();
+    rmDelPopup(target);
   });
 }
+
+function showDelPopup() {
+  deletePopup.style.display = "block";
+  deletePopup.classList.add("show");
+  console.log("show");
+}
+
+function rmDelPopup(target) {
+  deletePopupBtn.addEventListener("click", () => {
+    deleteList(target);
+    deletePopup.style.display = "none";
+  });
+}
+
+cancelDelBtn.addEventListener("click", () => {
+  deletePopup.style.display = "none";
+});

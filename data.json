@@ -1,0 +1,15 @@
+{
+  "columns": [
+    {
+      "title": "aa",
+      "cards": [
+        {
+          "title": "github 공부하기",
+          "details": ["input tag 연습"],
+          "footer": "author by web"
+        }
+      ]
+    }
+  ],
+  "history": [{}]
+}
