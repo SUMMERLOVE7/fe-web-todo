@@ -55,7 +55,7 @@ for (let del of deleteContent) {
 //   // });
 // }
 
-export function manageContent(target) {
+export function manageContent(target, todo_list) {
   target.addEventListener("mouseover", (e) => {
     hoverRed(target);
   });
@@ -65,6 +65,7 @@ export function manageContent(target) {
   target.addEventListener("click", (e) => {
     e.preventDefault();
     showDelPopup();
+    delArray(target, todo_list);
     rmDelPopup(target);
   });
 }
@@ -72,7 +73,6 @@ export function manageContent(target) {
 function showDelPopup() {
   deletePopup.style.display = "block";
   deletePopup.classList.add("show");
-  console.log("show");
 }
 
 function rmDelPopup(target) {
@@ -85,3 +85,24 @@ function rmDelPopup(target) {
 cancelDelBtn.addEventListener("click", () => {
   deletePopup.style.display = "none";
 });
+
+function delArray(target, todo_list) {
+  console.log(todo_list);
+  debugger;
+  let parentDiv = target.parentElement;
+  let grandParentSection = parentDiv.parentElement; //card
+  let ggrandParentDiv = grandParentSection.parentElement; //column
+  const cards = [...ggrandParentDiv.querySelectorAll(".todolist")];
+  const card = grandParentSection;
+  const idx = cards.findIndex((ele) => ele === card);
+  let title = parentDiv.querySelector(".list-title").innerText;
+  let caption = grandParentSection.querySelector(".caption").innerText;
+  if (ggrandParentDiv.classList.contains("havetodo-container")) {
+    // const index = todo_list.findIndex((ele) => ele.id === id);
+    todo_list.splice(idx, 1);
+  }
+}
+
+//1 === 1 true
+// [] === [] false
+//{} === {} false
