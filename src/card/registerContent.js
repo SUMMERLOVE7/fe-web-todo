@@ -11,8 +11,6 @@ import {
   doneTitleInput,
 } from "./inputContent.js";
 import { todo_list, doing_list, done_list } from "../store.js";
-//import doing_list from "../store.js";
-//import done_list from "../store.js";
 import { manageContent } from "./deleteContent.js";
 import { updateCount, changeEveryCount } from "./countCard.js";
 
@@ -45,19 +43,20 @@ function registerModal(target, todolist) {
     newTitle = document.querySelector(".todo-title-input").value;
     newContent = document.querySelector(".todo-caption-input").value;
     //todo_list.push({ title: newTitle, caption: newContent });
-    todolist.push({ title: newTitle, caption: newContent });
+    //todolist.push({ title: newTitle, caption: newContent });
     //const todo = {todo}
   } else if (target === contentDoing) {
     newTitle = document.querySelector(".doing-title-input").value;
     newContent = document.querySelector(".doing-caption-input").value;
     //doing_list.push({ title: newTitle, caption: newContent });
-    todolist.push({ title: newTitle, caption: newContent });
+    //todolist.push({ title: newTitle, caption: newContent });
   } else if (target == contentDone) {
     newTitle = document.querySelector(".done-title-input").value;
     newContent = document.querySelector(".done-caption-input").value;
     //done_list.push({ title: newTitle, caption: newContent });
-    todolist.push({ title: newTitle, caption: newContent });
+    //todolist.push({ title: newTitle, caption: newContent });
   }
+  todolist.push({ title: newTitle, caption: newContent });
 
   let newSection = document.createElement("section");
   let newClass = document.createAttribute("class");
