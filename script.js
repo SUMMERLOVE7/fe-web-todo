@@ -118,7 +118,6 @@ const addInputRegisterEvent = (e)=>{
             render();
             return;
         }
-        
         const input_status = document.querySelector('.input-items').closest('section').className;
         todos.unshift({
             Status:input_status,
@@ -140,11 +139,13 @@ const addInputFocusOutEvent = ()=>{
     //focusout 이벤트
     document.querySelector('.input-items').addEventListener("blur", ()=>{
         setTimeout(()=>{
-            initializeToBeUpdatedItem();
-            initializeInputData();
             const input_item = document.querySelector('.input-items');
             if(input_item)
             input_item.remove();
+            if(checkBeforeUpdateItem())
+                render();
+            initializeToBeUpdatedItem();
+            initializeInputData();
         },0)
     })
 }
@@ -157,9 +158,12 @@ const addInputFocusOutEvent = ()=>{
 const addInputCancelEvent = ()=>{
     //취소버튼 이벤트
     document.querySelector('.input-items').querySelector('.cancel-button').addEventListener('click',(e)=>{
+        document.querySelector('.input-items').remove();
+        if(checkBeforeUpdateItem())
+            render();
         initializeToBeUpdatedItem();
         initializeInputData();
-        document.querySelector('.input-items').remove();});
+    });
 }
 
 const make_new_input = (mode)=>{
@@ -246,7 +250,7 @@ todolist.addEventListener('dblclick',(e)=>{
     console.log('Before data',BeforeUpdateItem);
 
     update_element.className = 'input-items';
-    // update_element.setattribute('tabindex', -1);
+    update_element.setAttribute('tabindex', "-1");
 
     update_element.innerHTML = 
     `<form>
