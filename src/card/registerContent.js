@@ -14,18 +14,19 @@ import { todo_list, doing_list, done_list } from "../store.js";
 //import doing_list from "../store.js";
 //import done_list from "../store.js";
 import { manageContent } from "./deleteContent.js";
-import { idGenerator } from "../store.js";
+import { updateCount, changeEveryCount } from "./countCard.js";
+
 export let addTodoButton = document.querySelector(".todo-add-button");
 let cancelTodoButton = document.querySelector(".todo-cancel-button");
-let contentTodo = document.querySelector(".havetodo-container");
+export let contentTodo = document.querySelector(".havetodo-container");
 
 let addDoingButton = document.querySelector(".doing-add-button");
 let cancelDoingButton = document.querySelector(".doing-cancel-button");
-let contentDoing = document.querySelector(".doing-container");
+export let contentDoing = document.querySelector(".doing-container");
 
 let addDoneButton = document.querySelector(".done-add-button");
 let cancelDoneButton = document.querySelector(".done-cancel-button");
-let contentDone = document.querySelector(".done-container");
+export let contentDone = document.querySelector(".done-container");
 
 function valid_input(target) {
   if (!target.value) {
@@ -84,13 +85,13 @@ function registerModal(target, todolist) {
   newButton.setAttributeNode(newClass3);
   newDiv.appendChild(newButton);
 
-  var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
   svg.setAttribute("width", "12");
   svg.setAttribute("height", "12");
   svg.setAttribute("viewBox", "0 0 12 12");
   svg.setAttribute("fill", "none");
-  var newPath = document.createElementNS("http://www.w3.org/2000/svg", "path"); //Create a path in SVG's namespace
+  let newPath = document.createElementNS("http://www.w3.org/2000/svg", "path"); //Create a path in SVG's namespace
   newPath.setAttribute(
     "d",
     "M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z"
@@ -109,6 +110,8 @@ function registerModal(target, todolist) {
   //target.appendChild(newSection);
   let firstchild = target.querySelector(".todolist");
   target.insertBefore(newSection, firstchild);
+  changeEveryCount();
+  addEvent(target);
 }
 
 /*
@@ -119,56 +122,97 @@ column.addEventListener("click", ({ target }) => {
 
 });
 */
+
+function addEvent(target) {
+  let isTarget = target.querySelector(".x-content-button");
+
+  target.addEventListener("click", () => {
+    if (isTarget.classList.contains("x-content-button")) {
+      manageContent(isTarget);
+    }
+  });
+}
+
 addTodoButton.addEventListener("click", (e) => {
   e.preventDefault(); //새로고침 방지
 
   if (valid_input(todoTitleInput) === 0) {
     registerModal(contentTodo, todo_list);
-    contentTodo.addEventListener("click", () => {
-      let isTarget = contentTodo.querySelectorAll(".x-content-button");
-
-      //if (isTarget.classList.contains("x-content-button")) {
-      //if (isTarget !== null) {
-      for (let ele of isTarget) {
-        manageContent(ele);
-      }
-    });
+    //addEvent(contentTodo);
     closeTodo();
   }
 });
-
 addDoingButton.addEventListener("click", (e) => {
-  e.preventDefault();
+  e.preventDefault(); //새로고침 방지
 
   if (valid_input(doingTitleInput) === 0) {
     registerModal(contentDoing, doing_list);
-    contentDoing.addEventListener("click", () => {
-      let isTarget = contentDoing.querySelectorAll(".x-content-button");
-
-      for (let ele of isTarget) {
-        manageContent(ele);
-      }
-    });
+    //addEvent(contentDoing);
     closeDoing();
   }
 });
-
 addDoneButton.addEventListener("click", (e) => {
-  e.preventDefault();
+  e.preventDefault(); //새로고침 방지
 
   if (valid_input(doneTitleInput) === 0) {
     registerModal(contentDone, done_list);
-
-    contentDone.addEventListener("click", () => {
-      let isTarget = contentDone.querySelectorAll(".x-content-button");
-
-      for (let ele of isTarget) {
-        manageContent(ele);
-      }
-    });
+    //addEvent(contentDone);
     closeDone();
   }
 });
+
+// addTodoButton.addEventListener("click", (e) => {
+//   e.preventDefault(); //새로고침 방지
+
+//   if (valid_input(todoTitleInput) === 0) {
+//     registerModal(contentTodo, todo_list);
+//     contentTodo.addEventListener("click", () => {
+//       let isTarget = contentTodo.querySelectorAll(".x-content-button");
+
+//       //if (isTarget.classList.contains("x-content-button")) {
+//       //if (isTarget !== null) {
+//       for (let ele of isTarget) {
+//         console.log("ele");
+//         manageContent(ele);
+//         debugger;
+//       }
+//     });
+//     closeTodo();
+//   }
+// });
+
+// addDoingButton.addEventListener("click", (e) => {
+//   e.preventDefault();
+
+//   if (valid_input(doingTitleInput) === 0) {
+//     registerModal(contentDoing, doing_list);
+//     contentDoing.addEventListener("click", () => {
+//       let isTarget = contentDoing.querySelectorAll(".x-content-button");
+
+//       for (let ele of isTarget) {
+//         manageContent(ele);
+//       }
+//     });
+//     closeDoing();
+//   }
+// });
+
+// addDoneButton.addEventListener("click", (e) => {
+//   e.preventDefault();
+
+//   if (valid_input(doneTitleInput) === 0) {
+//     registerModal(contentDone, done_list);
+
+//     contentDone.addEventListener("click", () => {
+//       let isTarget = contentDone.querySelectorAll(".x-content-button");
+
+//       for (let ele of isTarget) {
+//         manageContent(ele);
+//       }
+//     });
+//     closeDone();
+//   }
+// });
 
 cancelTodoButton.addEventListener("click", () => closeTodo());
 cancelDoingButton.addEventListener("click", () => closeDoing());

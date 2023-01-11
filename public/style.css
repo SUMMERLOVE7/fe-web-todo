@@ -204,7 +204,7 @@ header {
   flex-grow: 0;
 }
 
-.count-todo {
+.count {
   width: 26px;
   height: 26px;
   font-weight: 700;
@@ -218,7 +218,7 @@ header {
   border-radius: 15px;
   background-color: rgb(163, 160, 160);
 }
-
+/*
 .count-doing {
   width: 26px;
   height: 26px;
@@ -248,7 +248,7 @@ header {
   border-radius: 15px;
   background-color: rgb(163, 160, 160);
 }
-
+*/
 .plus-x-button {
   display: flex;
   flex-direction: row;

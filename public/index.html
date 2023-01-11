@@ -47,7 +47,10 @@
             <div class="havetodo-container" id="list-container">
                 <div class="container-title">
                     <h3>해야할 일</h3>
-                    <div class="count-todo"> 2 </div>
+                    <div class = "count-container">
+                        <div class = "count" id="count-todo"> 2 </div>
+                    </div>
+                    
                     <div class="plus-x-button">
                         <button class="plus-button" id="plus-todo-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -117,7 +120,10 @@
             <div class="doing-container" id="list-container">
                 <div class="container-title">
                     <h3>하고 있는 일</h3>
-                    <div class="count-doing"> 1 </div>
+                    <div class = "count-container">
+                        <div class="count" id="count-doing">2 </div>
+                    </div>
+                    
                     <div class="plus-x-button">
                         <button class="plus-button" id="plus-doing-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -170,7 +176,10 @@
             <div class="done-container" id="list-container">
                 <div class="container-title">
                     <h3>완료한 일</h3>
-                    <div class="count-done"> 0 </div>
+                    <div class = "count-container">
+                        <div class="count" id="count-done"> 0 </div>
+                    </div>
+                    
                     <div class="plus-x-button">
                         <button class="plus-button" id="plus-done-button">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -228,6 +237,7 @@
     <script src = "../src/card/inputContent.js" charset="utf-8" type="module" defer></script>
     <script src = "../src/card/registerContent.js" charset="utf-8" type="module" defer></script>
     <script src = "../src/card/deleteContent.js" charset="utf-8" type = "module" defer></script>
-    <script src = "../src/showMenu.js" charset="utf-8" defer></script>
+    <script src = "../src/showMenu.js" charset="utf-8" type = "module" defer></script>
+    <script src = "../src/card/countCard.js" charset="utf-8" type="module" defer></script>
 </body>
 </html>
