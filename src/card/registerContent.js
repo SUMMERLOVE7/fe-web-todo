@@ -10,9 +10,9 @@ import {
   doingTitleInput,
   doneTitleInput,
 } from "./inputContent.js";
-import todo_list from "../store.js";
-import doing_list from "../store.js";
-import done_list from "../store.js";
+import { todo_list, doing_list, done_list } from "../store.js";
+//import doing_list from "../store.js";
+//import done_list from "../store.js";
 import { manageContent } from "./deleteContent.js";
 import { idGenerator } from "../store.js";
 export let addTodoButton = document.querySelector(".todo-add-button");
@@ -36,23 +36,26 @@ function valid_input(target) {
   }
 }
 
-function registerModal(target, todo_list) {
+function registerModal(target, todolist) {
   let newTitle = "";
   let newContent = "";
 
   if (target == contentTodo) {
     newTitle = document.querySelector(".todo-title-input").value;
     newContent = document.querySelector(".todo-caption-input").value;
-    todo_list.push({ title: newTitle, caption: newContent });
+    //todo_list.push({ title: newTitle, caption: newContent });
+    todolist.push({ title: newTitle, caption: newContent });
     //const todo = {todo}
   } else if (target === contentDoing) {
     newTitle = document.querySelector(".doing-title-input").value;
     newContent = document.querySelector(".doing-caption-input").value;
-    doing_list.push({ title: newTitle, caption: newContent });
+    //doing_list.push({ title: newTitle, caption: newContent });
+    todolist.push({ title: newTitle, caption: newContent });
   } else if (target == contentDone) {
     newTitle = document.querySelector(".done-title-input").value;
     newContent = document.querySelector(".done-caption-input").value;
-    done_list.push({ title: newTitle, caption: newContent });
+    //done_list.push({ title: newTitle, caption: newContent });
+    todolist.push({ title: newTitle, caption: newContent });
   }
 
   let newSection = document.createElement("section");
@@ -121,14 +124,13 @@ addTodoButton.addEventListener("click", (e) => {
 
   if (valid_input(todoTitleInput) === 0) {
     registerModal(contentTodo, todo_list);
-
     contentTodo.addEventListener("click", () => {
       let isTarget = contentTodo.querySelectorAll(".x-content-button");
 
       //if (isTarget.classList.contains("x-content-button")) {
       //if (isTarget !== null) {
       for (let ele of isTarget) {
-        manageContent(ele, todo_list);
+        manageContent(ele);
       }
     });
     closeTodo();
@@ -139,12 +141,12 @@ addDoingButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   if (valid_input(doingTitleInput) === 0) {
-    registerModal(contentDoing, todo_list);
+    registerModal(contentDoing, doing_list);
     contentDoing.addEventListener("click", () => {
       let isTarget = contentDoing.querySelectorAll(".x-content-button");
 
       for (let ele of isTarget) {
-        manageContent(ele, todo_list);
+        manageContent(ele);
       }
     });
     closeDoing();
@@ -155,7 +157,7 @@ addDoneButton.addEventListener("click", (e) => {
   e.preventDefault();
 
   if (valid_input(doneTitleInput) === 0) {
-    registerModal(contentDone, todo_list);
+    registerModal(contentDone, done_list);
 
     contentDone.addEventListener("click", () => {
       let isTarget = contentDone.querySelectorAll(".x-content-button");

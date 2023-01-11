@@ -1,3 +1,6 @@
+import { todo_list, doing_list, done_list } from "../store.js";
+//import todo_list from "../store.js";
+
 //let deleteContent = document.getElementsByClassName("x-content-button");
 let deleteContent = document.querySelectorAll(".x-content-button");
 let deletePopup = document.querySelector(".delPopup");
@@ -55,7 +58,7 @@ for (let del of deleteContent) {
 //   // });
 // }
 
-export function manageContent(target, todo_list) {
+export function manageContent(target) {
   target.addEventListener("mouseover", (e) => {
     hoverRed(target);
   });
@@ -65,7 +68,7 @@ export function manageContent(target, todo_list) {
   target.addEventListener("click", (e) => {
     e.preventDefault();
     showDelPopup();
-    delArray(target, todo_list);
+    delArray(target);
     rmDelPopup(target);
   });
 }
@@ -86,21 +89,38 @@ cancelDelBtn.addEventListener("click", () => {
   deletePopup.style.display = "none";
 });
 
-function delArray(target, todo_list) {
-  console.log(todo_list);
-  debugger;
+function delArray(target) {
+  //console.log(todolist);
   let parentDiv = target.parentElement;
   let grandParentSection = parentDiv.parentElement; //card
   let ggrandParentDiv = grandParentSection.parentElement; //column
-  const cards = [...ggrandParentDiv.querySelectorAll(".todolist")];
-  const card = grandParentSection;
-  const idx = cards.findIndex((ele) => ele === card);
+  //const cards = [...ggrandParentDiv.querySelectorAll(".todolist")];
+  //const card = grandParentSection;
+  //const idx = cards.findIndex((ele) => ele === card);
   let title = parentDiv.querySelector(".list-title").innerText;
   let caption = grandParentSection.querySelector(".caption").innerText;
   if (ggrandParentDiv.classList.contains("havetodo-container")) {
     // const index = todo_list.findIndex((ele) => ele.id === id);
+
+    const cards = [...ggrandParentDiv.querySelectorAll(".todolist")];
+    const card = grandParentSection;
+    const idx = cards.findIndex((ele) => ele === card);
     todo_list.splice(idx, 1);
+    //debugger;
+  } else if (ggrandParentDiv.classList.contains("doing-container")) {
+    const cards = [...ggrandParentDiv.querySelectorAll(".todolist")];
+    const card = grandParentSection;
+    const idx = cards.findIndex((ele) => ele === card);
+    //debugger;
+    doing_list.splice(idx, 1);
+  } else if (grandParentSection.classList.contains("done-container")) {
+    const cards = [...ggrandParentDiv.querySelectorAll(".todolist")];
+    const card = grandParentSection;
+    const idx = cards.findIndex((ele) => ele === card);
+    done_list.splice(idx, 1);
   }
+
+  //todo_list.splice(idx, 1);
 }
 
 //1 === 1 true
