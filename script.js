@@ -1,5 +1,5 @@
 import {InputData, ToBeDeleted, TodosStatus, Todos, BeforeUpdateItem} from "./store.js";
-import {makeTodoSection, makeInputTemplate, makeInputFormTemplate} from "./template.js";
+import {makeTodoSection, makeInputTemplate, makeInputFormTemplate, makeNoticeTemplate} from "./template.js";
 import {initializeToBeUpdatedItem, initializeInputData, storeToBeUpdatedItem, storeInputData, storeDeletedItem} from"./dataProcessing.js";
 
 const render = () =>{
@@ -20,13 +20,19 @@ const modal = document.querySelector('.modal');
 const modal_delete_btn = modal.querySelector('.cancel-button');
 const modal_register_btn = modal.querySelector('.register-button');
 
-modal_delete_btn.addEventListener('click',(e)=>{
+modal_delete_btn.addEventListener('click',()=>{
     modal.classList.toggle('act');
 })
 
-modal_register_btn.addEventListener('click',(e)=>{
+//삭제
+modal_register_btn.addEventListener('click',()=>{
     Todos.splice(Todos.findIndex(e => e.Status === ToBeDeleted.Status && e.Title === ToBeDeleted.Title && e.Contents === ToBeDeleted.Contents),1);
     modal.classList.toggle('act');
+    const NoticeUl = document.querySelector('.notification-menu').querySelector('ul');
+    NoticeUl.insertAdjacentHTML('afterbegin',makeNoticeTemplate({
+        mode : 'delete',
+        info: {Status: ToBeDeleted.Status, Title:ToBeDeleted.Title}
+    }));
     render();
 })
 
@@ -77,22 +83,32 @@ const checkBeforeUpdateItem = ()=>{
 }
 
 const addInputRegisterEvent = ()=>{
-    //등록버튼 이벤트
+    const NoticeUl = document.querySelector('.notification-menu').querySelector('ul');
+    //update모드
     if(checkBeforeUpdateItem()){
         const index = Todos.findIndex(e => e.Title === BeforeUpdateItem.Title && e.Contents === BeforeUpdateItem.Contents && e.Status === BeforeUpdateItem.Status);
         Todos[index] = {...Todos[index], 
             Title:InputData['title'],
-            Contents:InputData['contents']}
+            Contents:InputData['contents']};
+        NoticeUl.insertAdjacentHTML('afterbegin',makeNoticeTemplate({
+            mode : 'update',
+            info: {Status: Todos[index].Status, Title:InputData['title']}
+        }));
         initializeToBeUpdatedItem();
         initializeInputData();
         render();
         return;
     }
+    //add 모드
     const input_status = document.querySelector('.input-items').closest('section').className;
     Todos.unshift({
         Status:input_status,
         Title:InputData['title'],
         Contents:InputData['contents']});
+    NoticeUl.insertAdjacentHTML('afterbegin',makeNoticeTemplate({
+        mode : 'add',
+        info: {Status:input_status, Title:InputData['title']}
+    }));
     initializeToBeUpdatedItem();
     initializeInputData();
     render();

@@ -26,7 +26,7 @@ const Todos = [
     {
         Status : 'todo',
         Title : 'Git hub 블로그에 포스팅할 것',
-        Contents: '* Git hub 공부내용 * 모던 자바스크립트 1장 공부 내용'
+        Contents: '* Git hub 공부내용\n* 모던 자바스크립트 1장 공부 내용'
     },
     {
         Status : 'doing',
@@ -35,7 +35,7 @@ const Todos = [
     }
 ]
 
-class Notice {
+class Notiification {
     constructor() {
         this.notices = [];
     }
@@ -53,6 +53,6 @@ const getId = ()=>{
 }
 const increaseId = () =>{id++;}
 
-const notice = new Notice();
+const Notice = new Notiification();
 
-export {InputData,ToBeDeleted,TodosStatus,Todos,BeforeUpdateItem, getId, increaseId}
+export {InputData,ToBeDeleted,TodosStatus,Todos,BeforeUpdateItem, Notice, getId, increaseId}

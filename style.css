@@ -108,7 +108,7 @@ header i{
 }
 
 section{
-    /* width:23vw; */
+    width:23vw;
     max-width: 30%;
     margin: 0 10px;
     flex-grow: 1;

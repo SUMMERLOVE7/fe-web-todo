@@ -17,10 +17,9 @@ const makeTodoSection = (items, status)=>{
                 </div>
             </div> 
             <ul class = "todolist-item">
-                ${items.map(item => makeListItemTemplate(item.Title,item.Contents)).join('')}
+                ${items.map(item => makeListItemTemplate(item.Title,item.Contents.replace(/\r\n|\r|\n/g,'<br>'))).join('')}
             </ul>
         </section>`;
-        increaseId();
     return created_section;
 }
 
@@ -33,7 +32,7 @@ const makeListItemTemplate=(title,contents)=>{
         </div>
         <p>${contents}</p>
     </li>`;
-    // increaseId();
+    increaseId();
     return created_item;
 }
 
@@ -64,4 +63,50 @@ const makeInputFormTemplate=()=>{
     return created_input_form;
 }
 
-export {makeTodoSection, makeListItemTemplate, makeInputTemplate, makeInputFormTemplate};
+const makeNoticeTemplate = ({mode, info}) => {
+    const created_notice = `
+    <li class = "notification-menu-items">
+        <h3>@sam</h3>
+        <p>${makeNoticeMessageTemplate(mode, info)}</p>
+        <p class = "notification-menu-items-time">1분 전</p>
+    </li>`;
+    return created_notice;
+}
+
+const makeNoticeMessageTemplate = (mode, info) => {
+    if (mode === 'add')
+        return makeAddMessage(info);
+
+    if(mode === 'delete')
+        return makeDeleteMessage(info);
+        
+    if(mode === 'update')
+        return makeUpdateMessage(info);
+        
+    return makeMoveMessage(info);
+}
+
+const makeAddMessage = ({Status, Title}) => {
+    const created_add_message = `<span class="notice-keyword">${Title}</span>을 <span class="notice-keyword">${Status}</span>에 추가했습니다.`;
+    return created_add_message;
+}
+
+const makeDeleteMessage = ({Status, Title})=>{
+    const created_delete_message = `<span class="notice-keyword">${Title}</span>을 <span class="notice-keyword">${Status}</span>에서 삭제했습니다.`;
+    return created_delete_message;
+}
+
+const makeUpdateMessage = ({Status, Title}) => {
+    const created_update_message = `<span class="notice-keyword">${Status}</span>에서 <span class="notice-keyword">${Title}</span>을 변경하였습니다.`;
+    return created_update_message;
+}
+
+const makeMoveMessage = ({Title , BeforeStatus, MovedStatus}) =>{
+    const created_update_message = `<span class="notice-keyword">
+    ${Title}</span>를 
+    <span class="notice-keyword">${BeforeStatus}</span>에서 
+    <span class="notice-keyword">${MovedStatus}</span>로 이동하었습니다.`;
+    return created_update_message;
+}
+
+export {makeTodoSection, makeListItemTemplate, makeInputTemplate, makeInputFormTemplate, makeNoticeTemplate};
