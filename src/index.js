@@ -1,4 +1,4 @@
-import { closeMenu } from "./showMenu.js";
+import { closeMenu } from "./menu/showMenu.js";
 import { changeEveryCount } from "./card/countCard.js";
 import { deleteContent, manageContent } from "./card/deleteContent.js";
 

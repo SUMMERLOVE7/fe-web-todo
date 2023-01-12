@@ -13,6 +13,7 @@ import {
 import { todo_list, doing_list, done_list } from "../store.js";
 import { manageContent } from "./deleteContent.js";
 import { updateCount, changeEveryCount } from "./countCard.js";
+import { newCardHistory } from "../menu/updateMenu.js";
 
 export let addTodoButton = document.querySelector(".todo-add-button");
 let cancelTodoButton = document.querySelector(".todo-cancel-button");
@@ -109,6 +110,7 @@ function registerModal(target, todolist) {
   //target.appendChild(newSection);
   let firstchild = target.querySelector(".todolist");
   target.insertBefore(newSection, firstchild);
+  newCardHistory();
   changeEveryCount();
   addEvent(target);
 }

@@ -1,3 +1,4 @@
+import { deleteCardHistory } from "../menu/updateMenu.js";
 import { todo_list, doing_list, done_list } from "../store.js";
 import { updateCount } from "./countCard.js";
 import { contentDoing, contentTodo, contentDone } from "./registerContent.js";
@@ -54,6 +55,7 @@ function rmDelPopup(target) {
     delArray(target);
     deleteList(target);
     deletePopup.style.display = "none";
+    deleteCardHistory();
   });
 }
 

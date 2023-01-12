@@ -132,6 +132,11 @@ header {
   position: relative;
 }
 
+.menu-content {
+  background-color: rgb(214, 247, 210);
+  width: 80%;
+}
+
 .close-button {
   border: none;
   background: none;
@@ -218,37 +223,7 @@ header {
   border-radius: 15px;
   background-color: rgb(163, 160, 160);
 }
-/*
-.count-doing {
-  width: 26px;
-  height: 26px;
-  font-weight: 700;
-  font-size: 14px;
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  color: #010101;
-  border-radius: 15px;
-  background-color: rgb(163, 160, 160);
-}
 
-.count-done {
-  width: 26px;
-  height: 26px;
-  font-weight: 700;
-  font-size: 14px;
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  color: #010101;
-  border-radius: 15px;
-  background-color: rgb(163, 160, 160);
-}
-*/
 .plus-x-button {
   display: flex;
   flex-direction: row;
