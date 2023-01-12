@@ -8,7 +8,8 @@
 	--color-dark-pink: #ff6863;
 	--color-dark-grey: #4d4d4d;
 	--color-grey: #616161;
-	--color-light-grey: #7c7979;
+	--color-light-grey: #908888;
+    --color-list-count-grey:#BDBDBD;
 	--color-blue: #73aace;
 	--color-yellow: #fff7d1;
 	--color-orange: #feb546;
@@ -83,24 +84,17 @@ p{
 	font-weight: var(--font-regular);
 	color: var(--color-black);
 	margin: 4px 0;
-    /* word-wrap:break-word; */
-}
-
-h1,h2,h3,p{
     word-break:break-all;
 }
 
 header{
     padding-left: 50px;
-}
-
-header h1{
     display: flex;
+    margin-bottom: 30px;
 }
 
-h1 i{
-    margin-left: auto;
-    margin-right: 10vw;
+header i{
+    margin: 5vh 10vw 0 auto;
     cursor: pointer;
 }
 
@@ -114,8 +108,8 @@ h1 i{
 }
 
 section{
-    /* width: 23vw; */
-    min-width:110px;
+    /* width:23vw; */
+    max-width: 30%;
     margin: 0 10px;
     flex-grow: 1;
     flex-shrink: 0;
@@ -123,13 +117,16 @@ section{
 
 .todo-header {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
 }
 
-.todo-header span, .todo-header div{
-    margin-top: 8px;
-    margin-bottom: 8px;
-    line-height: 100%;
+.todo-header-left{
+    display: flex;
+    align-items: center;
+}
+
+.todo-header h2{
+    margin: 0;
 }
 
 .buttons{
@@ -156,7 +153,6 @@ button{
     transition: transform 0.7s;
 }
 
-
 .add:hover{
     color: dodgerblue;
     transform: scale(1.4);
@@ -174,10 +170,11 @@ button{
 
 .list-count{
     border-radius: 50%;
-    background-color: gray;
+    background-color: var(--color-list-count-grey);
     display: flex;
-    width: 40px;
-    height: 40px;
+    margin-left: 10px;
+    width: 30px;
+    height: 30px;
     font-weight: bold;
     justify-content: center;
     align-items: center;
@@ -270,6 +267,7 @@ textarea{
     overflow: scroll;
     transition: all 0.7s ease-in-out;
     margin-right: 0;
+    z-index: 1;
 }
 
 .act{
@@ -324,7 +322,6 @@ textarea{
     transform : translate(-50%,-50%);
     width: 20vw;
     background-color: white;
-
     padding: 10px 20px;
     border-radius: var(--size-border-radius);
 }
@@ -343,11 +340,11 @@ textarea{
     top: 80vh;
     left: 90vw;
     border-radius: 50%;
-    width: 5vw;
-    height: 5vw;
+    width: 3vw;
+    height: 3vw;
     background-color: var(--color-blue);
     color: var(--color-light-white);
-    font-size: var(--font-medium);
+    font-size: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;

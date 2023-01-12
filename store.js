@@ -1,17 +1,23 @@
-const input_data={
+const InputData={
     'title': '',
     'contents': ''
 }
 
-const delete_data={
+const ToBeDeleted={
     Status : null,
     Title : null,
     Contents: null
 }
 
-const todos_status=['todo','doing','done'];
+const BeforeUpdateItem = {
+    Status : null,
+    Title : null,
+    Contents: null
+}
 
-const todos = [
+const TodosStatus=['todo','doing','done'];
+
+const Todos = [
     {
         Status : 'todo',
         Title : 'Git hub 공부하기',
@@ -40,6 +46,13 @@ class Notice {
     }
 }
 
+let id = 1;
+
+const getId = ()=>{
+    return id;
+}
+const increaseId = () =>{id++;}
+
 const notice = new Notice();
 
-export {input_data,delete_data,todos_status,todos,notice}
+export {InputData,ToBeDeleted,TodosStatus,Todos,BeforeUpdateItem, getId, increaseId}
