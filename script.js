@@ -2,10 +2,15 @@ import {InputData, ToBeDeleted, TodosStatus, Todos, BeforeUpdateItem} from "./st
 import {makeTodoSection, makeInputTemplate, makeInputFormTemplate, makeNoticeTemplate} from "./template.js";
 import {initializeToBeUpdatedItem, initializeInputData, storeToBeUpdatedItem, storeInputData, storeDeletedItem} from"./dataProcessing.js";
 
+/**
+ * 전체 화면 렌더링하는 함수
+ * 1. todolist 초기화
+ * 2. status 마다 섹션 생성
+ * 3. 생성한 섹션을 todolist안에 삽입
+ */
 const render = () =>{
     let todolist = document.querySelector('.todolist');
     todolist.innerHTML='';
-    //status에 따라 section 생성
     TodosStatus.map(status => {
         const items = Todos.filter(item=>item.Status===status);
         const created_section = makeTodoSection(items,status) 
@@ -15,16 +20,22 @@ const render = () =>{
 
 render();
 
-//모달창 설정
 const modal = document.querySelector('.modal');
 const modal_delete_btn = modal.querySelector('.cancel-button');
 const modal_register_btn = modal.querySelector('.register-button');
 
+//모달창에서 취소 버튼 누를시 모달 비활성화
 modal_delete_btn.addEventListener('click',()=>{
     modal.classList.toggle('act');
 })
 
-//삭제
+/** 
+ *  * 모달창에서 삭제버튼 누를 시 데이터 삭제
+ * 1. 삭제할 데이터를 Todos(todolist 데이터)에서 삭제
+ * 2. 모달 창 없앰
+ * 3. 알림창에 알림 등록
+ * 4. 리렌더링
+ * */
 modal_register_btn.addEventListener('click',()=>{
     Todos.splice(Todos.findIndex(e => e.Status === ToBeDeleted.Status && e.Title === ToBeDeleted.Title && e.Contents === ToBeDeleted.Contents),1);
     modal.classList.toggle('act');
@@ -36,12 +47,13 @@ modal_register_btn.addEventListener('click',()=>{
     render();
 })
 
-//add에서 input값 받는 함수
+//add에서 input창에서 input값 받는 함수
 const onChange = (e)=>{
     InputData[e.target.name] = e.target.value;
-    modifyRegisterButton();
+    modifyRegisterButtonMode();
 }
 
+/** 알림메뉴창 활성화, 비활성화 하는 함수 */
 const changeNotificationMode = ()=>{
     const notification_menu = document.querySelector('.notification-menu')
     notification_menu.classList.toggle('act');
@@ -51,13 +63,21 @@ const changeNotificationMode = ()=>{
 document.querySelector('.fa-bars').addEventListener('click',changeNotificationMode)
 document.querySelector('.delete-notification-menu').addEventListener('click',changeNotificationMode);
 
+//add,update input창 높이 자동 조절하는 함수
 const autoResizeTextarea = (e) => {
     e.target.style.height ='auto';
     e.target.style.height = `${e.target.scrollHeight}px`
 };
 
+/** 
+ * add, update input창 이벤트 등록하는 함수
+ * 1. input title로 포커스
+ * 2. input title, input contents 높이 자동 조절
+ * 3. 취소버튼 이벤트 등록
+ * 4. 등록, 수정버튼 눌렀을 때 이벤트 등록
+ * 5. 인풋 창에 blur(focusout) 이벤트 등록
+*/
 const addInputEvent = ()=>{
-    //input창 이벤트
     const input_title = document.querySelector('.input-title');
     const input_contents = document.querySelector('.input-contents');
     const input_item = document.querySelector('.input-items');
@@ -75,16 +95,30 @@ const addInputEvent = ()=>{
     register_btn.addEventListener('mousedown',addInputRegisterEvent);
     input_item.addEventListener("blur", addInputFocusOutEvent);
 
-    modifyRegisterButton();
+    modifyRegisterButtonMode();
 };
 
 const checkBeforeUpdateItem = ()=>{
     return BeforeUpdateItem.Title && BeforeUpdateItem.Contents && BeforeUpdateItem.Status;
 }
 
+/**
+ * 1. update할 데이터가 있는지 체크
+ * 
+ * 2. update 모드
+ * 2-1. update할 데이터 탐색
+ * 2-2. 객체 복사 후 업데이트 할 title, contents 덮어씌움
+ * 2-3. update 알림 등록
+ * 
+ * 3. add 모드
+ * 3-1. Todos 배열 맨 앞에 데이터 삽입 (나중에 Todos 아이템에 이벤트 시간을 넣어 정렬할까 생각중...)
+ * 3-2. add 알림 등록
+ * 
+ * 4. 데이터 초기화
+ * 5. 리렌더링
+*/
 const addInputRegisterEvent = ()=>{
     const NoticeUl = document.querySelector('.notification-menu').querySelector('ul');
-    //update모드
     if(checkBeforeUpdateItem()){
         const index = Todos.findIndex(e => e.Title === BeforeUpdateItem.Title && e.Contents === BeforeUpdateItem.Contents && e.Status === BeforeUpdateItem.Status);
         Todos[index] = {...Todos[index], 
@@ -99,7 +133,6 @@ const addInputRegisterEvent = ()=>{
         render();
         return;
     }
-    //add 모드
     const input_status = document.querySelector('.input-items').closest('section').className;
     Todos.unshift({
         Status:input_status,
@@ -115,7 +148,6 @@ const addInputRegisterEvent = ()=>{
 };
 
 const addInputFocusOutEvent = ()=>{
-    //focusout 이벤트
     setTimeout(()=>{
         const input_item = document.querySelector('.input-items');
         if(input_item)
@@ -127,8 +159,12 @@ const addInputFocusOutEvent = ()=>{
     },0)
 }
 
+/** add, update 액션에서 input창 취소버튼 눌렀을 때 이벤트
+ * 1. input창 제거
+ * 2. 업데이트모드면 리렌더링
+ * 3. input 데이터들 초기화
+*/
 const InputCancelEvent = ()=>{
-    //취소버튼 이벤트
     document.querySelector('.input-items').querySelector('.cancel-button').addEventListener('click',()=>{
         document.querySelector('.input-items').remove();
         if(checkBeforeUpdateItem())
@@ -146,7 +182,7 @@ const checkInputStatus = () => {
     return InputData['title'] && InputData['contents'];
 }
 
-const modifyRegisterButton = () => {
+const modifyRegisterButtonMode = () => {
     const register_button = document.querySelector('.register-button');
     const input_items = document.querySelector('.input-items');
     if(checkInputStatus(register_button)){
@@ -158,10 +194,11 @@ const modifyRegisterButton = () => {
     input_items.style.opacity = 0.4;
 }
 
-//클릭 이벤트 한꺼번에 설정해 위임
 const todolist = document.querySelector('.todolist');
+
+//클릭 이벤트 한꺼번에 설정해 위임
 todolist.addEventListener('click',(e)=>{
-    //add 이벤트
+    // + 버튼 눌럿을때 add action
     if(e.target.classList[1] === "fa-plus"){
         const input_items = document.querySelector('.input-items');
         if(input_items){
@@ -174,8 +211,7 @@ todolist.addEventListener('click',(e)=>{
         addInputEvent();
         return;
     }
-
-    //delete 이벤트
+    // x 버튼 눌렀을 때 리스트 내용 삭제하고 삭제 모달창 활성화
     const id = e.target.dataset.id;
     if(e.target.dataset.id && e.target.tagName === 'I'){
         storeDeletedItem(id);
@@ -187,6 +223,11 @@ todolist.ondragstart = function() {
     return false;
 };
 
+/** drag and drop 구현중인 함수
+ * 1. mousedown 일어날때마다 타이머를 만들어서 일정 시간이 지난 후 드래그 이벤트 시작
+ * 2. mousemove 이벤트로 잔상이 마우스 따라오게함
+ * Todos : mouse over 시 리스트 삽입 및 이동되는 노드 제거
+*/
 todolist.addEventListener('mousedown',(e)=>{
     const origin_item = e.target.closest('.todolist-items');
     if(!origin_item)
@@ -255,6 +296,8 @@ function getDragAfterElement(container, x) {
 }
 
 const sections = document.querySelectorAll('section:not(.notification-menu)');
+
+// drag한 것이 todolist 로 올라왔을때 처리하려는 함수
 Array.from(sections).map(section => {
     section.addEventListener('mouseover',e=>{
         const draggable = document.querySelector(".dragging");
@@ -273,7 +316,7 @@ Array.from(sections).map(section => {
     })
 })
 
-// 더블클릭이벤트 위임
+// list-item 더블클릭이벤트
 todolist.addEventListener('dblclick',(e)=>{
     const update_element = e.target.closest('.todolist-items');
     if(!update_element)
@@ -284,5 +327,4 @@ todolist.addEventListener('dblclick',(e)=>{
     update_element.setAttribute('tabindex', "-1");
     update_element.innerHTML = makeInputFormTemplate();
     addInputEvent();
-    modifyRegisterButton();
 })

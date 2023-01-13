@@ -1,8 +1,5 @@
 import {InputData, BeforeUpdateItem, getId, increaseId} from "./store.js";
 
-//임시 id 나중에 UUID로 바꾸고 싶음
-// let id = 1;
-
 const makeTodoSection = (items, status)=>{
     const created_section =`
         <section class = "${status}">
