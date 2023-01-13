@@ -28,7 +28,7 @@ function deleteList(element) {
   //target.addEventListner('click', grandParentSection.style.display = 'none');
   let parentDiv = element.parentElement;
   let grandParentSection = parentDiv.parentElement;
-  grandParentSection.style.display = "none";
+  grandParentSection.remove();
 }
 
 export function manageContent(target) {
@@ -55,7 +55,6 @@ function rmDelPopup(target) {
     delArray(target);
     deleteList(target);
     deletePopup.style.display = "none";
-    deleteCardHistory();
   });
 }
 
@@ -63,7 +62,7 @@ cancelDelBtn.addEventListener("click", () => {
   deletePopup.style.display = "none";
 });
 
-function findCardIndex(targetDiv, targetSection) {
+export function findCardIndex(targetDiv, targetSection) {
   const cards = [...targetDiv.querySelectorAll(".todolist")];
   const card = targetSection;
   const idx = cards.findIndex((ele) => ele === card);
@@ -75,19 +74,20 @@ function delArray(target) {
   let grandParentSection = parentDiv.parentElement; //card
   let ggrandParentDiv = grandParentSection.parentElement; //column
 
-  if (ggrandParentDiv.classList.contains("havetodo-container")) {
+  if (ggrandParentDiv?.classList.contains("havetodo-container")) {
     const idx = findCardIndex(ggrandParentDiv, grandParentSection);
     todo_list.splice(idx, 1);
     updateCount(contentTodo, todo_list);
-  } else if (ggrandParentDiv.classList.contains("doing-container")) {
+  } else if (ggrandParentDiv?.classList.contains("doing-container")) {
     const idx = findCardIndex(ggrandParentDiv, grandParentSection);
     doing_list.splice(idx, 1);
     updateCount(contentDoing, doing_list);
-  } else if (ggrandParentDiv.classList.contains("done-container")) {
+  } else if (ggrandParentDiv?.classList.contains("done-container")) {
     const idx = findCardIndex(ggrandParentDiv, grandParentSection);
     done_list.splice(idx, 1);
     updateCount(contentDone, done_list);
   }
+  deleteCardHistory();
 }
 
 //1 === 1 true

@@ -16,9 +16,31 @@ export let doneCaptionInput = document.querySelector(".done-caption-input");
 export let openDoneModal = document.querySelector("#open-modal-done");
 let closeDoneContent = document.querySelector("#x-done-button");
 
-function openModal(target) {
+export function openModal(target) {
   target.style.display = "block";
   target.classList.add("show");
+}
+
+export function createModal(target) {
+  let container = target.closest("#list-container");
+  let modal = container.querySelector("open-modal-content");
+}
+
+export function modal() {
+  return `<section id="open-modal" class="hidden">
+  <div class="list-title-modal">
+      <input type="text" class="title-input" name="title-input" placeholder="제목을 입력하세요."> </input>
+  </div>
+  <form>
+      <div class="caption-modal">
+          <input type="text" class="caption-input" name="caption-input" placeholder="내용을 입력하세요."> </input>
+      </div>
+      <div class="modal-button">
+          <button type="button" class="cancel-button"> 취소 </button>
+          <button type="submit" class = "add-button"> 등록 </button>                    
+      </div>
+  </form>  
+</section>`;
 }
 
 addTodoContent.addEventListener("click", () => openModal(openTodoModal));

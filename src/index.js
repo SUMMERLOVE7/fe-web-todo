@@ -10,3 +10,7 @@ window.onload = function () {
     manageContent(del);
   }
 };
+
+// document.body.addEventListener("click", ({ target }) => {
+//   console.log(target);
+// });
