@@ -1,14 +1,15 @@
 import { closeMenu } from "./menu/showMenu.js";
-import { changeEveryCount } from "./card/countCard.js";
+import { changeEveryCount, updateCount } from "./card/countCard.js";
 import { deleteContent, manageContent } from "./card/deleteContent.js";
+import { dataStorage } from "./store.js";
 
-window.onload = function () {
+window.onload = function (e) {
   closeMenu();
-  changeEveryCount();
 
   for (let del of deleteContent) {
     manageContent(del);
   }
+  changeEveryCount();
 };
 
 // document.body.addEventListener("click", ({ target }) => {

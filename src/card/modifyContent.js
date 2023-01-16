@@ -1,7 +1,13 @@
 import { modifyCardHistory } from "../menu/updateMenu.js";
+import { dataStorage } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
 import { openModal } from "./inputContent.js";
-import { addEvent, contentTodo, renderNewSection } from "./registerContent.js";
+import {
+  addEvent,
+  contentTodo,
+  findColumnIndex,
+  renderNewSection,
+} from "./registerContent.js";
 
 export function modifyModal(target) {
   let btnContainer = target.parentElement;
@@ -12,8 +18,6 @@ export function modifyModal(target) {
     let caption = parentSection.querySelector(".caption").innerText;
     // let title = parentSection.querySelector(".list-title").value;
     // let caption = parentSection.querySelector(".caption").value;
-    console.log(title);
-    console.log(caption);
 
     parentSection.innerHTML = `<section id="open-modal"> <div class='list-title-modal'>
       <input type='text' class='title-input' name='title-input' value="${title}"></input></div>
@@ -26,22 +30,40 @@ export function modifyModal(target) {
   });
 }
 
+export function modifyCardInStorage(
+  targetDiv,
+  targetSection,
+  newTitle,
+  newCaption
+) {
+  let cardindex = findCardIndex(targetDiv, targetSection);
+  let columnName = targetDiv.querySelector(".column-name");
+  let colIndex = findColumnIndex(columnName.innerText);
+  console.log(colIndex);
+  console.log(cardindex);
+  dataStorage.columns[colIndex].cards[cardindex].title = newTitle;
+
+  dataStorage.columns[colIndex].cards[cardindex].caption = newCaption;
+}
+
 export function finishModification(target) {
   let modBtn = target.querySelector(".modify-button");
 
-  console.log(modBtn);
   modBtn.addEventListener("click", (e) => {
     e.preventDefault();
     let parent = target.closest(".todolist");
     let newtitle = parent.querySelector(".title-input").value;
     let newcaption = parent.querySelector(".caption-input").value;
-    console.log(parent);
-    console.log(newtitle);
-    console.log(newcaption);
+
+    let grandParent = target.closest("#list-container");
+    let columnName = grandParent.querySelector(".column-name").innerText;
+    console.log(columnName);
 
     target.innerHTML = renderNewSection(newtitle, newcaption);
     let container = target.closest("#list-container");
 
+    modifyCardInStorage(grandParent, parent, newtitle, newcaption);
+    debugger;
     addEvent(container);
     modifyCardHistory();
   });
