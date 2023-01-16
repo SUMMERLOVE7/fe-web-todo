@@ -1,11 +1,11 @@
-import { InputData, BeforeUpdateItem, getId, increaseId } from "./store.js";
+import { InputData, BeforeUpdateItem, getId } from "./store.js";
 
 const makeTodoSection = (items, status) => {
   const created_section = `
         <section class = "${status}">
             <div class = "todo-header">
                 <div class ="todo-header-left">
-                    <h2>${status} </h2>
+                    <h2 class = "todo-column">${status} </h2>
                     <div class="list-count">${items.length}</div>
                 </div>
                 <div class="buttons">
@@ -28,14 +28,14 @@ const makeTodoSection = (items, status) => {
 };
 
 const makeListItemTemplate = (title, contents) => {
-  const created_item = `<li class="todolist-items" data-id =${getId()}>
+  const data_id = getId();
+  const created_item = `<li class="todolist-items" data-id =${data_id}>
             <div class="todolist-items-header">
-                <h3>${title}</h3>
-            <button class="delete-lst"><i class="fa-solid fa-x" data-id =${getId()}></i></button>
+                <h3 class = "todolist-items-title">${title}</h3>
+            <button class="delete-lst"><i class="fa-solid fa-x" data-id =${data_id}></i></button>
         </div>
-        <p>${contents}</p>
+        <p class ="todolist-items-contents">${contents}</p>
     </li>`;
-  increaseId();
   return created_item;
 };
 

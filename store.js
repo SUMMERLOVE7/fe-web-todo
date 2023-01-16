@@ -46,14 +46,13 @@ class Notiification {
   }
 }
 
-let id = 1;
-
-const getId = () => {
-  return id;
-};
-const increaseId = () => {
-  id++;
-};
+let getId;
+{
+  let Id = 1;
+  getId = () => {
+    return Id++;
+  };
+}
 
 const Notice = new Notiification();
 
@@ -65,5 +64,4 @@ export {
   BeforeUpdateItem,
   Notice,
   getId,
-  increaseId,
 };
