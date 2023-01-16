@@ -13,8 +13,12 @@ const initializeInputData = () => {
 
 const storeToBeUpdatedItem = (update_element) => {
   BeforeUpdateItem.Status = update_element.closest("section").className;
-  BeforeUpdateItem.Title = update_element.querySelector("h3").innerText;
-  BeforeUpdateItem.Contents = update_element.querySelector("p").innerText;
+  BeforeUpdateItem.Title = update_element.querySelector(
+    ".todolist-items-title"
+  ).innerText;
+  BeforeUpdateItem.Contents = update_element.querySelector(
+    ".todolist-items-contents"
+  ).innerText;
 };
 
 const storeInputData = () => {
