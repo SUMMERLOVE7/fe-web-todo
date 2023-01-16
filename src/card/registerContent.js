@@ -1,14 +1,4 @@
-import {
-  closeTodo,
-  closeDoing,
-  closeDone,
-  todoTitleInput,
-  doingTitleInput,
-  doneTitleInput,
-  todoCaptionInput,
-  doingCaptionInput,
-  doneCaptionInput,
-} from "./inputContent.js";
+import { closeModal } from "./inputContent.js";
 import { dataStorage } from "../store.js";
 import { manageContent } from "./deleteContent.js";
 import { updateCount, changeEveryCount } from "./countCard.js";
@@ -16,15 +6,8 @@ import { newCardHistory } from "../menu/updateMenu.js";
 import { modifyModal } from "./modifyContent.js";
 
 export let addTodoButton = document.querySelector(".todo-add-button");
-let cancelTodoButton = document.querySelector(".todo-cancel-button");
 export let contentTodo = document.querySelector(".havetodo-container");
-
-let addDoingButton = document.querySelector(".doing-add-button");
-let cancelDoingButton = document.querySelector(".doing-cancel-button");
 export let contentDoing = document.querySelector(".doing-container");
-
-let addDoneButton = document.querySelector(".done-add-button");
-let cancelDoneButton = document.querySelector(".done-cancel-button");
 export let contentDone = document.querySelector(".done-container");
 
 function valid_title_input(target) {
@@ -43,6 +26,12 @@ function valid_caption_input(target) {
   } else {
     return 0;
   }
+}
+
+function check_input_validity(title, caption) {
+  if (valid_title_input(title) === 0 && valid_caption_input(caption) === 0) {
+    return 0;
+  } else return -1;
 }
 
 export function findColumnIndex(element) {
@@ -91,7 +80,7 @@ export function renderNewSection(newTitle, newContent) {
   return `<div class = 'list-header'> <div class = 'list-title'>
   ${newTitle} </div> <div class='caption'>
   ${newContent}
-  </div></div><div class'button-container'><button type='button' class='x-content-button'>
+  </div></div><div class='button-container'><button type='button' class='x-content-button'>
   <svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'>
   <path d='M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z' fill='black'/>
   </svg></button><button type='button' class='modify-content-button'>
@@ -114,40 +103,68 @@ export function addEvent(target) {
   });
 }
 
-addTodoButton.addEventListener("click", (e) => {
-  e.preventDefault(); //새로고침 방지
+export function addCard(target) {
+  const modal = target.closest(".open-modal");
+  const title = modal.querySelector("#title-input");
+  const caption = modal.querySelector("#caption-input");
 
-  if (
-    valid_title_input(todoTitleInput) === 0 &&
-    valid_caption_input(todoCaptionInput) === 0
-  ) {
-    registerModal(contentTodo);
-    closeTodo();
+  if (check_input_validity(title, caption) === 0) {
+    let column = target.closest("#list-container");
+    registerModal(column);
+    closeModal(modal);
   }
-});
-addDoingButton.addEventListener("click", (e) => {
-  e.preventDefault(); //새로고침 방지
+}
 
-  if (
-    valid_title_input(doingTitleInput) === 0 &&
-    valid_caption_input(doingCaptionInput) === 0
-  ) {
-    registerModal(contentDoing);
-    closeDoing();
+export function cancelCardAddition(target) {
+  let modal = target.closest(".open-modal");
+  closeModal(modal);
+}
+
+export function manageAddBtnEvent() {
+  let addBtns = document.querySelectorAll("#add-button");
+
+  for (let btn of addBtns) {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      addCard(btn);
+    });
   }
-});
-addDoneButton.addEventListener("click", (e) => {
-  e.preventDefault(); //새로고침 방지
 
-  if (
-    valid_title_input(doneTitleInput) === 0 &&
-    valid_caption_input(doneCaptionInput) === 0
-  ) {
-    registerModal(contentDone);
-    closeDone();
+  const addBtn = document.querySelectorAll("#cancel-button");
+  for (let btn of addBtn) {
+    btn.addEventListener("click", () => {
+      cancelCardAddition(btn);
+    });
   }
-});
+}
 
-cancelTodoButton.addEventListener("click", () => closeTodo());
-cancelDoingButton.addEventListener("click", () => closeDoing());
-cancelDoneButton.addEventListener("click", () => closeDone());
+// addTodoButton.addEventListener("click", (e) => {
+//   e.preventDefault(); //새로고침 방지
+
+//   if (
+//     valid_title_input(todoTitleInput) === 0 &&
+//     valid_caption_input(todoCaptionInput) === 0
+//   ) {
+//     registerModal(contentTodo);
+//   }
+// });
+// addDoingButton.addEventListener("click", (e) => {
+//   e.preventDefault(); //새로고침 방지
+
+//   if (
+//     valid_title_input(doingTitleInput) === 0 &&
+//     valid_caption_input(doingCaptionInput) === 0
+//   ) {
+//     registerModal(contentDoing);
+//   }
+// });
+// addDoneButton.addEventListener("click", (e) => {
+//   e.preventDefault(); //새로고침 방지
+
+//   if (
+//     valid_title_input(doneTitleInput) === 0 &&
+//     valid_caption_input(doneCaptionInput) === 0
+//   ) {
+//     registerModal(contentDone);
+//   }
+// });

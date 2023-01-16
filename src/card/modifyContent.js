@@ -1,7 +1,6 @@
 import { modifyCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
-import { openModal } from "./inputContent.js";
 import {
   addEvent,
   contentTodo,

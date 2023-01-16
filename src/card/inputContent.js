@@ -16,7 +16,7 @@ export let doneCaptionInput = document.querySelector(".done-caption-input");
 export let openDoneModal = document.querySelector("#open-modal-done");
 let closeDoneContent = document.querySelector("#x-done-button");
 
-export function openModal(target) {
+export function showModal(target) {
   target.style.display = "block";
   target.classList.add("show");
 }
@@ -38,33 +38,53 @@ export function modal() {
 </section>`;
 }
 
-addTodoContent.addEventListener("click", () => openModal(openTodoModal));
-addDoingContent.addEventListener("click", () => openModal(openDoingModal));
-addDoneContent.addEventListener("click", () => openModal(openDoneModal));
+export function openModal() {
+  const plusBtns = document.querySelectorAll(".plus-button");
+
+  for (let plus of plusBtns) {
+    plus.addEventListener("click", () => {
+      const column = plus.closest("#list-container");
+      const modal = column.querySelector(".open-modal");
+      showModal(modal);
+    });
+  }
+}
+
+// addTodoContent.addEventListener("click", () => openModal(openTodoModal));
+// addDoingContent.addEventListener("click", () => openModal(openDoingModal));
+// addDoneContent.addEventListener("click", () => openModal(openDoneModal));
+
+// export function closeModal(target) {
+//   target.style.display = "none";
+// }
 
 export function closeModal(target) {
+  const titleInput = target.querySelector("#title-input");
+  const captionInput = target.querySelector("#caption-input");
+  titleInput.value = "";
+  captionInput.value = "";
   target.style.display = "none";
 }
 
-export function closeTodo() {
-  todoTitleInput.value = "";
-  todoCaptionInput.value = "";
-  closeModal(openTodoModal);
-}
+// export function closeTodo() {
+//   todoTitleInput.value = "";
+//   todoCaptionInput.value = "";
+//   closeModal(openTodoModal);
+// }
 //closeTodoContent.addEventListener('click', () => closeTodo());
 
-export function closeDoing() {
-  doingTitleInput.value = "";
-  doingCaptionInput.value = "";
-  closeModal(openDoingModal);
-}
+// export function closeDoing() {
+//   doingTitleInput.value = "";
+//   doingCaptionInput.value = "";
+//   closeModal(openDoingModal);
+// }
 //closeDoingContent.addEventListener('click', () => closeDoing());
 
-export function closeDone() {
-  doneTitleInput.value = "";
-  doneCaptionInput.value = "";
-  closeModal(openDoneModal);
-}
+// export function closeDone() {
+//   doneTitleInput.value = "";
+//   doneCaptionInput.value = "";
+//   closeModal(openDoneModal);
+// }
 //closeDoneContent.addEventListener('click', () => closeDone());
 
 //import {example, aaa} = 'aaaa.js';

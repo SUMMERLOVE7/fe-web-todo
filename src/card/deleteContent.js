@@ -1,12 +1,7 @@
 import { deleteCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { updateCount } from "./countCard.js";
-import {
-  contentDoing,
-  contentTodo,
-  contentDone,
-  findColumnIndex,
-} from "./registerContent.js";
+import { findColumnIndex } from "./registerContent.js";
 
 export let deleteContent = document.querySelectorAll(".x-content-button");
 let deletePopup = document.querySelector(".delPopup");
@@ -32,10 +27,16 @@ function deleteList(element) {
   //let grandParentSection = parentDiv.closest("section");
   //target.addEventListner('click', grandParentSection.style.display = 'none');
 
-  let parentDiv = element.parentElement;
-  let grandParentSection = parentDiv.parentElement;
-  // let grandParentSection = element.closest(".todolist");
+  // let parentDiv = element.parentElement;
+  // let grandParentSection = parentDiv.parentElement;
+  let grandParentSection = element.closest(".todolist");
+  let ggrandParentDiv = element.closest("#list-container");
+  let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
+  const cardIndex = findCardIndex(ggrandParentDiv, grandParentSection);
+  deleteCardFromStorage(columnName, cardIndex);
   grandParentSection.remove();
+  updateCount(ggrandParentDiv);
+  deleteCardHistory();
 }
 
 export function manageContent(target) {
@@ -59,7 +60,7 @@ function showDelPopup() {
 
 function rmDelPopup(target) {
   deletePopupBtn.addEventListener("click", () => {
-    delArray(target);
+    //delArray(target);
     deleteList(target);
     deletePopup.style.display = "none";
   });
@@ -81,21 +82,20 @@ function deleteCardFromStorage(columnName, cardIndex) {
   dataStorage.columns[index].cards.splice(cardIndex, 1);
 }
 
-function delArray(target) {
-  // let parentDiv = target.parentElement;
-  // let grandParentSection = parentDiv.parentElement; //card
-  // let ggrandParentDiv = grandParentSection.parentElement; //column
+// function delArray(target) {
+//   // let parentDiv = target.parentElement;
+//   // let grandParentSection = parentDiv.parentElement; //card
+//   // let ggrandParentDiv = grandParentSection.parentElement; //column
 
-  let grandParentSection = target.closest(".todolist");
-  let ggrandParentDiv = target.closest("#list-container");
-  // console.log(grandParentSection);
-  let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
-
-  const cardIndex = findCardIndex(ggrandParentDiv, grandParentSection);
-  deleteCardFromStorage(columnName, cardIndex);
-  updateCount(ggrandParentDiv);
-  deleteCardHistory();
-}
+//   let grandParentSection = target.closest(".todolist");
+//   let ggrandParentDiv = target.closest("#list-container");
+//   // console.log(grandParentSection);
+//   let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
+//   const cardIndex = findCardIndex(ggrandParentDiv, grandParentSection);
+//   deleteCardFromStorage(columnName, cardIndex);
+//   updateCount(ggrandParentDiv);
+//   deleteCardHistory();
+// }
 
 //1 === 1 true
 // [] === [] false
