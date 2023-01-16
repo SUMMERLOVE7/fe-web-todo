@@ -23,10 +23,11 @@ export function modifyModal(target) {
       <input type='text' class='title-input' name='title-input' value="${title}"></input></div>
       <form><div class='caption-modal'><input type='text' class='caption-input' name='caption-input' value="${caption}">
       </input></div>
-      <div class='modal-button'><button type='button' class='cancel-button'> 취소 </button>
+      <div class='modal-button'><button type='button' class='cancel-modify-button'> 취소 </button>
       <button type='submit' class='modify-button'> 수정 </button></div></form></section>`;
 
     finishModification(parentSection);
+    cancelModification(parentSection, title, caption);
   });
 }
 
@@ -62,5 +63,14 @@ export function finishModification(target) {
     modifyCardInStorage(grandParent, parent, newtitle, newcaption);
     addEvent(container);
     modifyCardHistory();
+  });
+}
+
+export function cancelModification(target, title, caption) {
+  let cancelModBtn = target.querySelector(".cancel-modify-button");
+  cancelModBtn.addEventListener("click", () => {
+    let parentSection = target.closest(".todolist");
+
+    parentSection.innerHTML = renderNewSection(title, caption);
   });
 }

@@ -82,12 +82,12 @@ function deleteCardFromStorage(columnName, cardIndex) {
 }
 
 function delArray(target) {
-  let parentDiv = target.parentElement;
-  let grandParentSection = parentDiv.parentElement; //card
-  let ggrandParentDiv = grandParentSection.parentElement; //column
+  // let parentDiv = target.parentElement;
+  // let grandParentSection = parentDiv.parentElement; //card
+  // let ggrandParentDiv = grandParentSection.parentElement; //column
 
-  // let grandParentSection = target.closest(".todolist");
-  // let ggrandParentDiv = target.closest("#list-container");
+  let grandParentSection = target.closest(".todolist");
+  let ggrandParentDiv = target.closest("#list-container");
   // console.log(grandParentSection);
   let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
 
