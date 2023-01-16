@@ -255,7 +255,7 @@ const todolist = document.querySelector(".todolist");
 //클릭 이벤트 한꺼번에 설정해 위임
 todolist.addEventListener("click", (e) => {
   // + 버튼 눌럿을때 add action
-  if (e.target.classList[1] === "fa-plus") {
+  if (e.target.classList.contains("fa-plus")) {
     const input_items = document.querySelector(".input-items");
     if (input_items) {
       input_items.remove();
@@ -269,7 +269,7 @@ todolist.addEventListener("click", (e) => {
   }
   // x 버튼 눌렀을 때 리스트 내용 삭제하고 삭제 모달창 활성화
   const id = e.target.dataset.id;
-  if (e.target.dataset.id && e.target.tagName === "I") {
+  if (e.target.dataset.id && e.target.classList.contains("fa-x")) {
     storeDeletedItem(id);
     modal.classList.toggle("act");
   }
