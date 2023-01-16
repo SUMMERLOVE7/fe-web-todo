@@ -1,7 +1,3 @@
-// export const todo_list = [];
-// export const doing_list = [];
-// export const done_list = [];
-
 export const dataStorage = {
   columns: [
     {

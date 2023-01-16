@@ -9,7 +9,7 @@ import {
   doingCaptionInput,
   doneCaptionInput,
 } from "./inputContent.js";
-import { todo_list, doing_list, done_list, dataStorage } from "../store.js";
+import { dataStorage } from "../store.js";
 import { manageContent } from "./deleteContent.js";
 import { updateCount, changeEveryCount } from "./countCard.js";
 import { newCardHistory } from "../menu/updateMenu.js";
@@ -46,8 +46,6 @@ function valid_caption_input(target) {
 }
 
 export function findColumnIndex(element) {
-  console.log(element);
-  console.log(dataStorage.columns[0].column);
   for (let i = 0; i < dataStorage.columns.length; i++) {
     if (element === dataStorage.columns[i].column) {
       return i;
@@ -64,15 +62,13 @@ function pushCardIntoStorage(columnName, title, caption) {
   });
 }
 
-function registerModal(target, todolist) {
+function registerModal(target) {
   let newTitle = "";
   let newContent = "";
   let columnName = target.querySelector(".column-name").innerText;
 
   newTitle = target.querySelector("#title-input").value;
   newContent = target.querySelector("#caption-input").value;
-
-  todolist.push({ title: newTitle, caption: newContent });
 
   pushCardIntoStorage(columnName, newTitle, newContent);
 
@@ -125,7 +121,7 @@ addTodoButton.addEventListener("click", (e) => {
     valid_title_input(todoTitleInput) === 0 &&
     valid_caption_input(todoCaptionInput) === 0
   ) {
-    registerModal(contentTodo, todo_list);
+    registerModal(contentTodo);
     closeTodo();
   }
 });
@@ -136,7 +132,7 @@ addDoingButton.addEventListener("click", (e) => {
     valid_title_input(doingTitleInput) === 0 &&
     valid_caption_input(doingCaptionInput) === 0
   ) {
-    registerModal(contentDoing, doing_list);
+    registerModal(contentDoing);
     closeDoing();
   }
 });
@@ -147,7 +143,7 @@ addDoneButton.addEventListener("click", (e) => {
     valid_title_input(doneTitleInput) === 0 &&
     valid_caption_input(doneCaptionInput) === 0
   ) {
-    registerModal(contentDone, done_list);
+    registerModal(contentDone);
     closeDone();
   }
 });

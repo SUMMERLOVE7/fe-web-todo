@@ -39,10 +39,8 @@ export function modifyCardInStorage(
   let cardindex = findCardIndex(targetDiv, targetSection);
   let columnName = targetDiv.querySelector(".column-name");
   let colIndex = findColumnIndex(columnName.innerText);
-  console.log(colIndex);
-  console.log(cardindex);
-  dataStorage.columns[colIndex].cards[cardindex].title = newTitle;
 
+  dataStorage.columns[colIndex].cards[cardindex].title = newTitle;
   dataStorage.columns[colIndex].cards[cardindex].caption = newCaption;
 }
 
@@ -57,52 +55,12 @@ export function finishModification(target) {
 
     let grandParent = target.closest("#list-container");
     let columnName = grandParent.querySelector(".column-name").innerText;
-    console.log(columnName);
 
     target.innerHTML = renderNewSection(newtitle, newcaption);
     let container = target.closest("#list-container");
 
     modifyCardInStorage(grandParent, parent, newtitle, newcaption);
-    debugger;
     addEvent(container);
     modifyCardHistory();
   });
 }
-
-// export function modifyEvent(target) {
-//   target.addEventListener("click", (e) => {
-//     modifyModal(target); //수정할 수 있도록 화면만 변경
-//     let isTarget = target.closest(".todolist");
-//     const p = target.parentElement;
-//     let btnContainer = target.parentElement;
-
-//     console.log(isTarget);
-//     finishModification(isTarget);
-//   });
-// }
-
-// export function finishModification(target) {
-//   //let modBtn = target.querySelector(".modify-button");
-//   // modBtn.addEventListener("click", (e) => {
-//   //   e.preventDefault();
-//   //   let parent = modBtn.closest("#open-modal");
-//   //   let newtitle = parent.querySelector(".title-input").value;
-//   //   let newcaption = parent.querySelector(".caption-input").value;
-//   //   let section = modBtn.closest(".todolist");
-//   //   section.innerHTML = renderNewSection(newtitle, newcaption);
-//   //   debugger;});
-
-//   let modBtn = target.querySelector(".modify-button");
-//   console.log(modBtn);
-
-//   target.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     let parent = target.closest(".todolist");
-//     let newtitle = parent.querySelector(".title-input").value;
-//     let newcaption = parent.querySelector(".caption-input").value;
-//     console.log(parent);
-//     console.log(newtitle);
-//     console.log(newcaption);
-//   });
-//   modifyCardHistory();
-// }

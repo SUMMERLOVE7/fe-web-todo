@@ -21,11 +21,6 @@ export function openModal(target) {
   target.classList.add("show");
 }
 
-export function createModal(target) {
-  let container = target.closest("#list-container");
-  let modal = container.querySelector("open-modal-content");
-}
-
 export function modal() {
   return `<section id="open-modal" class="hidden">
   <div class="list-title-modal">
@@ -82,5 +77,3 @@ export function example(target){
     todoCaptionInput.value = '';
 }
 */
-//example(openTodoModal)
-//example(openDoingModal)

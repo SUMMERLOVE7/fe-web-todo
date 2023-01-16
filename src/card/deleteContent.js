@@ -1,5 +1,5 @@
 import { deleteCardHistory } from "../menu/updateMenu.js";
-import { todo_list, doing_list, done_list, dataStorage } from "../store.js";
+import { dataStorage } from "../store.js";
 import { updateCount } from "./countCard.js";
 import {
   contentDoing,
@@ -31,8 +31,10 @@ function deleteList(element) {
   //let parentDiv = element.closest("div");
   //let grandParentSection = parentDiv.closest("section");
   //target.addEventListner('click', grandParentSection.style.display = 'none');
+
   let parentDiv = element.parentElement;
   let grandParentSection = parentDiv.parentElement;
+  // let grandParentSection = element.closest(".todolist");
   grandParentSection.remove();
 }
 
@@ -84,27 +86,14 @@ function delArray(target) {
   let grandParentSection = parentDiv.parentElement; //card
   let ggrandParentDiv = grandParentSection.parentElement; //column
 
+  // let grandParentSection = target.closest(".todolist");
+  // let ggrandParentDiv = target.closest("#list-container");
+  // console.log(grandParentSection);
   let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
 
   const cardIndex = findCardIndex(ggrandParentDiv, grandParentSection);
-  console.log(cardIndex);
   deleteCardFromStorage(columnName, cardIndex);
   updateCount(ggrandParentDiv);
-
-  // if (ggrandParentDiv?.classList.contains("havetodo-container")) {
-  //   const idx = findCardIndex(ggrandParentDiv, grandParentSection);
-  //   todo_list.splice(idx, 1);
-
-  //   updateCount(contentTodo, todo_list);
-  // } else if (ggrandParentDiv?.classList.contains("doing-container")) {
-  //   const idx = findCardIndex(ggrandParentDiv, grandParentSection);
-  //   doing_list.splice(idx, 1);
-  //   updateCount(contentDoing, doing_list);
-  // } else if (ggrandParentDiv?.classList.contains("done-container")) {
-  //   const idx = findCardIndex(ggrandParentDiv, grandParentSection);
-  //   done_list.splice(idx, 1);
-  //   updateCount(contentDone, done_list);
-  // }
   deleteCardHistory();
 }
 
