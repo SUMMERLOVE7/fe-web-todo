@@ -116,6 +116,10 @@ export function addCard(target) {
     let column = target.closest(".list-container");
     registerModal(column);
     closeModal(modal);
+    let txtarea = modal.querySelectorAll(".textarea-input");
+    for (let txt of txtarea) {
+      txt.style.height = "auto";
+    }
   }
 }
 

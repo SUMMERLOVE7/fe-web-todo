@@ -67,8 +67,20 @@ export function resizeTextareaEvent() {
   let txtarea = document.querySelectorAll(".textarea-input");
 
   for (let txt of txtarea) {
-    txt.addEventListener("keydown", resizeTextarea(txt));
-    txt.addEventListener("keyup", resizeTextarea(txt));
+    txt.addEventListener(
+      "keydown",
+      () => {
+        resizeTextarea(txt);
+      },
+      true
+    );
+    txt.addEventListener(
+      "keyup",
+      () => {
+        resizeTextarea(txt);
+      },
+      true
+    );
   }
 }
 

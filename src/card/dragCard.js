@@ -5,5 +5,4 @@ columns.forEach((column) => {
     animation: 150,
     ghostClass: "blue-background-class",
   });
-  console.log("1");
 });
