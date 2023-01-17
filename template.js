@@ -73,14 +73,32 @@ const makeInputFormTemplate = () => {
   return created_input_form;
 };
 
-const makeNoticeTemplate = ({ mode, info }) => {
+const makeNoticeTemplate = ({ mode, info, time }) => {
   const created_notice = `
     <li class = "notification-menu-items">
         <h3>@sam</h3>
         <p>${makeNoticeMessageTemplate(mode, info)}</p>
-        <p class = "notification-menu-items-time">1분 전</p>
+        <p class = "notification-menu-items-time">${makeNoticeTimeMessage(
+          time
+        )}</p>
     </li>`;
   return created_notice;
+};
+
+const makeNoticeTimeMessage = (time) => {
+  const now_time = new Date().getTime();
+  const diff_time = now_time - time;
+  let time_message = "";
+  const initial_time_message = "방금 전";
+  const diff_day = Math.round(diff_time / 1000 / 60 / 60 / 24);
+  const diff_hour = Math.round(diff_time / 1000 / 60 / 60);
+  const diff_min = Math.round(diff_time / 1000 / 60);
+  if (diff_day) time_message += diff_day + "일";
+  if (diff_hour) time_message += diff_hour + "시간 ";
+  if (diff_min) time_message += diff_min + "분 ";
+  if (!time_message) return initial_time_message;
+  time_message += "전";
+  return time_message;
 };
 
 const makeNoticeMessageTemplate = (mode, info) => {

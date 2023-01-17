@@ -1,9 +1,5 @@
-import { ToBeDeleted, TodosStatus, Todos } from "./store.js";
-import {
-  makeInputTemplate,
-  makeInputFormTemplate,
-  makeNoticeTemplate,
-} from "./template.js";
+import { ToBeDeleted, TodosStatus, Todos, Notice } from "./store.js";
+import { makeInputTemplate, makeInputFormTemplate } from "./template.js";
 import {
   storeToBeUpdatedItem,
   storeInputData,
@@ -43,16 +39,14 @@ modal_register_btn.addEventListener("click", () => {
     1
   );
   modal.classList.toggle("act");
-  const NoticeUl = document
-    .querySelector(".notification-menu")
-    .querySelector("ul");
-  NoticeUl.insertAdjacentHTML(
-    "afterbegin",
-    makeNoticeTemplate({
-      mode: "delete",
-      info: { Status: ToBeDeleted.Status, Title: ToBeDeleted.Title },
-    })
-  );
+
+  Notice.add({
+    mode: "delete",
+    info: { Status: ToBeDeleted.Status, Title: ToBeDeleted.Title },
+    time: new Date().getTime(),
+  });
+  Notice.render();
+
   render();
 });
 
@@ -63,9 +57,10 @@ const changeNotificationMode = () => {
 };
 
 //popupbar 메뉴 보이기와 숨기기
-document
-  .querySelector(".fa-bars")
-  .addEventListener("click", changeNotificationMode);
+document.querySelector(".fa-bars").addEventListener("click", () => {
+  Notice.render();
+  changeNotificationMode();
+});
 document
   .querySelector(".delete-notification-menu")
   .addEventListener("click", changeNotificationMode);

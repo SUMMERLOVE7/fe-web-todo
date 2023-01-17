@@ -3,9 +3,7 @@ import {
   initializeToBeUpdatedItem,
   initializeInputData,
 } from "./dataProcessing.js";
-
-import { BeforeUpdateItem, InputData, Todos } from "./store.js";
-
+import { BeforeUpdateItem, InputData, Todos, Notice } from "./store.js";
 import { makeNoticeTemplate } from "./template.js";
 
 const checkBeforeUpdateItem = () => {
@@ -118,13 +116,12 @@ const addInputRegisterEvent = () => {
       Title: InputData["title"],
       Contents: InputData["contents"],
     };
-    NoticeUl.insertAdjacentHTML(
-      "afterbegin",
-      makeNoticeTemplate({
-        mode: "update",
-        info: { Status: Todos[index].Status, Title: InputData["title"] },
-      })
-    );
+    Notice.add({
+      mode: "update",
+      info: { Status: Todos[index].Status, Title: InputData["title"] },
+      time: new Date().getTime(),
+    });
+    Notice.render();
     initializeToBeUpdatedItem();
     initializeInputData();
     render();
@@ -138,13 +135,13 @@ const addInputRegisterEvent = () => {
     Title: InputData["title"],
     Contents: InputData["contents"],
   });
-  NoticeUl.insertAdjacentHTML(
-    "afterbegin",
-    makeNoticeTemplate({
-      mode: "add",
-      info: { Status: input_status, Title: InputData["title"] },
-    })
-  );
+  Notice.add({
+    mode: "add",
+    info: { Status: input_status, Title: InputData["title"] },
+    time: new Date().getTime(),
+  });
+  Notice.render();
+
   initializeToBeUpdatedItem();
   initializeInputData();
   render();

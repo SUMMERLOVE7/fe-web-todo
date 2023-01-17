@@ -1,3 +1,5 @@
+import { makeNoticeTemplate } from "./template.js";
+
 const InputData = {
   title: "",
   contents: "",
@@ -39,10 +41,14 @@ class Notiification {
   constructor() {
     this.notices = [];
   }
-  show() {
-    this.notices.map((notice) => {
-      console.log(notice);
-    });
+  render() {
+    const notice_ul = document.querySelector(".notification-menu ul");
+    notice_ul.innerHTML =
+      `${this.notices.map((notice) => makeNoticeTemplate(notice)).join("")}` ||
+      `<h1>알림이 없습니다.<h1>`;
+  }
+  add(info) {
+    this.notices.unshift(info);
   }
 }
 
