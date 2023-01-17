@@ -129,10 +129,10 @@ document.body.addEventListener("mousedown", (e) => {
       moveAt(e.pageX, e.pageY);
       const getDropable = checkDropable();
       if (!getDropable) return;
-      const todolist_ul = getDropable.closest("ul");
       const todolist_section = getDropable.closest("section");
-      if (!todolist_ul) return;
-      const afterElement = getDragAfterElement(todolist_ul, e.clientY);
+      if (!todolist_section) return;
+      const todolist_ul = todolist_section.querySelector("ul");
+      const afterElement = getDragAfterElement(todolist_section, e.clientY);
       console.log(
         "origin",
         origin_item,
