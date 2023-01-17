@@ -22,21 +22,19 @@ function mouseOut(target) {
   grandParentSection.style.backgroundColor = "white";
 }
 
-function deleteList(element) {
-  //let parentDiv = element.closest("div");
-  //let grandParentSection = parentDiv.closest("section");
-  //target.addEventListner('click', grandParentSection.style.display = 'none');
-
-  // let parentDiv = element.parentElement;
-  // let grandParentSection = parentDiv.parentElement;
-  let grandParentSection = element.closest(".todolist");
-  let ggrandParentDiv = element.closest("#list-container");
-  let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
-  const cardIndex = findCardIndex(ggrandParentDiv, grandParentSection);
-  deleteCardFromStorage(columnName, cardIndex);
-  grandParentSection.remove();
-  updateCount(ggrandParentDiv);
+function deleteList(target) {
+  const $columnCountTarget = target.closest(".list-container");
+  deleteCard(target, $columnCountTarget);
+  target.remove();
+  updateCount($columnCountTarget);
   deleteCardHistory();
+}
+
+function deleteCard(target, $columnCountTarget) {
+  const columnName = $columnCountTarget.querySelector(".column-name").innerText;
+  const cardIndex = findCardIndex($columnCountTarget, target);
+  deleteCardFromStorage(columnName, cardIndex);
+  console.log(dataStorage);
 }
 
 export function manageContent(target) {
@@ -46,10 +44,13 @@ export function manageContent(target) {
   target.addEventListener("mouseout", (e) => {
     mouseOut(target);
   });
-  target.addEventListener("click", (e) => {
+  document.addEventListener("click", (e) => {
     e.preventDefault();
+    const $cardTarget = e.target.closest(".todolist");
+
+    if (!$cardTarget) return;
     showDelPopup();
-    rmDelPopup(target);
+    rmDelPopup($cardTarget);
   });
 }
 
@@ -60,7 +61,6 @@ function showDelPopup() {
 
 function rmDelPopup(target) {
   deletePopupBtn.addEventListener("click", () => {
-    //delArray(target);
     deleteList(target);
     deletePopup.style.display = "none";
   });
@@ -88,7 +88,7 @@ function deleteCardFromStorage(columnName, cardIndex) {
 //   // let ggrandParentDiv = grandParentSection.parentElement; //column
 
 //   let grandParentSection = target.closest(".todolist");
-//   let ggrandParentDiv = target.closest("#list-container");
+//   let ggrandParentDiv = target.closest(".list-container");
 //   // console.log(grandParentSection);
 //   let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
 //   const cardIndex = findCardIndex(ggrandParentDiv, grandParentSection);

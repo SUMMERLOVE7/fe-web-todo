@@ -53,11 +53,11 @@ export function finishModification(target) {
     let newtitle = parent.querySelector(".title-input").value;
     let newcaption = parent.querySelector(".caption-input").value;
 
-    let grandParent = target.closest("#list-container");
+    let grandParent = target.closest(".list-container");
     let columnName = grandParent.querySelector(".column-name").innerText;
 
     target.innerHTML = renderNewSection(newtitle, newcaption);
-    let container = target.closest("#list-container");
+    let container = target.closest(".list-container");
 
     modifyCardInStorage(grandParent, parent, newtitle, newcaption);
     addEvent(container);

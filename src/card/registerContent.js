@@ -56,8 +56,8 @@ function registerModal(target) {
   let newContent = "";
   let columnName = target.querySelector(".column-name").innerText;
 
-  newTitle = target.querySelector("#title-input").value;
-  newContent = target.querySelector("#caption-input").value;
+  newTitle = target.querySelector(".title-input").value;
+  newContent = target.querySelector(".caption-input").value;
 
   pushCardIntoStorage(columnName, newTitle, newContent);
 
@@ -105,11 +105,11 @@ export function addEvent(target) {
 
 export function addCard(target) {
   const modal = target.closest(".open-modal");
-  const title = modal.querySelector("#title-input");
-  const caption = modal.querySelector("#caption-input");
+  const title = modal.querySelector(".title-input");
+  const caption = modal.querySelector(".caption-input");
 
   if (check_input_validity(title, caption) === 0) {
-    let column = target.closest("#list-container");
+    let column = target.closest(".list-container");
     registerModal(column);
     closeModal(modal);
   }

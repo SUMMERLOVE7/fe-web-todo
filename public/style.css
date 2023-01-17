@@ -298,7 +298,8 @@ header {
   margin-bottom: 10px;
   /*width: auto;*/
   width: 280px;
-  height: 108px;
+  /* height: 108px; */
+  min-height: 108px;
   background: #ffffff;
   border-radius: 6px;
   border-style: solid;
@@ -330,18 +331,37 @@ header {
   gap: 10px;
 }
 
+textarea {
+  min-height: 0.5rem;
+  overflow-y: hidden;
+  resize: none;
+}
+
+.title-input {
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 10px;
+  height: auto;
+}
+
+.caption-input {
+  border: none;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
 /*여기 수정하기*/
-#title-input {
+/* .title-input {
   border: none;
   font-weight: 700;
   font-size: 16px;
   margin-bottom: 10px;
 }
-#caption-input {
+.caption-input {
   border: none;
   font-size: 14px;
   margin-bottom: 10px;
-}
+} */
 
 #cancel-button,
 .undo-popup {
@@ -366,19 +386,6 @@ header {
   background: #0075de;
   border-radius: 6px;
   border: none;
-}
-
-.title-input {
-  border: none;
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.caption-input {
-  border: none;
-  font-size: 14px;
-  margin-bottom: 10px;
 }
 
 .popup-text {
@@ -430,15 +437,15 @@ header {
   margin-bottom: 10px;
   /*width: auto;*/
   width: 280px;
-  height: 108px;
+  /* height: 108px; */
+  height: fit-content;
   background: #ffffff;
   border-radius: 6px;
 }
 
-#open-modal-todo {
+/* #open-modal-todo {
   padding: 16px;
   margin-bottom: 10px;
-  /*width: auto;*/
   width: 280px;
   height: 108px;
   background: #ffffff;
@@ -448,7 +455,6 @@ header {
 #open-modal-doing {
   padding: 16px;
   margin-bottom: 10px;
-  /*width: auto;*/
   width: 280px;
   height: 108px;
   background: #ffffff;
@@ -458,9 +464,8 @@ header {
 #open-modal-done {
   padding: 16px;
   margin-bottom: 10px;
-  /*width: auto;*/
   width: 280px;
   height: 108px;
   background: #ffffff;
   border-radius: 6px;
-}
+} */

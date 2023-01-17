@@ -1,265 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TODO</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="#">
-
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="#" />
+  </head>
+  <body>
     <header>
-       <h1 class="site-title">TO-DO LIST</h1> 
-       <button type="button" class="menu-button"> 
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="11" viewBox="0 0 17 11" fill="none">
-                <path d="M0 1V0H17V1H0ZM17 5V6H0V5H17ZM0 10H17V11H0V10Z" fill="black"/>
-            </svg>
-        </button>    
-        <span class="menu-screen">
+      <h1 class="site-title">TO-DO LIST</h1>
+      <button type="button" class="menu-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="11" viewBox="0 0 17 11" fill="none">
+          <path d="M0 1V0H17V1H0ZM17 5V6H0V5H17ZM0 10H17V11H0V10Z" fill="black" />
+        </svg>
+      </button>
+      <span class="menu-screen">
         <button class="close-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
-            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black" />
+          </svg>
         </button>
-        <div class = "menu-content">
-            <div class = "menu-card">
-                <div class = "menu-emoji">
-
-                </div>
-                <div class = "one-menu-card">
-                    <div class = "menu-person-name">
-
-                    </div>
-                    <div class = "menu-caption">
-
-                    </div>
-                </div>
-                
-            </div>            
+        <div class="menu-content">
+          <div class="menu-card">
+            <div class="menu-emoji"></div>
+            <div class="one-menu-card">
+              <div class="menu-person-name"></div>
+              <div class="menu-caption"></div>
+            </div>
+          </div>
         </div>
-    </span>      
+      </span>
     </header>
-      
+
     <main id="main-content">
-        <div class="column-container">
-            <div class="havetodo-container" id="list-container">
-                <div class="container-title">
-                    <h3 class = "column-name">해야할 일</h3>
-                    <div class = "count-container">
-                        <div class = "count" id="count-todo"> 2 </div>
-                    </div>
-                    
-                    <div class="plus-x-button">
-                        <button class="plus-button" id="plus-todo-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="black"/>
-                            </svg>
-                        </button>
-                        <button class="x-button" id="x-todo-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
-                            </svg>
-                        </button>
-                    </div>
-                                     
-                </div>
-                
-                <div class="todo-content">
-                    <div class="open-modal-content">
-                        <section id="open-modal-todo" class="hidden open-modal">
-                            <div class="list-title-modal" id="list-title-modal-todo">
-                                <textarea type="text" id="title-input" class="todo-title-input" name="todo-title-input" placeholder="제목을 입력하세요."> </textarea>
-                            </div>
-                            <form>
-                                <div class="caption-modal" id="caption-modal-todo">
-                                    <textarea type="text" id="caption-input" class="todo-caption-input" name="todo-caption-input" placeholder="내용을 입력하세요."> </textarea>
-                                </div>
-                                <div class="modal-button">
-                                    <button type="button" id="cancel-button" class="todo-cancel-button"> 취소 </button>
-                                    <button type="submit" id = "add-button" class="todo-add-button"> 등록 </button>                    
-                                </div>
-                            </form>
-                            
-                        </section>
-                    </div> 
-                </div>
-                <section class="todolist" id="todolist-todo">
-                    <div class = "list-header">
-                        <div class="list-title" id="list-title-todo">
-                            GITHUB 공부하기
-                        </div>
-                        <div class="caption" id="caption-todo">
-                        add, commit, push
-                        </div>                                           
-                    </div>                                          
-                    <div class = "button-container">
-                        <button type="button" class="x-content-button" id="x-todo-content-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
-                            </svg>
-                        </button> 
-                        <button type="button" class="modify-content-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
-                                <path d="M13.7619 2.8366L11.2012 0.262865C11.032 0.0945094 10.803 0 10.5643 0C10.3256 0 10.0967 0.0945094 9.92745 0.262865L0.849572 9.32765L0.0207413 12.9047C-0.00785061 13.0355 -0.00687046 13.171 0.02361 13.3013C0.0540905 13.4316 0.113301 13.5535 0.196917 13.658C0.280533 13.7626 0.386441 13.8471 0.506905 13.9054C0.62737 13.9638 0.759346 13.9945 0.893194 13.9953C0.955562 14.0016 1.0184 14.0016 1.08077 13.9953L4.69709 13.1664L13.7619 4.11038C13.9302 3.94117 14.0247 3.71219 14.0247 3.47349C14.0247 3.2348 13.9302 3.00581 13.7619 2.8366ZM4.26086 12.3812L0.871383 13.0923L1.6435 9.76824L8.43555 3.00237L11.0529 5.61973L4.26086 12.3812ZM11.6375 4.9872L9.02009 2.36984L10.5382 0.860495L13.1119 3.47785L11.6375 4.9872Z" fill="#828282"/>
-                            </svg>
-                        </button>
-                     </div>                  
-                </section>
-                <section class="todolist" id="todolist-todo">
-                    <div class = "list-header">
-                        <div class="list-title" id="list-title-todo">
-                            블로그에 포스팅할 것
-                        </div>
-                        <div class="caption" id="caption-todo">
-                        <li>Github 공부내용</li>
-                        <li>모던자바스크립트 1장 공부내용</li>
-                        </div>
-                    </div>        
-                    <div class = "button-container">
-                        <button type="button" class="x-content-button" id="x-todo-content-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
-                            </svg>
-                        </button> 
-                        <button type="button" class="modify-content-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
-                                <path d="M13.7619 2.8366L11.2012 0.262865C11.032 0.0945094 10.803 0 10.5643 0C10.3256 0 10.0967 0.0945094 9.92745 0.262865L0.849572 9.32765L0.0207413 12.9047C-0.00785061 13.0355 -0.00687046 13.171 0.02361 13.3013C0.0540905 13.4316 0.113301 13.5535 0.196917 13.658C0.280533 13.7626 0.386441 13.8471 0.506905 13.9054C0.62737 13.9638 0.759346 13.9945 0.893194 13.9953C0.955562 14.0016 1.0184 14.0016 1.08077 13.9953L4.69709 13.1664L13.7619 4.11038C13.9302 3.94117 14.0247 3.71219 14.0247 3.47349C14.0247 3.2348 13.9302 3.00581 13.7619 2.8366ZM4.26086 12.3812L0.871383 13.0923L1.6435 9.76824L8.43555 3.00237L11.0529 5.61973L4.26086 12.3812ZM11.6375 4.9872L9.02009 2.36984L10.5382 0.860495L13.1119 3.47785L11.6375 4.9872Z" fill="#828282"/>
-                            </svg>
-                        </button>
-                     </div>                             
-                </section>
+      <div class="column-container">
+        <div class="havetodo-container list-container">
+          <div class="container-title">
+            <h3 class="column-name">해야할 일</h3>
+            <div class="count-container">
+              <div class="count" id="count-todo">2</div>
             </div>
-            <div class="doing-container" id="list-container">
-                <div class="container-title">
-                    <h3 class = "column-name">하고 있는 일</h3>
-                    <div class = "count-container">
-                        <div class="count" id="count-doing">2 </div>
-                    </div>
-                    
-                    <div class="plus-x-button">
-                        <button class="plus-button" id="plus-doing-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="black"/>
-                            </svg>
-                        </button>
-                        <button class="x-button" id="x-doing-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
-                            </svg>
-                        </button>
-                    </div>                
-                </div>
-                <div class="doing-content">
-                    <div class="open-modal-content">
-                        <section id="open-modal-doing" class="hidden open-modal">
-                            <div class="list-title-modal" id="list-title-modal-doing">
-                                <input type="text" id="title-input" class="doing-title-input" placeholder="제목을 입력하세요."> </input>
-                            </div>
-                            <form>
-                                <div class="caption-modal" id="caption-modal-doing">
-                                    <input name="a" type="text" id="caption-input" class="doing-caption-input" placeholder="내용을 입력하세요."> </input>
-                                </div>
-                                <div class="modal-button">
-                                    <button type="button" id="cancel-button" class="doing-cancel-button"> 취소 </button>
-                                    <button type="submit" id = "add-button" class="doing-add-button"> 등록 </button>                    
-                                </div>
-                            </form>
-                        </section>
-                    </div> 
-                </div>
-                
-                <section class="todolist" id="todolist-doing">
-                    <div class="list-header">
-                        <div class="list-title" id="list-title-doing">
-                            HTML/CSS 공부하기
-                        </div>
-                        <div class="caption" id="caption-doing">
-                        input 태그 실습
-                        </div>
-                    </div>    
-                    <div class = "button-container">
-                        <button type="button" class="x-content-button" id="x-todo-content-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
-                            </svg>
-                        </button> 
-                        <button type="button" class="modify-content-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
-                                <path d="M13.7619 2.8366L11.2012 0.262865C11.032 0.0945094 10.803 0 10.5643 0C10.3256 0 10.0967 0.0945094 9.92745 0.262865L0.849572 9.32765L0.0207413 12.9047C-0.00785061 13.0355 -0.00687046 13.171 0.02361 13.3013C0.0540905 13.4316 0.113301 13.5535 0.196917 13.658C0.280533 13.7626 0.386441 13.8471 0.506905 13.9054C0.62737 13.9638 0.759346 13.9945 0.893194 13.9953C0.955562 14.0016 1.0184 14.0016 1.08077 13.9953L4.69709 13.1664L13.7619 4.11038C13.9302 3.94117 14.0247 3.71219 14.0247 3.47349C14.0247 3.2348 13.9302 3.00581 13.7619 2.8366ZM4.26086 12.3812L0.871383 13.0923L1.6435 9.76824L8.43555 3.00237L11.0529 5.61973L4.26086 12.3812ZM11.6375 4.9872L9.02009 2.36984L10.5382 0.860495L13.1119 3.47785L11.6375 4.9872Z" fill="#828282"/>
-                            </svg>
-                        </button>
-                    </div>                          
-                </section>
+
+            <div class="plus-x-button">
+              <button class="plus-button" id="plus-todo-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="black" />
+                </svg>
+              </button>
+              <button class="x-button" id="x-todo-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black" />
+                </svg>
+              </button>
             </div>
-            <div class="done-container" id="list-container">
-                <div class="container-title">
-                    <h3 class = "column-name">완료한 일</h3>
-                    <div class = "count-container">
-                        <div class="count" id="count-done"> 0 </div>
-                    </div>
-                    
-                    <div class="plus-x-button">
-                        <button class="plus-button" id="plus-done-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="black"/>
-                            </svg>
-                        </button>
-                        <button class="x-button" id="x-done-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black"/>
-                            </svg>
-                        </button>
-                    </div>                
+          </div>
+
+          <div class="todo-content">
+            <div class="open-modal-content">
+              <section id="open-modal-todo" class="hidden open-modal">
+                <div class="list-title-modal" id="list-title-modal-todo">
+                  <textarea type="text" class="title-input textarea-input" name="todo-title-input" placeholder="제목을 입력하세요." rows="1"></textarea>
                 </div>
-                <div class="done-content">
-                    <div class="open-modal-content">
-                        <section id="open-modal-done" class="hidden open-modal">
-                            <div class="list-title-modal" id="list-title-modal-done">
-                                <input type="text" id="title-input" class="done-title-input" placeholder="제목을 입력하세요."> </input>
-                            </div>
-                            <form>
-                                <div class="caption-modal" id="caption-modal-done">
-                                    <input type="text" id="caption-input" class="done-caption-input" placeholder="내용을 입력하세요."> </input>
-                                </div>
-                                <div class="modal-button">
-                                    <button type="button" id="cancel-button" class="done-cancel-button"> 취소 </button>
-                                    <button type="submit" id = "add-button" class="done-add-button"> 등록 </button>                    
-                                </div>
-                            </form>
-                            
-                        </section>
-                    </div> 
-                </div>                
+                <form>
+                  <div class="caption-modal" id="caption-modal-todo">
+                    <textarea type="text" class="caption-input textarea-input" name="todo-caption-input" placeholder="내용을 입력하세요." rows="1"></textarea>
+                  </div>
+                  <div class="modal-button">
+                    <button type="button" id="cancel-button" class="todo-cancel-button">취소</button>
+                    <button type="submit" id="add-button" class="todo-add-button">등록</button>
+                  </div>
+                </form>
+              </section>
             </div>
+          </div>
+          <section class="todolist">
+            <div class="list-header">
+              <div class="list-title" id="list-title-todo">GITHUB 공부하기</div>
+              <div class="caption" id="caption-todo">add, commit, push</div>
+            </div>
+            <div class="button-container">
+              <button type="button" class="x-content-button" id="x-todo-content-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black" />
+                </svg>
+              </button>
+              <button type="button" class="modify-content-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+                  <path
+                    d="M13.7619 2.8366L11.2012 0.262865C11.032 0.0945094 10.803 0 10.5643 0C10.3256 0 10.0967 0.0945094 9.92745 0.262865L0.849572 9.32765L0.0207413 12.9047C-0.00785061 13.0355 -0.00687046 13.171 0.02361 13.3013C0.0540905 13.4316 0.113301 13.5535 0.196917 13.658C0.280533 13.7626 0.386441 13.8471 0.506905 13.9054C0.62737 13.9638 0.759346 13.9945 0.893194 13.9953C0.955562 14.0016 1.0184 14.0016 1.08077 13.9953L4.69709 13.1664L13.7619 4.11038C13.9302 3.94117 14.0247 3.71219 14.0247 3.47349C14.0247 3.2348 13.9302 3.00581 13.7619 2.8366ZM4.26086 12.3812L0.871383 13.0923L1.6435 9.76824L8.43555 3.00237L11.0529 5.61973L4.26086 12.3812ZM11.6375 4.9872L9.02009 2.36984L10.5382 0.860495L13.1119 3.47785L11.6375 4.9872Z"
+                    fill="#828282"
+                  />
+                </svg>
+              </button>
+            </div>
+          </section>
+          <section class="todolist">
+            <div class="list-header">
+              <div class="list-title" id="list-title-todo">블로그에 포스팅할 것</div>
+              <div class="caption" id="caption-todo">
+                <li>Github 공부내용</li>
+                <li>모던자바스크립트 1장 공부내용</li>
+              </div>
+            </div>
+            <div class="button-container">
+              <button type="button" class="x-content-button" id="x-todo-content-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black" />
+                </svg>
+              </button>
+              <button type="button" class="modify-content-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+                  <path
+                    d="M13.7619 2.8366L11.2012 0.262865C11.032 0.0945094 10.803 0 10.5643 0C10.3256 0 10.0967 0.0945094 9.92745 0.262865L0.849572 9.32765L0.0207413 12.9047C-0.00785061 13.0355 -0.00687046 13.171 0.02361 13.3013C0.0540905 13.4316 0.113301 13.5535 0.196917 13.658C0.280533 13.7626 0.386441 13.8471 0.506905 13.9054C0.62737 13.9638 0.759346 13.9945 0.893194 13.9953C0.955562 14.0016 1.0184 14.0016 1.08077 13.9953L4.69709 13.1664L13.7619 4.11038C13.9302 3.94117 14.0247 3.71219 14.0247 3.47349C14.0247 3.2348 13.9302 3.00581 13.7619 2.8366ZM4.26086 12.3812L0.871383 13.0923L1.6435 9.76824L8.43555 3.00237L11.0529 5.61973L4.26086 12.3812ZM11.6375 4.9872L9.02009 2.36984L10.5382 0.860495L13.1119 3.47785L11.6375 4.9872Z"
+                    fill="#828282"
+                  />
+                </svg>
+              </button>
+            </div>
+          </section>
         </div>
+        <div class="doing-container list-container">
+          <div class="container-title">
+            <h3 class="column-name">하고 있는 일</h3>
+            <div class="count-container">
+              <div class="count" id="count-doing">2</div>
+            </div>
+
+            <div class="plus-x-button">
+              <button class="plus-button" id="plus-doing-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="black" />
+                </svg>
+              </button>
+              <button class="x-button" id="x-doing-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="doing-content">
+            <div class="open-modal-content">
+              <section id="open-modal-doing" class="hidden open-modal">
+                <div class="list-title-modal" id="list-title-modal-doing">
+                  <textarea type="text" class="title-input textarea-input" placeholder="제목을 입력하세요." rows="1"></textarea>
+                </div>
+                <form>
+                  <div class="caption-modal" id="caption-modal-doing">
+                    <textarea type="text" class="caption-input textarea-input" placeholder="내용을 입력하세요." rows="1"></textarea>
+                  </div>
+                  <div class="modal-button">
+                    <button type="button" id="cancel-button" class="doing-cancel-button">취소</button>
+                    <button type="submit" id="add-button" class="doing-add-button">등록</button>
+                  </div>
+                </form>
+              </section>
+            </div>
+          </div>
+
+          <section class="todolist">
+            <div class="list-header">
+              <div class="list-title" id="list-title-doing">HTML/CSS 공부하기</div>
+              <div class="caption" id="caption-doing">input 태그 실습</div>
+            </div>
+            <div class="button-container">
+              <button type="button" class="x-content-button" id="x-todo-content-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black" />
+                </svg>
+              </button>
+              <button type="button" class="modify-content-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14" fill="none">
+                  <path
+                    d="M13.7619 2.8366L11.2012 0.262865C11.032 0.0945094 10.803 0 10.5643 0C10.3256 0 10.0967 0.0945094 9.92745 0.262865L0.849572 9.32765L0.0207413 12.9047C-0.00785061 13.0355 -0.00687046 13.171 0.02361 13.3013C0.0540905 13.4316 0.113301 13.5535 0.196917 13.658C0.280533 13.7626 0.386441 13.8471 0.506905 13.9054C0.62737 13.9638 0.759346 13.9945 0.893194 13.9953C0.955562 14.0016 1.0184 14.0016 1.08077 13.9953L4.69709 13.1664L13.7619 4.11038C13.9302 3.94117 14.0247 3.71219 14.0247 3.47349C14.0247 3.2348 13.9302 3.00581 13.7619 2.8366ZM4.26086 12.3812L0.871383 13.0923L1.6435 9.76824L8.43555 3.00237L11.0529 5.61973L4.26086 12.3812ZM11.6375 4.9872L9.02009 2.36984L10.5382 0.860495L13.1119 3.47785L11.6375 4.9872Z"
+                    fill="#828282"
+                  />
+                </svg>
+              </button>
+            </div>
+          </section>
+        </div>
+        <div class="done-container list-container">
+          <div class="container-title">
+            <h3 class="column-name">완료한 일</h3>
+            <div class="count-container">
+              <div class="count" id="count-done">0</div>
+            </div>
+
+            <div class="plus-x-button">
+              <button class="plus-button" id="plus-done-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="black" />
+                </svg>
+              </button>
+              <button class="x-button" id="x-done-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M1.5 11.25L0.75 10.5L5.25 6L0.75 1.5L1.5 0.75L6 5.25L10.5 0.75L11.25 1.5L6.75 6L11.25 10.5L10.5 11.25L6 6.75L1.5 11.25Z" fill="black" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div class="done-content">
+            <div class="open-modal-content">
+              <section id="open-modal-done" class="hidden open-modal">
+                <div class="list-title-modal" id="list-title-modal-done">
+                  <textarea type="text" class="title-input textarea-input" placeholder="제목을 입력하세요." rows="1"></textarea>
+                </div>
+                <form>
+                  <div class="caption-modal" id="caption-modal-done">
+                    <textarea type="text" class="caption-input textarea-input" placeholder="내용을 입력하세요." rows="1"></textarea>
+                  </div>
+                  <div class="modal-button">
+                    <button type="button" id="cancel-button" class="done-cancel-button">취소</button>
+                    <button type="submit" id="add-button" class="done-add-button">등록</button>
+                  </div>
+                </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
-    <div class="delPopup"  style="display: none;">
-        <div class="delPopup-inner">
-            <div class="popup-text">선택한 카드를 삭제할까요?</div>
-            <div class="popup-button">
-                <button class="undo-popup">
-                    취소
-                </button>
-                <button class="del-popup">
-                    삭제
-                </button>
-            </div>      
-        </div>          
+    <div class="delPopup" style="display: none">
+      <div class="delPopup-inner">
+        <div class="popup-text">선택한 카드를 삭제할까요?</div>
+        <div class="popup-button">
+          <button class="undo-popup">취소</button>
+          <button class="del-popup">삭제</button>
+        </div>
+      </div>
     </div>
-    <button type="button" id="plus-column-button"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 14 14" fill="none">
-        <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="white"/>
-    </svg></button>
+    <button type="button" id="plus-column-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 14 14" fill="none">
+        <path d="M0.105709 7.53033L0.105709 6.46967H6.46967V0.105713H7.53033V6.46967H13.8943V7.53033H7.53033V13.8943H6.46967V7.53033H0.105709Z" fill="white" />
+      </svg>
+    </button>
 
-    <script src = "../src/index.js" charset="utf-8" type="module" defer></script>
-    <script src = "../src/card/inputContent.js" charset="utf-8" type="module" defer></script>
-    <script src = "../src/card/registerContent.js" charset="utf-8" type="module" defer></script>
-    <script src = "../src/card/deleteContent.js" charset="utf-8" type = "module" defer></script>
-    <script src = "../src/menu/showMenu.js" charset="utf-8" type = "module" defer></script>
-    <script src = "../src/card/countCard.js" charset="utf-8" type="module" defer></script>
-    <script src = "../src/card/modifyContent.js" charset="utf-8" type="module" defer></script>
-    <script src = "../src/store.js" charset="utf-8" type = "module" defer></script>
-</body>
+    <script src="../src/index.js" charset="utf-8" type="module" defer></script>
+    <script src="../src/card/inputContent.js" charset="utf-8" type="module" defer></script>
+    <script src="../src/card/registerContent.js" charset="utf-8" type="module" defer></script>
+    <script src="../src/card/deleteContent.js" charset="utf-8" type="module" defer></script>
+    <script src="../src/menu/showMenu.js" charset="utf-8" type="module" defer></script>
+    <script src="../src/card/countCard.js" charset="utf-8" type="module" defer></script>
+    <script src="../src/card/modifyContent.js" charset="utf-8" type="module" defer></script>
+    <script src="../src/store.js" charset="utf-8" type="module" defer></script>
+  </body>
 </html>
