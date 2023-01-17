@@ -42,6 +42,7 @@ body {
   font-family: "Open Sans", sans-serif;
   cursor: default;
   background-color: var(--color-light-white);
+  user-select: none;
 }
 
 a {

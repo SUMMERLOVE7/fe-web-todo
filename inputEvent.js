@@ -4,7 +4,6 @@ import {
   initializeInputData,
 } from "./dataProcessing.js";
 import { BeforeUpdateItem, InputData, Todos, Notice } from "./store.js";
-import { makeNoticeTemplate } from "./template.js";
 
 const checkBeforeUpdateItem = () => {
   return (
@@ -101,9 +100,6 @@ const addInputFocusOutEvent = () => {
  * 5. 리렌더링
  */
 const addInputRegisterEvent = () => {
-  const NoticeUl = document
-    .querySelector(".notification-menu")
-    .querySelector("ul");
   if (checkBeforeUpdateItem()) {
     const index = Todos.findIndex(
       (e) =>

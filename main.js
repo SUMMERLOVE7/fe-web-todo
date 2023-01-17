@@ -8,47 +8,10 @@ import {
 
 import { render } from "./render.js";
 import { addInputEvent, autoResizeTextarea } from "./inputEvent.js";
+import { modal } from "./Modal.js";
 
 //초기 렌더링
 render();
-
-const modal = document.querySelector(".modal");
-const modal_delete_btn = modal.querySelector(".cancel-button");
-const modal_register_btn = modal.querySelector(".register-button");
-
-//모달창에서 취소 버튼 누를시 모달 비활성화
-modal_delete_btn.addEventListener("click", () => {
-  modal.classList.toggle("act");
-});
-
-/**
- *  * 모달창에서 삭제버튼 누를 시 데이터 삭제
- * 1. 삭제할 데이터를 Todos(todolist 데이터)에서 삭제
- * 2. 모달 창 없앰
- * 3. 알림창에 알림 등록
- * 4. 리렌더링
- * */
-modal_register_btn.addEventListener("click", () => {
-  Todos.splice(
-    Todos.findIndex(
-      (e) =>
-        e.Status === ToBeDeleted.Status &&
-        e.Title === ToBeDeleted.Title &&
-        e.Contents === ToBeDeleted.Contents
-    ),
-    1
-  );
-  modal.classList.toggle("act");
-
-  Notice.add({
-    mode: "delete",
-    info: { Status: ToBeDeleted.Status, Title: ToBeDeleted.Title },
-    time: new Date().getTime(),
-  });
-  Notice.render();
-
-  render();
-});
 
 /** 알림메뉴창 활성화, 비활성화 하는 함수 */
 const changeNotificationMode = () => {
@@ -107,9 +70,15 @@ document.body.ondragstart = function () {
 };
 
 /** drag and drop 구현중인 함수
- * 1. mousedown 일어날때마다 타이머를 만들어서 일정 시간이 지난 후 드래그 이벤트 시작
- * 2. mousemove 이벤트로 잔상이 마우스 따라오게함
- * Todos : mouse over 시 리스트 삽입 및 이동되는 노드 제거
+ *  1. 드래그 이벤트 실행되면 드래그할 노드 클론해 생성 (x)
+ *  2. 드래그 되는 노드 잔상으로 만든다 (x)
+ *  3. mousemove 때 마우스 따라서 도형 이동 (x)
+ *  4. 못내려놓거나 본인자리면 무시
+ *  5. 그게 아니면 잔상 이동
+ *  6. 마우스가 올라가면 드래그 하는 노드 제거하고
+ *  7. 잔상을 원래 노드로 스타일 변경
+ *
+ * Todos : mouse over 시 이동되는 노드 제거
  */
 document.body.addEventListener("mousedown", (e) => {
   const origin_item = e.target.closest(".todolist-items");
@@ -126,6 +95,7 @@ document.body.addEventListener("mousedown", (e) => {
     origin_item.style.border = "1px solid dodgerblue";
     copy_item.style.position = "absolute";
     copy_item.style.zIndex = 1;
+    copy_item.style.width = "23vw";
     copy_item.classList.toggle("dragging");
 
     document.body.append(copy_item);
@@ -135,8 +105,47 @@ document.body.addEventListener("mousedown", (e) => {
       copy_item.style.top = pageY - shiftY + "px";
     }
 
+    function checkDropable() {
+      copy_item.hidden = true;
+      let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+      copy_item.hidden = false;
+      if (!elemBelow) return;
+      return elemBelow;
+    }
+
+    /**
+     *
+     *  3. mousemove 때 마우스 따라서 도형 이동 (x)
+     *  4. 못내려놓거나 본인자리면 무시
+     *  5. 그게 아니면 잔상 이동
+     *
+     * @todo
+     * 1. 마우스 위치에 따라 카드 이동
+     * 2. 마우스가 있는 위치로 잔상이 이동할수 있는지 검사
+     * 3. 내려놓을 수 있으면 위에 넣을지 아래에 넣을지 검사
+     * 4. 위치에 넣음
+     */
     function onMouseMove(e) {
       moveAt(e.pageX, e.pageY);
+      const getDropable = checkDropable();
+      if (!getDropable) return;
+      const todolist_ul = getDropable.closest("ul");
+      const todolist_section = getDropable.closest("section");
+      if (!todolist_ul) return;
+      const afterElement = getDragAfterElement(todolist_ul, e.clientY);
+      console.log(
+        "origin",
+        origin_item,
+        "afterelement",
+        afterElement,
+        "todolist_ul",
+        todolist_ul,
+        "section",
+        todolist_section
+      );
+      if (afterElement === origin_item) return;
+      if (!afterElement) todolist_ul.appendChild(origin_item);
+      todolist_ul.insertBefore(origin_item, afterElement);
     }
     moveAt(e.pageX, e.pageY);
 
@@ -147,7 +156,8 @@ document.body.addEventListener("mousedown", (e) => {
       // document.onmouseup = null;
 
       // document.removeChild(copy_item);
-      // copy_item.remove();
+      // origin_item.remove();
+      copy_item.remove();
       origin_item.style.opacity = 1;
       origin_item.style.border = "none";
     };
@@ -159,12 +169,13 @@ document.body.addEventListener("mousedown", (e) => {
   };
 });
 
-function getDragAfterElement(container, x) {
+function getDragAfterElement(container, y) {
   const draggableElements = [...container.querySelectorAll(".todolist-items")];
+  // console.log("container", container, "y", y);
   return draggableElements.reduce(
     (closest, child) => {
       const box = child.getBoundingClientRect();
-      const offset = x - box.top - box.height / 2;
+      const offset = y - box.top - box.height / 2;
       if (offset < 0 && offset > closest.offset) {
         return { offset: offset, element: child };
       } else {
@@ -178,22 +189,16 @@ function getDragAfterElement(container, x) {
 const sections = document.querySelectorAll("section:not(.notification-menu)");
 
 // drag한 것이 todolist 로 올라왔을때 처리하려는 함수
-Array.from(sections).map((section) => {
-  section.addEventListener("mouseover", (e) => {
-    const draggable = document.querySelector(".dragging");
-    if (!draggable) return;
+// Array.from(sections).map((section) => {
+//   section.addEventListener("mouseover", (e) => {
+//     const draggable = document.querySelector(".dragging");
+//     if (!draggable) return;
 
-    const afterElement = getDragAfterElement(section, e.clientX);
-    console.log("afterElement", afterElement);
-    document.querySelector("body").removeChild(draggable);
-    section.appendChild(draggable);
-    draggable.classList.toggle("dragging");
-    draggable.style.position = "static";
-    draggable.style.zIndex = 0;
-
-    console.log("draggable", draggable);
-  });
-});
+//     draggable.classList.toggle("dragging");
+//     draggable.style.position = "static";
+//     draggable.style.zIndex = 0;
+//   });
+// });
 
 // list-item 더블클릭이벤트
 document.body.addEventListener("dblclick", (e) => {

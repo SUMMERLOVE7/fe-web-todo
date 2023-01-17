@@ -45,7 +45,7 @@ class Notiification {
     const notice_ul = document.querySelector(".notification-menu ul");
     notice_ul.innerHTML =
       `${this.notices.map((notice) => makeNoticeTemplate(notice)).join("")}` ||
-      `<h1>알림이 없습니다.<h1>`;
+      `<h2>알림이 없습니다.<h2>`;
   }
   add(info) {
     this.notices.unshift(info);
