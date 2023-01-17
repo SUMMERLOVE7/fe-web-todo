@@ -2,19 +2,19 @@ let addTodoContent = document.querySelector("#plus-todo-button");
 let closeTodoContent = document.querySelector("#x-todo-button");
 // export let todoTitleInput = document.querySelector(".todo-title-input");
 // export let todoCaptionInput = document.querySelector(".todo-caption-input");
-export let openTodoModal = document.querySelector("#open-modal-todo");
+// export let openTodoModal = document.querySelector("#open-modal-todo");
 
-let addDoingContent = document.querySelector("#plus-doing-button");
+// let addDoingContent = document.querySelector("#plus-doing-button");
 // export let doingTitleInput = document.querySelector(".doing-title-input");
 // export let doingCaptionInput = document.querySelector(".doing-caption-input");
-export let openDoingModal = document.querySelector("#open-modal-doing");
-let closeDoingContent = document.querySelector("#x-doing-button");
+// export let openDoingModal = document.querySelector("#open-modal-doing");
+// let closeDoingContent = document.querySelector("#x-doing-button");
 
-let addDoneContent = document.querySelector("#plus-done-button");
+// let addDoneContent = document.querySelector("#plus-done-button");
 // export let doneTitleInput = document.querySelector(".done-title-input");
 // export let doneCaptionInput = document.querySelector(".done-caption-input");
-export let openDoneModal = document.querySelector("#open-modal-done");
-let closeDoneContent = document.querySelector("#x-done-button");
+// export let openDoneModal = document.querySelector("#open-modal-done");
+// let closeDoneContent = document.querySelector("#x-done-button");
 
 export function showModal(target) {
   target.style.display = "block";
@@ -50,14 +50,6 @@ export function openModal() {
   }
 }
 
-// addTodoContent.addEventListener("click", () => openModal(openTodoModal));
-// addDoingContent.addEventListener("click", () => openModal(openDoingModal));
-// addDoneContent.addEventListener("click", () => openModal(openDoneModal));
-
-// export function closeModal(target) {
-//   target.style.display = "none";
-// }
-
 export function closeModal(target) {
   const titleInput = target.querySelector(".title-input");
   const captionInput = target.querySelector(".caption-input");
@@ -79,6 +71,15 @@ export function resizeTextareaEvent() {
     txt.addEventListener("keyup", resizeTextarea(txt));
   }
 }
+
+// addTodoContent.addEventListener("click", () => openModal(openTodoModal));
+// addDoingContent.addEventListener("click", () => openModal(openDoingModal));
+// addDoneContent.addEventListener("click", () => openModal(openDoneModal));
+
+// export function closeModal(target) {
+//   target.style.display = "none";
+// }
+
 // export function closeTodo() {
 //   todoTitleInput.value = "";
 //   todoCaptionInput.value = "";

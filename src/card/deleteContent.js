@@ -44,7 +44,7 @@ export function manageContent(target) {
   target.addEventListener("mouseout", (e) => {
     mouseOut(target);
   });
-  document.addEventListener("click", (e) => {
+  target.addEventListener("click", (e) => {
     e.preventDefault();
     const $cardTarget = e.target.closest(".todolist");
 

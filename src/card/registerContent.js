@@ -67,6 +67,10 @@ function registerModal(target) {
   newClass.value = "todolist";
   newSection.setAttributeNode(newClass);
 
+  const newDraggable = document.createAttribute("draggable");
+  newDraggable.value = "true";
+  newSection.setAttributeNode(newDraggable);
+
   newSection.innerHTML = renderNewSection(newTitle, newContent);
 
   let firstchild = target.querySelector(".todolist");
