@@ -52,7 +52,6 @@ export function addColumn() {
   columnContainer.appendChild(newDiv);
 
   dataStorage.columns.push({ column: newColumnName, cards: [] });
-  console.log(dataStorage);
   openModal(columnContainer);
   manageAddBtnEvent(columnContainer);
 }
