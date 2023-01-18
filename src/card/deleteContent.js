@@ -27,13 +27,15 @@ function deleteList(target) {
   deleteCard(target, $columnCountTarget);
   target.remove();
   updateCount($columnCountTarget);
-  deleteCardHistory();
+  // deleteCardHistory();
 }
 
 function deleteCard(target, $columnCountTarget) {
   const columnName = $columnCountTarget.querySelector(".column-name").innerText;
   const cardIndex = findCardIndex($columnCountTarget, target);
+  const cardTitle = target.querySelector(".list-title").innerText;
   deleteCardFromStorage(columnName, cardIndex);
+  deleteCardHistory(columnName, cardTitle);
   // console.log(columnName);
   // 위의 코드와 동일
   // pipeline(findCardIndex, deleteCardFromStorage, print)(columnName)
@@ -46,8 +48,9 @@ export function manageContent(target) {
   target.addEventListener("mouseout", (e) => {
     mouseOut(target);
   });
-  target.addEventListener("click", ({ preventDefault, e }) => {
-    preventDefault();
+  // target.addEventListener("click", ({ preventDefault, e }) => {
+  target.addEventListener("click", (e) => {
+    e.preventDefault();
     const $cardTarget = e.target.closest(".todolist");
 
     if (!$cardTarget) return;

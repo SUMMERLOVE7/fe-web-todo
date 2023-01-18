@@ -74,7 +74,7 @@ function registerModal(target) {
 
   let firstchild = target.querySelector(".todolist");
   target.insertBefore(newSection, firstchild);
-  newCardHistory();
+  newCardHistory(columnName, newTitle);
   changeEveryCount();
   addEvent(target);
 }

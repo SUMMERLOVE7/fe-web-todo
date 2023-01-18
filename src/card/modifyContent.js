@@ -55,11 +55,10 @@ export function finishModification(target) {
     let columnName = grandParent.querySelector(".column-name").innerText;
 
     target.innerHTML = renderNewSection(newtitle, newcaption);
-    let container = target.closest(".list-container");
 
     modifyCardInStorage(grandParent, parent, newtitle, newcaption);
     addEvent(grandParent);
-    modifyCardHistory();
+    modifyCardHistory(columnName, newtitle);
   });
 }
 
