@@ -11,9 +11,11 @@ import { autoResizeTextarea } from "./src/utils.js";
 import { addInputEvent } from "./src/inputEvent.js";
 import { modal } from "./src/Modal.js";
 import { doDragEvent } from "./src/drag.js";
+import { getTodo } from "./src/api/rest.js";
 
 //초기 렌더링
-render();
+getTodo();
+// render();
 
 /** 알림메뉴창 활성화, 비활성화 하는 함수 */
 const changeNotificationMode = () => {

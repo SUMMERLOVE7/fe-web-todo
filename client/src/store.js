@@ -19,23 +19,7 @@ const BeforeUpdateItem = {
 
 const TodosStatus = ["todo", "doing", "done"];
 
-const Todos = [
-  {
-    Status: "todo",
-    Title: "Git hub 공부하기",
-    Contents: "add , commit , push",
-  },
-  {
-    Status: "todo",
-    Title: "Git hub 블로그에 포스팅할 것",
-    Contents: "* Git hub 공부내용\n* 모던 자바스크립트 1장 공부 내용",
-  },
-  {
-    Status: "doing",
-    Title: "모던 자바스크립트 예제 실습",
-    Contents: "input 태그",
-  },
-];
+let Todos = [];
 
 class Notiification {
   constructor() {

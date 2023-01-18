@@ -17,5 +17,6 @@
   "bugs": {
     "url": "https://github.com/DongjaJ/fe-web-todo/issues"
   },
-  "homepage": "https://github.com/DongjaJ/fe-web-todo#readme"
+  "homepage": "https://github.com/DongjaJ/fe-web-todo#readme",
+  "proxy": "http://localhost:4000/"
 }
