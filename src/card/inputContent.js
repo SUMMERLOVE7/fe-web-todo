@@ -6,8 +6,8 @@ export function showModal(target) {
   target.classList.add("show");
 }
 
-export function openModal() {
-  const plusBtns = document.querySelectorAll(".plus-button");
+export function openModal(target) {
+  const plusBtns = target.querySelectorAll(".plus-button");
 
   for (let plus of plusBtns) {
     plus.addEventListener("click", () => {

@@ -1,4 +1,7 @@
 import { showPopup } from "../card/deleteContent.js";
+import { openModal } from "../card/inputContent.js";
+import { manageAddBtnEvent } from "../card/registerContent.js";
+import { dataStorage } from "../store.js";
 
 const columnPopup = document.querySelector(".columnPopup");
 const cancelColBtn = document.querySelector(".undo-column-button");
@@ -47,11 +50,16 @@ export function addColumn() {
   let newColumnName = getColumnName();
   newDiv.innerHTML = createColumnHTML(newColumnName);
   columnContainer.appendChild(newDiv);
+
+  dataStorage.columns.push({ column: newColumnName, cards: [] });
+  console.log(dataStorage);
+  openModal(columnContainer);
+  manageAddBtnEvent(columnContainer);
 }
 
 export function createColumnHTML(columnTitle) {
   return `<div class="container-title">
-    <h3 class="column-name">"${columnTitle}"</h3>
+    <h3 class="column-name">${columnTitle}</h3>
     <div class="count-container">
       <div class="count">0</div>
     </div>

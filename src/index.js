@@ -21,8 +21,8 @@ window.onload = function (e) {
   }
 
   changeEveryCount();
-  manageAddBtnEvent();
-  openModal();
+  manageAddBtnEvent(document);
+  openModal(document);
   openColumnModal();
   registerColumn();
 };

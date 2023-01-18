@@ -128,8 +128,8 @@ export function cancelCardAddition(target) {
   closeModal(modal);
 }
 
-export function manageAddBtnEvent() {
-  let addBtns = document.querySelectorAll(".add-button");
+export function manageAddBtnEvent(target) {
+  let addBtns = target.querySelectorAll(".add-button");
 
   for (let btn of addBtns) {
     btn.addEventListener("click", (e) => {
@@ -138,7 +138,7 @@ export function manageAddBtnEvent() {
     });
   }
 
-  const addBtn = document.querySelectorAll(".cancel-button");
+  const addBtn = target.querySelectorAll(".cancel-button");
   for (let btn of addBtn) {
     btn.addEventListener("click", () => {
       cancelCardAddition(btn);
