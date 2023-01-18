@@ -2,6 +2,7 @@ body {
   font-family: "Lato", sans-serif;
   background-color: #f5f5f7;
 }
+
 header {
   font-family: "Lato", sans-serif;
   background-color: #f5f5f7;
@@ -14,7 +15,7 @@ header {
   top: 0px;
 }
 
-#plus-column-button {
+.plus-column-button {
   position: fixed;
   display: flex;
   align-items: center;
@@ -31,13 +32,12 @@ header {
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
   background: #0075de;
   /* up */
-  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5),
-    0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
 }
 
-#plus-column-button:hover,
-#plus-column-button:focus {
+.plus-column-button:hover,
+.plus-column-button:focus {
   right: 27px;
   bottom: 27px;
   height: 66px;
@@ -46,10 +46,11 @@ header {
   font-size: 40px;
 }
 
-#plus-column-button:focus {
+.plus-column-button:focus {
   outline: none;
 }
 
+.columnPopup,
 .delPopup {
   position: fixed;
   top: 0;
@@ -67,29 +68,33 @@ header {
   content: "";
 }
 
+.columnPopup-inner,
 .delPopup-inner {
   display: inline-block;
   padding: 24px;
   width: 400px;
   height: 138px;
-
   background: #fff;
   font-size: 20px;
   vertical-align: middle;
   /*
-
   display: inline-block;
   padding: 20px 30px;
   background: #fff;
   width: 200px;
-
   font-size: 15px;
   */
-  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5),
-    0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
   /* Note: backdrop-filter has minimal browser support */
   border-radius: 6px;
+}
+
+.columnPopup:after {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  content: "";
 }
 
 .site-title {
@@ -109,12 +114,13 @@ header {
 .menu-button {
   border: none;
   background: none;
+  float: right;
+  padding-top: 50px;
+  /* margin-right: 10%; */
 }
 
 .menu-button svg {
-  padding-top: 50px;
-  margin-right: 50px;
-  float: right;
+  /* margin-right: 50px; */
   background: none;
   border: none;
 }
@@ -163,34 +169,13 @@ header {
   padding: 30px;
   flex-grow: 0;
 }
-
-.havetodo-container {
+.list-container {
   padding: 16px;
   margin-right: 30px;
   width: 300px;
   height: max-content;
   box-shadow: 0px 1px 30px rgba(224, 224, 224, 0.3);
   border-radius: 6px;
-  order: 1;
-}
-
-.doing-container {
-  padding: 16px;
-  margin-right: 30px;
-  width: 300px;
-  height: max-content;
-  box-shadow: 0px 1px 30px rgba(224, 224, 224, 0.3);
-  border-radius: 6px;
-  order: 2;
-}
-
-.done-container {
-  padding: 16px;
-  width: 300px;
-  height: max-content;
-  box-shadow: 0px 1px 30px rgba(224, 224, 224, 0.3);
-  border-radius: 6px;
-  order: 3;
 }
 
 .container-title {
@@ -296,9 +281,7 @@ header {
   align-items: flex-start;
   padding: 16px;
   margin-bottom: 10px;
-  /*width: auto;*/
   width: 280px;
-  /* height: 108px; */
   min-height: 108px;
   background: #ffffff;
   border-radius: 6px;
@@ -350,43 +333,6 @@ textarea {
   font-size: 14px;
   margin-bottom: 10px;
 }
-/*여기 수정하기*/
-/* .title-input {
-  border: none;
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-.caption-input {
-  border: none;
-  font-size: 14px;
-  margin-bottom: 10px;
-} */
-
-#cancel-button,
-.undo-popup {
-  width: 135px;
-  align-items: flex-start;
-  padding: 10px;
-  margin-top: 10px;
-  gap: 10px;
-  height: 40px;
-  background: #e0e0e0;
-  border-radius: 6px;
-  border: none;
-}
-
-#add-button,
-.del-popup {
-  width: 135px;
-  padding: 10px;
-  margin-top: 10px;
-  gap: 10px;
-  height: 40px;
-  background: #0075de;
-  border-radius: 6px;
-  border: none;
-}
 
 .popup-text {
   float: left;
@@ -401,6 +347,16 @@ textarea {
   margin-top: 30px;
 }
 
+.new-column-title {
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 10px;
+  height: 50px;
+  width: 80%;
+}
+
+.undo-column-button,
 .cancel-modify-button,
 .cancel-button,
 .undo-popup {
@@ -415,6 +371,7 @@ textarea {
   border: none;
 }
 
+.confirm-column-button,
 .modify-button,
 .add-button,
 .del-popup {
@@ -435,37 +392,9 @@ textarea {
 .open-modal {
   padding: 16px;
   margin-bottom: 10px;
-  /*width: auto;*/
   width: 280px;
   /* height: 108px; */
   height: fit-content;
   background: #ffffff;
   border-radius: 6px;
 }
-
-/* #open-modal-todo {
-  padding: 16px;
-  margin-bottom: 10px;
-  width: 280px;
-  height: 108px;
-  background: #ffffff;
-  border-radius: 6px;
-}
-
-#open-modal-doing {
-  padding: 16px;
-  margin-bottom: 10px;
-  width: 280px;
-  height: 108px;
-  background: #ffffff;
-  border-radius: 6px;
-}
-
-#open-modal-done {
-  padding: 16px;
-  margin-bottom: 10px;
-  width: 280px;
-  height: 108px;
-  background: #ffffff;
-  border-radius: 6px;
-} */

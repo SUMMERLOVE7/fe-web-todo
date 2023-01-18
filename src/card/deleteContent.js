@@ -49,14 +49,14 @@ export function manageContent(target) {
     const $cardTarget = e.target.closest(".todolist");
 
     if (!$cardTarget) return;
-    showDelPopup();
+    showPopup(deletePopup);
     rmDelPopup($cardTarget);
   });
 }
 
-function showDelPopup() {
-  deletePopup.style.display = "block";
-  deletePopup.classList.add("show");
+export function showPopup(target) {
+  target.style.display = "block";
+  target.classList.add("show");
 }
 
 function rmDelPopup(target) {

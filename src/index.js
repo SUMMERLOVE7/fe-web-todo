@@ -4,11 +4,8 @@ import { deleteContent, manageContent } from "./card/deleteContent.js";
 import { dataStorage } from "./store.js";
 import { modifyModal } from "./card/modifyContent.js";
 import { manageAddBtnEvent } from "./card/registerContent.js";
-import {
-  openModal,
-  resizeTextarea,
-  resizeTextareaEvent,
-} from "./card/inputContent.js";
+import { openModal, resizeTextareaEvent } from "./card/inputContent.js";
+import { openColumnModal, registerColumn } from "./column/addColumn.js";
 
 let modifyContent = document.querySelectorAll(".modify-content-button");
 
@@ -26,6 +23,8 @@ window.onload = function (e) {
   changeEveryCount();
   manageAddBtnEvent();
   openModal();
+  openColumnModal();
+  registerColumn();
 };
 
 // document.body.addEventListener("click", ({ target }) => {

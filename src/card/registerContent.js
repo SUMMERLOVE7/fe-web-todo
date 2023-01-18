@@ -5,7 +5,7 @@ import { updateCount, changeEveryCount } from "./countCard.js";
 import { newCardHistory } from "../menu/updateMenu.js";
 import { modifyModal } from "./modifyContent.js";
 
-export let addTodoButton = document.querySelector(".todo-add-button");
+// export let addTodoButton = document.querySelector(".todo-add-button");
 export let contentTodo = document.querySelector(".havetodo-container");
 export let contentDoing = document.querySelector(".doing-container");
 export let contentDone = document.querySelector(".done-container");
@@ -129,7 +129,7 @@ export function cancelCardAddition(target) {
 }
 
 export function manageAddBtnEvent() {
-  let addBtns = document.querySelectorAll("#add-button");
+  let addBtns = document.querySelectorAll(".add-button");
 
   for (let btn of addBtns) {
     btn.addEventListener("click", (e) => {
@@ -138,7 +138,7 @@ export function manageAddBtnEvent() {
     });
   }
 
-  const addBtn = document.querySelectorAll("#cancel-button");
+  const addBtn = document.querySelectorAll(".cancel-button");
   for (let btn of addBtn) {
     btn.addEventListener("click", () => {
       cancelCardAddition(btn);
