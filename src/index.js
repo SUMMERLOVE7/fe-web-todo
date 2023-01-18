@@ -6,6 +6,7 @@ import { modifyModal } from "./card/modifyContent.js";
 import { manageAddBtnEvent } from "./card/registerContent.js";
 import { openModal, resizeTextareaEvent } from "./card/inputContent.js";
 import { openColumnModal, registerColumn } from "./column/addColumn.js";
+import { deleteColumn } from "./column/ColumnDeletion.js";
 
 let modifyContent = document.querySelectorAll(".modify-content-button");
 
@@ -23,6 +24,7 @@ window.onload = function (e) {
   changeEveryCount();
   manageAddBtnEvent(document);
   openModal(document);
+  deleteColumn(document);
   openColumnModal();
   registerColumn();
 };

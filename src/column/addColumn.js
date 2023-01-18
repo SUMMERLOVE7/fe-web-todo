@@ -3,6 +3,7 @@ import { showPopup } from "../card/deleteContent.js";
 import { openModal } from "../card/inputContent.js";
 import { manageAddBtnEvent } from "../card/registerContent.js";
 import { dataStorage } from "../store.js";
+import { deleteColumn } from "./ColumnDeletion.js";
 
 const columnPopup = document.querySelector(".columnPopup");
 const cancelColBtn = document.querySelector(".undo-column-button");
@@ -54,6 +55,7 @@ export function addColumn() {
 
   dataStorage.columns.push({ column: newColumnName, cards: [] });
   openModal(columnContainer);
+  deleteColumn(columnContainer);
   manageAddBtnEvent(columnContainer);
 }
 
