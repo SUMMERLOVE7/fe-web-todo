@@ -1,7 +1,7 @@
 import { closeModal } from "./inputContent.js";
 import { dataStorage } from "../store.js";
 import { manageContent } from "./deleteContent.js";
-import { updateCount, changeEveryCount } from "./countCard.js";
+import { updateCount, changeEveryCount, countCard } from "./countCard.js";
 import { newCardHistory } from "../menu/updateMenu.js";
 import { modifyModal } from "./modifyContent.js";
 

@@ -1,6 +1,7 @@
 import { modifyCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
+import { resizeTextareaEvent } from "./inputContent.js";
 import { addEvent, contentTodo, findColumnIndex, renderNewSection } from "./registerContent.js";
 
 export function modifyModal(target) {
@@ -25,6 +26,8 @@ export function modifyModal(target) {
       </form>
       </section>`;
 
+    resizeTextareaEvent(parentSection);
+
     finishModification(parentSection);
     cancelModification(parentSection, title, caption);
   });
@@ -41,7 +44,7 @@ export function modifyCardInStorage(targetDiv, targetSection, newTitle, newCapti
 
 export function finishModification(target) {
   let modBtn = target.querySelector(".modify-button");
-  console.log(modBtn, target);
+
   modBtn.addEventListener("click", (e) => {
     e.preventDefault();
     let parent = target.closest(".todolist");
@@ -55,7 +58,7 @@ export function finishModification(target) {
     let container = target.closest(".list-container");
 
     modifyCardInStorage(grandParent, parent, newtitle, newcaption);
-    addEvent(container);
+    addEvent(grandParent);
     modifyCardHistory();
   });
 }

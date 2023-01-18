@@ -1,3 +1,4 @@
+import { updateCount } from "../card/countCard.js";
 import { showPopup } from "../card/deleteContent.js";
 import { openModal } from "../card/inputContent.js";
 import { manageAddBtnEvent } from "../card/registerContent.js";

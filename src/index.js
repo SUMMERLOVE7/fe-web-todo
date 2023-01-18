@@ -12,7 +12,7 @@ let modifyContent = document.querySelectorAll(".modify-content-button");
 window.onload = function (e) {
   closeMenu();
 
-  resizeTextareaEvent();
+  resizeTextareaEvent(document);
   for (let del of deleteContent) {
     manageContent(del);
   }

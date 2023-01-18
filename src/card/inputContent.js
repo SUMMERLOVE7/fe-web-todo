@@ -13,6 +13,7 @@ export function openModal(target) {
     plus.addEventListener("click", () => {
       const column = plus.closest(".list-container");
       const modal = column.querySelector(".open-modal");
+      modal.style.width = "280px";
       showModal(modal);
     });
   }
@@ -31,8 +32,8 @@ export function resizeTextarea(object) {
   object.style.height = object.scrollHeight + "px";
 }
 
-export function resizeTextareaEvent() {
-  let txtarea = document.querySelectorAll(".textarea-input");
+export function resizeTextareaEvent(target) {
+  let txtarea = target.querySelectorAll(".textarea-input");
 
   for (let txt of txtarea) {
     txt.style.height = txt.scrollHeight + 16 + "px";
