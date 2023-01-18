@@ -1,9 +1,7 @@
 import { render } from "./render.js";
-import {
-  initializeToBeUpdatedItem,
-  initializeInputData,
-} from "./dataProcessing.js";
+import { initializeBothData } from "./dataProcessing.js";
 import { BeforeUpdateItem, InputData, Todos, Notice } from "./store.js";
+import { autoResizeTextarea } from "./utils.js";
 
 const checkBeforeUpdateItem = () => {
   return (
@@ -46,12 +44,6 @@ export const addInputEvent = () => {
   modifyRegisterButtonMode();
 };
 
-//add,update input창 높이 자동 조절하는 함수
-const autoResizeTextarea = (e) => {
-  e.target.style.height = "auto";
-  e.target.style.height = `${e.target.scrollHeight}px`;
-};
-
 //add에서 input창에서 input값 받는 함수
 const onChange = (e) => {
   InputData[e.target.name] = e.target.value;
@@ -69,8 +61,7 @@ const InputCancelEvent = () => {
     .addEventListener("click", () => {
       document.querySelector(".input-items").remove();
       if (checkBeforeUpdateItem()) render();
-      initializeToBeUpdatedItem();
-      initializeInputData();
+      initializeBothData();
     });
 };
 
@@ -79,68 +70,60 @@ const addInputFocusOutEvent = () => {
     const input_item = document.querySelector(".input-items");
     if (input_item) input_item.remove();
     if (checkBeforeUpdateItem()) render();
-    initializeToBeUpdatedItem();
-    initializeInputData();
+    initializeBothData();
   }, 0);
 };
 
-/**
- * 1. update할 데이터가 있는지 체크
- *
- * 2. update 모드
- * 2-1. update할 데이터 탐색
- * 2-2. 객체 복사 후 업데이트 할 title, contents 덮어씌움
- * 2-3. update 알림 등록
- *
- * 3. add 모드
- * 3-1. Todos 배열 맨 앞에 데이터 삽입 (나중에 Todos 아이템에 이벤트 시간을 넣어 정렬할까 생각중...)
- * 3-2. add 알림 등록
- *
- * 4. 데이터 초기화
- * 5. 리렌더링
- */
-const addInputRegisterEvent = () => {
-  if (checkBeforeUpdateItem()) {
-    const index = Todos.findIndex(
-      (e) =>
-        e.Title === BeforeUpdateItem.Title &&
-        e.Contents === BeforeUpdateItem.Contents &&
-        e.Status === BeforeUpdateItem.Status
-    );
-    Todos[index] = {
-      ...Todos[index],
-      Title: InputData["title"],
-      Contents: InputData["contents"],
-    };
-    Notice.add({
-      mode: "update",
-      info: { Status: Todos[index].Status, Title: InputData["title"] },
-      time: new Date().getTime(),
-    });
-    Notice.render();
-    initializeToBeUpdatedItem();
-    initializeInputData();
-    render();
-    return;
-  }
+const doUpdateAction = () => {
+  const index = Todos.findIndex(
+    (e) =>
+      e.Title === BeforeUpdateItem.Title &&
+      e.Contents === BeforeUpdateItem.Contents &&
+      e.Status === BeforeUpdateItem.Status
+  );
+  Todos[index] = {
+    ...Todos[index],
+    Title: InputData["title"],
+    Contents: InputData["contents"],
+  };
+  Notice.add({
+    mode: "update",
+    info: { Status: Todos[index].Status, Title: InputData["title"] },
+    time: new Date().getTime(),
+  });
+  Notice.render();
+  initializeBothData();
+  render();
+};
+
+const doAddAction = () => {
   const input_status = document
     .querySelector(".input-items")
     .closest("section").className;
+
   Todos.unshift({
     Status: input_status,
     Title: InputData["title"],
     Contents: InputData["contents"],
   });
+
   Notice.add({
     mode: "add",
     info: { Status: input_status, Title: InputData["title"] },
     time: new Date().getTime(),
   });
-  Notice.render();
 
-  initializeToBeUpdatedItem();
-  initializeInputData();
+  Notice.render();
+  initializeBothData();
   render();
+};
+
+const addInputRegisterEvent = () => {
+  if (checkBeforeUpdateItem()) {
+    doUpdateAction();
+    return;
+  }
+  doAddAction();
 };
 
 const modifyRegisterButtonMode = () => {
@@ -154,5 +137,3 @@ const modifyRegisterButtonMode = () => {
   register_button.disabled = true;
   input_items.style.opacity = 0.4;
 };
-
-export { autoResizeTextarea };

@@ -11,6 +11,11 @@ const initializeInputData = () => {
   InputData["contents"] = "";
 };
 
+const initializeBothData = () => {
+  initializeToBeUpdatedItem();
+  initializeInputData();
+};
+
 const storeToBeUpdatedItem = (update_element) => {
   BeforeUpdateItem.Status = update_element.closest("section").className;
   BeforeUpdateItem.Title = update_element.querySelector(
@@ -41,4 +46,5 @@ export {
   storeToBeUpdatedItem,
   storeInputData,
   storeDeletedItem,
+  initializeBothData,
 };

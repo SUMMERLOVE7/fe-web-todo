@@ -1,14 +1,16 @@
-import { ToBeDeleted, TodosStatus, Todos, Notice } from "./store.js";
-import { makeInputTemplate, makeInputFormTemplate } from "./template.js";
+import { TodosStatus, Todos, Notice } from "./src/store.js";
+import { makeInputTemplate, makeInputFormTemplate } from "./src/template.js";
 import {
   storeToBeUpdatedItem,
   storeInputData,
   storeDeletedItem,
-} from "./dataProcessing.js";
+} from "./src/dataProcessing.js";
 
-import { render } from "./render.js";
-import { addInputEvent, autoResizeTextarea } from "./inputEvent.js";
-import { modal } from "./Modal.js";
+import { render } from "./src/render.js";
+import { autoResizeTextarea } from "./src/utils.js";
+import { addInputEvent } from "./src/inputEvent.js";
+import { modal } from "./src/Modal.js";
+import { doDragEvent } from "./src/drag.js";
 
 //초기 렌더링
 render();
@@ -65,140 +67,22 @@ document.body.addEventListener("click", (e) => {
   }
 });
 
-document.body.ondragstart = function () {
-  return false;
-};
-
-/** drag and drop 구현중인 함수
- *  1. 드래그 이벤트 실행되면 드래그할 노드 클론해 생성 (x)
- *  2. 드래그 되는 노드 잔상으로 만든다 (x)
- *  3. mousemove 때 마우스 따라서 도형 이동 (x)
- *  4. 못내려놓거나 본인자리면 무시
- *  5. 그게 아니면 잔상 이동
- *  6. 마우스가 올라가면 드래그 하는 노드 제거하고
- *  7. 잔상을 원래 노드로 스타일 변경
- *
- * Todos : mouse over 시 이동되는 노드 제거
- */
 document.body.addEventListener("mousedown", (e) => {
   const origin_item = e.target.closest(".todolist-items");
+  const drag_delay = 150;
   if (!origin_item) return;
   let isClick = 1;
   const timer = setTimeout(() => {
     if (!isClick) return;
     isClick = 0;
-    let shiftX = e.clientX - origin_item.getBoundingClientRect().left;
-    let shiftY = e.clientY - origin_item.getBoundingClientRect().top;
-
-    const copy_item = origin_item.cloneNode(true);
-    origin_item.style.opacity = 0.4;
-    origin_item.style.border = "1px solid dodgerblue";
-    copy_item.style.position = "absolute";
-    copy_item.style.zIndex = 1;
-    copy_item.style.width = "23vw";
-    copy_item.classList.toggle("dragging");
-
-    document.body.append(copy_item);
-
-    function moveAt(pageX, pageY) {
-      copy_item.style.left = pageX - shiftX + "px";
-      copy_item.style.top = pageY - shiftY + "px";
-    }
-
-    function checkDropable() {
-      copy_item.hidden = true;
-      let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-      copy_item.hidden = false;
-      if (!elemBelow) return;
-      return elemBelow;
-    }
-
-    /**
-     *
-     *  3. mousemove 때 마우스 따라서 도형 이동 (x)
-     *  4. 못내려놓거나 본인자리면 무시
-     *  5. 그게 아니면 잔상 이동
-     *
-     * @todo
-     * 1. 마우스 위치에 따라 카드 이동
-     * 2. 마우스가 있는 위치로 잔상이 이동할수 있는지 검사
-     * 3. 내려놓을 수 있으면 위에 넣을지 아래에 넣을지 검사
-     * 4. 위치에 넣음
-     */
-    function onMouseMove(e) {
-      moveAt(e.pageX, e.pageY);
-      const getDropable = checkDropable();
-      if (!getDropable) return;
-      const todolist_section = getDropable.closest("section");
-      if (!todolist_section) return;
-      const todolist_ul = todolist_section.querySelector("ul");
-      const afterElement = getDragAfterElement(todolist_section, e.clientY);
-      console.log(
-        "origin",
-        origin_item,
-        "afterelement",
-        afterElement,
-        "todolist_ul",
-        todolist_ul,
-        "section",
-        todolist_section
-      );
-      if (afterElement === origin_item) return;
-      if (!afterElement) todolist_ul.appendChild(origin_item);
-      todolist_ul.insertBefore(origin_item, afterElement);
-    }
-    moveAt(e.pageX, e.pageY);
-
-    document.addEventListener("mousemove", onMouseMove);
-
-    document.onmouseup = function (e) {
-      document.removeEventListener("mousemove", onMouseMove);
-      // document.onmouseup = null;
-
-      // document.removeChild(copy_item);
-      // origin_item.remove();
-      copy_item.remove();
-      origin_item.style.opacity = 1;
-      origin_item.style.border = "none";
-    };
-  }, 150);
+    doDragEvent(e, origin_item);
+  }, drag_delay);
 
   document.onmouseup = function (e) {
     clearTimeout(timer);
     isClick = 0;
   };
 });
-
-function getDragAfterElement(container, y) {
-  const draggableElements = [...container.querySelectorAll(".todolist-items")];
-  // console.log("container", container, "y", y);
-  return draggableElements.reduce(
-    (closest, child) => {
-      const box = child.getBoundingClientRect();
-      const offset = y - box.top - box.height / 2;
-      if (offset < 0 && offset > closest.offset) {
-        return { offset: offset, element: child };
-      } else {
-        return closest;
-      }
-    },
-    { offset: Number.NEGATIVE_INFINITY }
-  ).element;
-}
-
-const sections = document.querySelectorAll("section:not(.notification-menu)");
-
-// drag한 것이 todolist 로 올라왔을때 처리하려는 함수
-// Array.from(sections).map((section) => {
-//   section.addEventListener("mouseover", (e) => {
-//     const draggable = document.querySelector(".dragging");
-//     if (!draggable) return;
-
-//     draggable.classList.toggle("dragging");
-//     draggable.style.position = "static";
-//     draggable.style.zIndex = 0;
-//   });
-// });
 
 // list-item 더블클릭이벤트
 document.body.addEventListener("dblclick", (e) => {

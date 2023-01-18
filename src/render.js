@@ -1,4 +1,4 @@
-import { TodosStatus, Todos } from "./store.js";
+import { TodosStatus, Todos, BeforeUpdateItem, InputData } from "./store.js";
 import { makeTodoSection } from "./template.js";
 
 /**
