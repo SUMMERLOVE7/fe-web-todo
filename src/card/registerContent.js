@@ -5,7 +5,6 @@ import { updateCount, changeEveryCount } from "./countCard.js";
 import { newCardHistory } from "../menu/updateMenu.js";
 import { modifyModal } from "./modifyContent.js";
 
-// export let addTodoButton = document.querySelector(".todo-add-button");
 export let contentTodo = document.querySelector(".havetodo-container");
 export let contentDoing = document.querySelector(".doing-container");
 export let contentDone = document.querySelector(".done-container");
@@ -145,34 +144,3 @@ export function manageAddBtnEvent(target) {
     });
   }
 }
-
-// addTodoButton.addEventListener("click", (e) => {
-//   e.preventDefault(); //새로고침 방지
-
-//   if (
-//     valid_title_input(todoTitleInput) === 0 &&
-//     valid_caption_input(todoCaptionInput) === 0
-//   ) {
-//     registerModal(contentTodo);
-//   }
-// });
-// addDoingButton.addEventListener("click", (e) => {
-//   e.preventDefault(); //새로고침 방지
-
-//   if (
-//     valid_title_input(doingTitleInput) === 0 &&
-//     valid_caption_input(doingCaptionInput) === 0
-//   ) {
-//     registerModal(contentDoing);
-//   }
-// });
-// addDoneButton.addEventListener("click", (e) => {
-//   e.preventDefault(); //새로고침 방지
-
-//   if (
-//     valid_title_input(doneTitleInput) === 0 &&
-//     valid_caption_input(doneCaptionInput) === 0
-//   ) {
-//     registerModal(contentDone);
-//   }
-// });

@@ -82,21 +82,6 @@ function deleteCardFromStorage(columnName, cardIndex) {
   dataStorage.columns[index].cards.splice(cardIndex, 1);
 }
 
-// function delArray(target) {
-//   // let parentDiv = target.parentElement;
-//   // let grandParentSection = parentDiv.parentElement; //card
-//   // let ggrandParentDiv = grandParentSection.parentElement; //column
-
-//   let grandParentSection = target.closest(".todolist");
-//   let ggrandParentDiv = target.closest(".list-container");
-//   // console.log(grandParentSection);
-//   let columnName = ggrandParentDiv.querySelector(".column-name").innerText;
-//   const cardIndex = findCardIndex(ggrandParentDiv, grandParentSection);
-//   deleteCardFromStorage(columnName, cardIndex);
-//   updateCount(ggrandParentDiv);
-//   deleteCardHistory();
-// }
-
 //1 === 1 true
 // [] === [] false
 //{} === {} false

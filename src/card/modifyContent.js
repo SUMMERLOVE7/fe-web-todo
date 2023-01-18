@@ -1,12 +1,7 @@
 import { modifyCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
-import {
-  addEvent,
-  contentTodo,
-  findColumnIndex,
-  renderNewSection,
-} from "./registerContent.js";
+import { addEvent, contentTodo, findColumnIndex, renderNewSection } from "./registerContent.js";
 
 export function modifyModal(target) {
   let btnContainer = target.parentElement;
@@ -15,27 +10,27 @@ export function modifyModal(target) {
   target.addEventListener("click", () => {
     let title = parentSection.querySelector(".list-title").innerText;
     let caption = parentSection.querySelector(".caption").innerText;
-    // let title = parentSection.querySelector(".list-title").value;
-    // let caption = parentSection.querySelector(".caption").value;
 
-    parentSection.innerHTML = `<section id="open-modal"> <div class='list-title-modal'>
-      <input type='text' class='title-input' name='title-input' value="${title}"></input></div>
-      <form><div class='caption-modal'><input type='text' class='caption-input' name='caption-input' value="${caption}">
-      </input></div>
-      <div class='modal-button'><button type='button' class='cancel-modify-button'> 취소 </button>
-      <button type='submit' class='modify-button'> 수정 </button></div></form></section>`;
+    parentSection.innerHTML = `<section class="open-modal">
+    <div class='list-title-modal'>
+    <textarea type='text' class='title-input textarea-input' name='title-input'>${title}</textarea></div>
+      <form>
+        <div class='caption-modal'>
+          <textarea type='text' class='caption-input textarea-input' name='caption-input'>${caption}</textarea>
+        </div>
+      <div class='modal-button'>
+        <button type='button' class='cancel-modify-button'> 취소 </button>
+        <button type='submit' class='modify-button'> 수정 </button>
+      </div>
+      </form>
+      </section>`;
 
     finishModification(parentSection);
     cancelModification(parentSection, title, caption);
   });
 }
 
-export function modifyCardInStorage(
-  targetDiv,
-  targetSection,
-  newTitle,
-  newCaption
-) {
+export function modifyCardInStorage(targetDiv, targetSection, newTitle, newCaption) {
   let cardindex = findCardIndex(targetDiv, targetSection);
   let columnName = targetDiv.querySelector(".column-name");
   let colIndex = findColumnIndex(columnName.innerText);
@@ -46,7 +41,7 @@ export function modifyCardInStorage(
 
 export function finishModification(target) {
   let modBtn = target.querySelector(".modify-button");
-
+  console.log(modBtn, target);
   modBtn.addEventListener("click", (e) => {
     e.preventDefault();
     let parent = target.closest(".todolist");

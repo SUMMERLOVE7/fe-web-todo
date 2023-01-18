@@ -392,9 +392,10 @@ textarea {
 .open-modal {
   padding: 16px;
   margin-bottom: 10px;
-  width: 280px;
+  /* width: 280px; */
   /* height: 108px; */
   height: fit-content;
+  width: 260px;
   background: #ffffff;
   border-radius: 6px;
 }
