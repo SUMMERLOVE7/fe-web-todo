@@ -22,6 +22,11 @@ const initializeBothData = () => {
   initializeInputData();
 };
 
+const initializeBeforeMovedItem = () => {
+  BeforeMovedItem.Id = null;
+  BeforeMovedItem.Status = null;
+};
+
 const storeToBeUpdatedItem = (update_element) => {
   BeforeUpdateItem.Id = update_element.dataset.id;
   BeforeUpdateItem.Status = update_element.closest("section").className;
@@ -61,4 +66,5 @@ export {
   storeDeletedItem,
   initializeBothData,
   storeTobeMovedItem,
+  initializeBeforeMovedItem,
 };

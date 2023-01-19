@@ -1,3 +1,9 @@
+import {
+  storeTobeMovedItem,
+  initializeBeforeMovedItem,
+} from "./dataProcessing.js";
+import { BeforeMovedItem } from "./store.js";
+import { UpdateTodo } from "./api/rest.js";
 document.body.ondragstart = function () {
   return false;
 };
@@ -33,6 +39,11 @@ function getDragAfterElement(container, y) {
 }
 
 const dragStart = (origin_item, copy_item) => {
+  const draggingId = origin_item.dataset.id;
+  const BeforeMovedStatus = origin_item?.closest("section")?.className;
+  storeTobeMovedItem({ id: draggingId, status: BeforeMovedStatus });
+  console.log("id", draggingId, "status", BeforeMovedStatus);
+
   origin_item.classList.toggle("dragged");
   document.body.append(copy_item);
   copy_item.classList.toggle("dragging");
@@ -61,6 +72,13 @@ export const doDragEvent = (e, origin_item) => {
     document.removeEventListener("mousemove", onMouseMove);
     copy_item.remove();
     origin_item.classList.toggle("dragged");
+    if (origin_item?.closest("section")?.className === BeforeMovedItem.Status)
+      return;
+    UpdateTodo({
+      obj: { Status: origin_item?.closest("section")?.className },
+      id: BeforeMovedItem.Id,
+    });
+    initializeBeforeMovedItem();
   }
 
   function moveAt(pageX, pageY) {
