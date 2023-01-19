@@ -7,6 +7,6 @@ todos.get("/", list);
 todos.post("/", write);
 todos.get("/:id", read);
 todos.delete("/:id", remove);
-todos.patch("/:id", update);
+todos.put("/:id", update);
 
 export { todos };

@@ -17,6 +17,7 @@ const makeTodoSection = (items, status) => {
                 ${items
                   .map((item) =>
                     makeListItemTemplate(
+                      item.Id,
                       item.Title,
                       item.Contents.replace(/\r\n|\r|\n/g, "<br>")
                     )
@@ -27,12 +28,12 @@ const makeTodoSection = (items, status) => {
   return created_section;
 };
 
-const makeListItemTemplate = (title, contents) => {
+const makeListItemTemplate = (id, title, contents) => {
   const data_id = getId();
-  const created_item = `<li class="todolist-items" data-id =${data_id}>
+  const created_item = `<li class="todolist-items" data-id =${id}>
             <div class="todolist-items-header">
                 <h3 class = "todolist-items-title">${title}</h3>
-            <button class="delete-lst"><i class="fa-solid fa-x" data-id =${data_id}></i></button>
+            <button class="delete-lst"><i class="fa-solid fa-x" data-id =${id}></i></button>
         </div>
         <p class ="todolist-items-contents">${contents}</p>
     </li>`;

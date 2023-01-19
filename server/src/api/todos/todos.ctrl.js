@@ -1,25 +1,19 @@
-let todoid = 4;
+import fs from "fs";
 
-const Todos = [
-  {
-    id: 1,
-    Status: "todo",
-    Title: "Git hub 공부하기",
-    Contents: "add , commit , push",
-  },
-  {
-    id: 2,
-    Status: "todo",
-    Title: "Git hub 블로그에 포스팅할 것",
-    Contents: "* Git hub 공부내용\n* 모던 자바스크립트 1장 공부 내용",
-  },
-  {
-    id: 3,
-    Status: "doing",
-    Title: "모던 자바스크립트 예제 실습",
-    Contents: "input 태그",
-  },
-];
+let Todos = [];
+
+const readJson = async () => {
+  const jsonFile = fs.readFileSync("./data.json", "utf8");
+  // console.log("jsonFile", jsonFile);
+  const jsonData = JSON.parse(jsonFile);
+  Todos = jsonData;
+};
+
+const writeJson = async () => {
+  fs.writeFile("./data.json", JSON.stringify(Todos), (err) => {
+    if (err) console.log(err);
+  });
+};
 
 /**
 TODO 추가:
@@ -27,11 +21,12 @@ POST /api/todos
 { Status, Title, Contents } 
  */
 export function write(ctx) {
-  const { Status, Title, Contents } = ctx.request.body;
-  todoid++;
-  const todo = { id: todoid, Status, Title, Contents };
-  Todos.push(todo);
-  ctx.body = post;
+  const { Id, Status, Title, Contents } = ctx.request.body;
+  readJson();
+  const todo = { Id, Status, Title, Contents };
+  Todos.unshift(todo);
+  writeJson();
+  ctx.body = todo;
 }
 
 /**
@@ -39,6 +34,7 @@ TODO 조회:
 GET /api/todos/:id
  */
 export function list(ctx) {
+  readJson();
   ctx.body = Todos;
 }
 
@@ -48,7 +44,7 @@ GET /api/todos/:id
  */
 export function read(ctx) {
   const { id } = ctx.params;
-  const todo = Todos.find((todo) => todo.id.toString() === id);
+  const todo = Todos.find((todo) => todo.Id === id);
   if (!todo) {
     ctx.status = 404;
     ctx.body = {
@@ -65,7 +61,8 @@ DElETE /api/todos/:id
  */
 export function remove(ctx) {
   const { id } = ctx.params;
-  const index = Todos.findIndex((todo) => todo.id.toString() === id);
+  readJson();
+  const index = Todos.findIndex((todo) => todo.Id === id);
   //todo 없으면 오류
   if (index === -1) {
     ctx.status = 404;
@@ -75,17 +72,19 @@ export function remove(ctx) {
     return;
   }
   Todos.splice(index, 1);
+  writeJson();
   ctx.status = 204; // no content
 }
 
 /**
-TODO 수정
-PATCH /api/todos/:id
-{ Status, Title, Contents }
+TODO update and move
+PUT /api/todos/:id
+{ Status } or {Title, Contents}
 */
 export function update(ctx) {
   const { id } = ctx.params;
-  const index = Todos.findIndex((todo) => todo.id.toString() === id);
+  readJson();
+  const index = Todos.findIndex((todo) => todo.Id === id);
   //todo 없으면 오류
   if (index === -1) {
     ctx.status = 404;
@@ -98,5 +97,6 @@ export function update(ctx) {
     ...Todos[index],
     ...ctx.request.body,
   };
+  writeJson();
   ctx.body = Todos[index];
 }

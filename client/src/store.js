@@ -6,20 +6,27 @@ const InputData = {
 };
 
 const ToBeDeleted = {
+  Id: null,
   Status: null,
   Title: null,
   Contents: null,
 };
 
 const BeforeUpdateItem = {
+  Id: null,
   Status: null,
   Title: null,
   Contents: null,
 };
 
+const BeforeMovedItem = {
+  Id: null,
+  Status: null,
+};
+
 const TodosStatus = ["todo", "doing", "done"];
 
-let Todos = [];
+const Todos = [];
 
 class Notiification {
   constructor() {
@@ -54,4 +61,5 @@ export {
   BeforeUpdateItem,
   Notice,
   getId,
+  BeforeMovedItem,
 };

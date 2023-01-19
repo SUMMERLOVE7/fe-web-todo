@@ -11,7 +11,7 @@ import { autoResizeTextarea } from "./src/utils.js";
 import { addInputEvent } from "./src/inputEvent.js";
 import { modal } from "./src/Modal.js";
 import { doDragEvent } from "./src/drag.js";
-import { getTodo } from "./src/api/rest.js";
+import { getTodo, postTodo, deleteTodo } from "./src/api/rest.js";
 
 //초기 렌더링
 getTodo();

@@ -2,6 +2,7 @@ import { render } from "./render.js";
 import { initializeBothData } from "./dataProcessing.js";
 import { BeforeUpdateItem, InputData, Todos, Notice } from "./store.js";
 import { autoResizeTextarea } from "./utils.js";
+import { postTodo, UpdateTodo } from "./api/rest.js";
 
 const checkBeforeUpdateItem = () => {
   return (
@@ -86,6 +87,12 @@ const doUpdateAction = () => {
     Title: InputData["title"],
     Contents: InputData["contents"],
   };
+
+  UpdateTodo({
+    obj: { Title: InputData["title"], Contents: InputData["contents"] },
+    id: Todos[index].Id,
+  });
+
   Notice.add({
     mode: "update",
     info: { Status: Todos[index].Status, Title: InputData["title"] },
@@ -102,6 +109,14 @@ const doAddAction = () => {
     .closest("section").className;
 
   Todos.unshift({
+    id: new Date().getTime(),
+    Status: input_status,
+    Title: InputData["title"],
+    Contents: InputData["contents"],
+  });
+
+  postTodo({
+    Id: new Date().getTime().toString(),
     Status: input_status,
     Title: InputData["title"],
     Contents: InputData["contents"],

@@ -1,5 +1,6 @@
 import { Todos, ToBeDeleted, Notice } from "./store.js";
 import { render } from "./render.js";
+import { deleteTodo } from "./api/rest.js";
 
 const modal = document.querySelector(".modal");
 const modal_delete_btn = modal.querySelector(".cancel-button");
@@ -28,6 +29,7 @@ modal_register_btn.addEventListener("click", () => {
     1
   );
   modal.classList.toggle("act");
+  deleteTodo(ToBeDeleted.Id);
 
   Notice.add({
     mode: "delete",
