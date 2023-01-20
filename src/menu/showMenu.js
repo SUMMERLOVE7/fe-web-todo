@@ -1,8 +1,8 @@
-let menuBtn = document.querySelector(".menu-button");
+export let menuBtn = document.querySelector(".menu-button");
 let menuScreen = document.querySelector(".menu-screen");
-let closeMenuBtn = document.querySelector(".close-button");
+export let closeMenuBtn = document.querySelector(".close-button");
 
-function showMenu() {
+export function showMenu() {
   menuScreen.style.display = "block";
   menuScreen.classList.add("show");
   menuBtn.style.display = "none";
@@ -13,5 +13,5 @@ export function closeMenu() {
   menuBtn.style.display = "block";
 }
 
-menuBtn.addEventListener("click", () => showMenu());
-closeMenuBtn.addEventListener("click", () => closeMenu());
+// menuBtn.addEventListener("click", () => showMenu());
+// closeMenuBtn.addEventListener("click", () => closeMenu());

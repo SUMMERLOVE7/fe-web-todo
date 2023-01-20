@@ -1,6 +1,6 @@
-import { closeMenu } from "./menu/showMenu.js";
+import { closeMenu, closeMenuBtn, menuBtn, showMenu } from "./menu/showMenu.js";
 import { changeEveryCount, updateCount } from "./card/countCard.js";
-import { deleteContent, manageContent } from "./card/deleteContent.js";
+import { deleteContent, manageContent, cancelDelBtn, deletePopup } from "./card/deleteContent.js";
 import { dataStorage } from "./store.js";
 import { modifyModal } from "./card/modifyContent.js";
 import { manageAddBtnEvent } from "./card/registerContent.js";
@@ -29,6 +29,13 @@ window.onload = function (e) {
   openColumnModal();
   registerColumn();
 };
+
+menuBtn.addEventListener("click", () => showMenu());
+closeMenuBtn.addEventListener("click", () => closeMenu());
+
+cancelDelBtn.addEventListener("click", () => {
+  deletePopup.style.display = "none";
+});
 
 await getData();
 

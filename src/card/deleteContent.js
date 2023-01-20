@@ -5,9 +5,9 @@ import { updateCount } from "./countCard.js";
 import { findColumnIndex } from "./registerContent.js";
 
 export let deleteContent = document.querySelectorAll(".x-content-button");
-let deletePopup = document.querySelector(".delPopup");
+export let deletePopup = document.querySelector(".delPopup");
 let deletePopupBtn = document.querySelector(".del-popup");
-let cancelDelBtn = document.querySelector(".undo-popup");
+export let cancelDelBtn = document.querySelector(".undo-popup");
 
 function hoverRed(target) {
   let parentDiv = target.parentElement;
@@ -76,9 +76,9 @@ function rmDelPopup(target) {
   });
 }
 
-cancelDelBtn.addEventListener("click", () => {
-  deletePopup.style.display = "none";
-});
+// cancelDelBtn.addEventListener("click", () => {
+//   deletePopup.style.display = "none";
+// });
 
 export function findCardIndex(targetDiv, targetSection) {
   const cards = [...targetDiv.querySelectorAll(".todolist")];
