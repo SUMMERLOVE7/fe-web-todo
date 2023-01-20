@@ -7,6 +7,7 @@ import { manageAddBtnEvent } from "./card/registerContent.js";
 import { openModal, resizeTextareaEvent } from "./card/inputContent.js";
 import { openColumnModal, registerColumn } from "./column/addColumn.js";
 import { deleteColumn } from "./column/ColumnDeletion.js";
+import { getData } from "../server/server.js";
 
 let modifyContent = document.querySelectorAll(".modify-content-button");
 
@@ -28,6 +29,8 @@ window.onload = function (e) {
   openColumnModal();
   registerColumn();
 };
+
+await getData();
 
 // document.body.addEventListener("click", ({ target }) => {
 //   console.log(target);

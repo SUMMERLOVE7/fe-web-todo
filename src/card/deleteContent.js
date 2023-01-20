@@ -1,3 +1,4 @@
+import { delData } from "../../server/server.js";
 import { deleteCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { updateCount } from "./countCard.js";
@@ -36,6 +37,10 @@ function deleteCard(target, $columnCountTarget) {
   const cardTitle = target.querySelector(".list-title").innerText;
   deleteCardFromStorage(columnName, cardIndex);
   deleteCardHistory(columnName, cardTitle);
+
+  ///
+  const columnIdx = findColumnIndex(columnName);
+  delData(columnIdx, cardIndex);
   // console.log(columnName);
   // 위의 코드와 동일
   // pipeline(findCardIndex, deleteCardFromStorage, print)(columnName)

@@ -319,7 +319,8 @@ header {
 
 .caption {
   width: 252px;
-  height: 20px;
+  height: auto;
+  /* height: 20px; */
   font-size: 14px;
   color: #010101;
 }

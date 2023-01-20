@@ -27,6 +27,18 @@ export function closeModal(target) {
   target.style.display = "none";
 }
 
+export function changeLineWithEnter(inputHeight, target) {
+  console.log(target.querySelector(".textarea-input"));
+  console.log(target);
+  console.log(target.textContent, "hi", target.innerHTML);
+  target.innerHTML = target.textContent.replace(/(?:\n)/g, "<br>");
+  //target.style.height = inputHeight.scrollHeight + "px";
+
+  target.style.height = inputHeight + "px";
+  console.log(target.style.height);
+  console.log(inputHeight.scrollHeight);
+}
+
 export function resizeTextarea(object) {
   object.style.height = "auto";
   object.style.height = object.scrollHeight + "px";
