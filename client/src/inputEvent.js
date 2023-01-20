@@ -108,12 +108,12 @@ const doAddAction = () => {
     .querySelector(".input-items")
     .closest("section").className;
 
-  Todos.unshift({
-    id: new Date().getTime(),
-    Status: input_status,
-    Title: InputData["title"],
-    Contents: InputData["contents"],
-  });
+  // Todos.unshift({
+  //   id: new Date().getTime(),
+  //   Status: input_status,
+  //   Title: InputData["title"],
+  //   Contents: InputData["contents"],
+  // });
 
   postTodo({
     Id: new Date().getTime().toString(),

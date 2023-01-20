@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node src",
-    "start:dev": "nodemon --watch src src/index.js"
+    "dev": "nodemon --watch src src/index.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

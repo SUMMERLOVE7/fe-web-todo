@@ -11,10 +11,6 @@ const readJson = async () => {
     let jsonData = await JSON.parse(data);
     Todos = jsonData;
   });
-  // const jsonFile = fs.readFileSync("./data.json", "utf8");
-  // // console.log("jsonFile", jsonFile);
-  // const jsonData = JSON.parse(jsonFile);
-  // Todos = jsonData;
 };
 
 const writeJson = () => {
@@ -31,7 +27,6 @@ POST /api/todos
 export async function write(ctx) {
   const { Id, Status, Title, Contents } = ctx.request.body;
   const todo = { Id, Status, Title, Contents };
-  await readJson();
   Todos.unshift(todo);
   await writeJson();
   ctx.body = todo;
@@ -69,7 +64,6 @@ DElETE /api/todos/:id
  */
 export async function remove(ctx) {
   const { id } = ctx.params;
-  await readJson();
   const index = Todos.findIndex((todo) => todo.Id === id);
   //todo 없으면 오류
   if (index === -1) {
@@ -91,7 +85,6 @@ PUT /api/todos/:id
 */
 export async function update(ctx) {
   const { id } = ctx.params;
-  await readJson();
   const index = Todos.findIndex((todo) => todo.Id === id);
   //todo 없으면 오류
   if (index === -1) {
