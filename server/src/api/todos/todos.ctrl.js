@@ -1,15 +1,23 @@
-import fs from "fs";
+import * as fs from "fs";
 
 let Todos = [];
 
 const readJson = async () => {
-  const jsonFile = fs.readFileSync("./data.json", "utf8");
-  // console.log("jsonFile", jsonFile);
-  const jsonData = JSON.parse(jsonFile);
-  Todos = jsonData;
+  fs.readFile("./data.json", "utf8", async (err, data) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    let jsonData = await JSON.parse(data);
+    Todos = jsonData;
+  });
+  // const jsonFile = fs.readFileSync("./data.json", "utf8");
+  // // console.log("jsonFile", jsonFile);
+  // const jsonData = JSON.parse(jsonFile);
+  // Todos = jsonData;
 };
 
-const writeJson = async () => {
+const writeJson = () => {
   fs.writeFile("./data.json", JSON.stringify(Todos), (err) => {
     if (err) console.log(err);
   });
@@ -20,12 +28,12 @@ TODO 추가:
 POST /api/todos
 { Status, Title, Contents } 
  */
-export function write(ctx) {
+export async function write(ctx) {
   const { Id, Status, Title, Contents } = ctx.request.body;
-  readJson();
   const todo = { Id, Status, Title, Contents };
+  await readJson();
   Todos.unshift(todo);
-  writeJson();
+  await writeJson();
   ctx.body = todo;
 }
 
@@ -33,8 +41,8 @@ export function write(ctx) {
 TODO 조회:
 GET /api/todos/:id
  */
-export function list(ctx) {
-  readJson();
+export async function list(ctx) {
+  await readJson();
   ctx.body = Todos;
 }
 
@@ -59,9 +67,9 @@ export function read(ctx) {
 TODO 제거:
 DElETE /api/todos/:id
  */
-export function remove(ctx) {
+export async function remove(ctx) {
   const { id } = ctx.params;
-  readJson();
+  await readJson();
   const index = Todos.findIndex((todo) => todo.Id === id);
   //todo 없으면 오류
   if (index === -1) {
@@ -72,7 +80,7 @@ export function remove(ctx) {
     return;
   }
   Todos.splice(index, 1);
-  writeJson();
+  await writeJson();
   ctx.status = 204; // no content
 }
 
@@ -81,9 +89,9 @@ TODO update and move
 PUT /api/todos/:id
 { Status } or {Title, Contents}
 */
-export function update(ctx) {
+export async function update(ctx) {
   const { id } = ctx.params;
-  readJson();
+  await readJson();
   const index = Todos.findIndex((todo) => todo.Id === id);
   //todo 없으면 오류
   if (index === -1) {
@@ -97,6 +105,6 @@ export function update(ctx) {
     ...Todos[index],
     ...ctx.request.body,
   };
-  writeJson();
+  await writeJson();
   ctx.body = Todos[index];
 }

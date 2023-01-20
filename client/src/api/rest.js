@@ -2,22 +2,18 @@ import { render } from "../render.js";
 import { Todos } from "../store.js";
 
 //get
-export const getTodo = () => {
-  fetch("http://localhost:5500/api/todos")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      Todos.splice(0);
-      data.forEach((element) => {
-        Todos.push(element);
-      });
-    })
-    .then(render);
+export const getTodo = async () => {
+  const response = await fetch("http://localhost:5500/api/todos");
+  const data = await response.json();
+  Todos.splice(0);
+  data.forEach((element) => {
+    Todos.push(element);
+  });
+  render();
 };
 
 //post
-export const postTodo = (obj) => {
+export const postTodo = async (obj) => {
   fetch("http://localhost:5500/api/todos", {
     method: "POST",
     headers: {
@@ -31,7 +27,7 @@ export const postTodo = (obj) => {
 };
 
 //delete
-export const deleteTodo = (id) => {
+export const deleteTodo = async (id) => {
   fetch("http://localhost:5500/api/todos/" + id, {
     method: "DELETE",
   }).then((res) => console.log(res));
@@ -40,7 +36,7 @@ export const deleteTodo = (id) => {
 };
 
 //put
-export const UpdateTodo = ({ obj, id }) => {
+export const UpdateTodo = async ({ obj, id }) => {
   fetch("http://localhost:5500/api/todos/" + id, {
     method: "PUT",
     headers: {
