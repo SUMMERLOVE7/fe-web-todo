@@ -1,8 +1,8 @@
-import { render } from "./render.js";
-import { initializeBothData } from "./dataProcessing.js";
-import { BeforeUpdateItem, InputData, Todos, Notice } from "./store.js";
-import { autoResizeTextarea } from "./utils.js";
-import { postTodo, UpdateTodo } from "./api/rest.js";
+import { render } from "../render.js";
+import { initializeBothData } from "../dataProcessing.js";
+import { BeforeUpdateItem, InputData, Todos, Notice } from "../store.js";
+import { autoResizeTextarea } from "../utils.js";
+import { postTodo, UpdateTodo } from "../api/rest.js";
 
 const checkBeforeUpdateItem = () => {
   return (

@@ -86,3 +86,24 @@ export const doDragEvent = (e, origin_item) => {
     copy_item.style.top = pageY - shiftY + "px";
   }
 };
+
+const dragEvent = (body) => {
+  body.addEventListener("mousedown", (e) => {
+    const origin_item = e.target.closest(".todolist-items");
+    const drag_delay = 150;
+    if (!origin_item) return;
+    let isClick = 1;
+    const timer = setTimeout(() => {
+      if (!isClick) return;
+      isClick = 0;
+      doDragEvent(e, origin_item);
+    }, drag_delay);
+
+    document.onmouseup = () => {
+      clearTimeout(timer);
+      isClick = 0;
+    };
+  });
+};
+
+export { dragEvent };
