@@ -5,7 +5,7 @@ import { dataStorage } from "./store.js";
 import { modifyModal } from "./card/modifyContent.js";
 import { manageAddBtnEvent } from "./card/registerContent.js";
 import { openModal, resizeTextareaEvent } from "./card/inputContent.js";
-import { openColumnModal, registerColumn } from "./column/addColumn.js";
+import { openColumnModal, registerColumn, cancelColBtn } from "./column/addColumn.js";
 import { deleteColumn } from "./column/ColumnDeletion.js";
 import { getData } from "../server/server.js";
 
@@ -37,8 +37,9 @@ cancelDelBtn.addEventListener("click", () => {
   deletePopup.style.display = "none";
 });
 
-await getData();
+cancelColBtn.addEventListener("click", () => {
+  closePopup();
+});
 
-// document.body.addEventListener("click", ({ target }) => {
-//   console.log(target);
-// });
+// 서버 부분 코드
+// await getData();

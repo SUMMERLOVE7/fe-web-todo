@@ -1,7 +1,7 @@
 import { changeLineWithEnter, closeModal } from "./inputContent.js";
 import { dataStorage } from "../store.js";
 import { manageContent } from "./deleteContent.js";
-import { updateCount, changeEveryCount, countCard } from "./countCard.js";
+import { changeEveryCount } from "./countCard.js";
 import { newCardHistory } from "../menu/updateMenu.js";
 import { modifyModal } from "./modifyContent.js";
 import { addData } from "../../server/server.js";
@@ -51,9 +51,8 @@ async function pushCardIntoStorage(columnName, title, caption) {
     id: new Date(),
   });
 
-  ///
-  console.log(dataStorage);
-  await addData(index);
+  // 서버부분 코드
+  // await addData(index);
 }
 
 function registerModal(target) {
@@ -81,14 +80,11 @@ function registerModal(target) {
   newSection.innerHTML = renderNewSection(newTitle, newContent);
 
   let firstchild = target.querySelector(".todolist");
-
-  ////
   let listTitle = newSection.querySelector(".list-title");
   let listCaption = newSection.querySelector(".caption");
 
   changeLineWithEnter(title, listTitle);
   changeLineWithEnter(content, listCaption);
-  ////
 
   target.insertBefore(newSection, firstchild);
   newCardHistory(columnName, newTitle);

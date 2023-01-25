@@ -1,6 +1,3 @@
-let addTodoContent = document.querySelector("#plus-todo-button");
-let closeTodoContent = document.querySelector("#x-todo-button");
-
 export function showModal(target) {
   target.style.display = "block";
   target.classList.add("show");
@@ -28,15 +25,8 @@ export function closeModal(target) {
 }
 
 export function changeLineWithEnter(inputHeight, target) {
-  console.log(target.querySelector(".textarea-input"));
-  console.log(target);
-  console.log(target.textContent, "hi", target.innerHTML);
   target.innerHTML = target.textContent.replace(/(?:\n)/g, "<br>");
-  //target.style.height = inputHeight.scrollHeight + "px";
-
-  target.style.height = inputHeight + "px";
-  console.log(target.style.height);
-  console.log(inputHeight.scrollHeight);
+  target.style.height = inputHeight + 10 + "px";
 }
 
 export function resizeTextarea(object) {

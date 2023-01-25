@@ -1,5 +1,5 @@
 import { dataStorage } from "../store.js";
-import { contentTodo, contentDoing, contentDone, findColumnIndex } from "./registerContent.js";
+import { findColumnIndex } from "./registerContent.js";
 
 export function countCard(index) {
   let count = dataStorage.columns[index].cards.length;

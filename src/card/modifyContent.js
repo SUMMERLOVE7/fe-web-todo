@@ -3,7 +3,7 @@ import { modifyCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
 import { resizeTextareaEvent, changeLineWithEnter } from "./inputContent.js";
-import { addEvent, contentTodo, findColumnIndex, renderNewSection } from "./registerContent.js";
+import { addEvent, findColumnIndex, renderNewSection } from "./registerContent.js";
 
 export function modifyModal(target) {
   let btnContainer = target.parentElement;
@@ -50,21 +50,17 @@ export function finishModification(target) {
 
   modBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    let parent = target.closest(".todolist");
 
-    ///
+    let parent = target.closest(".todolist");
     let title = parent.querySelector(".title-input");
     let content = parent.querySelector(".caption-input");
-
-    let newtitle = parent.querySelector(".title-input").value;
-    let newcaption = parent.querySelector(".caption-input").value;
-
+    let newtitle = title.value;
+    let newcaption = content.value;
     let grandParent = target.closest(".list-container");
     let columnName = grandParent.querySelector(".column-name").innerText;
 
     target.innerHTML = renderNewSection(newtitle, newcaption);
 
-    //////
     let listTitle = target.querySelector(".list-title");
     let listCaption = target.querySelector(".caption");
     changeLineWithEnter(title, listTitle);

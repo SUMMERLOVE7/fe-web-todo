@@ -1,9 +1,4 @@
 let menuContainer = document.querySelector(".menu-content");
-let emojiContainer = document.querySelector(".menu-emoji");
-let menuCardTitle = document.querySelector(".menu-person-name");
-let menuCaption = document.querySelector(".menu-caption");
-
-export function updateHistory() {}
 
 export function newCardHistory(columnName, cardTitle) {
   let newDiv = document.createElement("div");

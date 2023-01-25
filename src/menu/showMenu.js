@@ -12,6 +12,3 @@ export function closeMenu() {
   menuScreen.style.display = "none";
   menuBtn.style.display = "block";
 }
-
-// menuBtn.addEventListener("click", () => showMenu());
-// closeMenuBtn.addEventListener("click", () => closeMenu());

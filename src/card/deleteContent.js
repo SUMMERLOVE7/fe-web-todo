@@ -28,7 +28,6 @@ function deleteList(target) {
   deleteCard(target, $columnCountTarget);
   target.remove();
   updateCount($columnCountTarget);
-  // deleteCardHistory();
 }
 
 function deleteCard(target, $columnCountTarget) {
@@ -38,12 +37,9 @@ function deleteCard(target, $columnCountTarget) {
   deleteCardFromStorage(columnName, cardIndex);
   deleteCardHistory(columnName, cardTitle);
 
-  ///
-  const columnIdx = findColumnIndex(columnName);
-  delData(columnIdx, cardIndex);
-  // console.log(columnName);
-  // 위의 코드와 동일
-  // pipeline(findCardIndex, deleteCardFromStorage, print)(columnName)
+  // 서버부분 코드
+  // const columnIdx = findColumnIndex(columnName);
+  // delData(columnIdx, cardIndex);
 }
 
 export function manageContent(target) {
@@ -53,7 +49,7 @@ export function manageContent(target) {
   target.addEventListener("mouseout", (e) => {
     mouseOut(target);
   });
-  // target.addEventListener("click", ({ preventDefault, e }) => {
+
   target.addEventListener("click", (e) => {
     e.preventDefault();
     const $cardTarget = e.target.closest(".todolist");
@@ -76,10 +72,6 @@ function rmDelPopup(target) {
   });
 }
 
-// cancelDelBtn.addEventListener("click", () => {
-//   deletePopup.style.display = "none";
-// });
-
 export function findCardIndex(targetDiv, targetSection) {
   const cards = [...targetDiv.querySelectorAll(".todolist")];
   const card = targetSection;
@@ -91,7 +83,3 @@ function deleteCardFromStorage(columnName, cardIndex) {
   const index = findColumnIndex(columnName);
   dataStorage.columns[index].cards.splice(cardIndex, 1);
 }
-
-//1 === 1 true
-// [] === [] false
-//{} === {} false
