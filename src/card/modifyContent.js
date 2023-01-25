@@ -3,7 +3,11 @@ import { modifyCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
 import { resizeTextareaEvent, changeLineWithEnter } from "./inputContent.js";
-import { addEvent, findColumnIndex, renderNewSection } from "./registerContent.js";
+import {
+  addEvent,
+  findColumnIndex,
+  renderNewSection,
+} from "./registerContent.js";
 
 // 수정 모달을 생성하는 함수
 export function modifyModal(target) {
@@ -36,7 +40,12 @@ export function modifyModal(target) {
 }
 
 // 카드 수정시 dataStorage의 내용 변경
-export function modifyCardInStorage(targetDiv, targetSection, newTitle, newCaption) {
+export function modifyCardInStorage(
+  targetDiv,
+  targetSection,
+  newTitle,
+  newCaption
+) {
   let cardindex = findCardIndex(targetDiv, targetSection);
   let columnName = targetDiv.querySelector(".column-name");
   let colIndex = findColumnIndex(columnName.innerText);
@@ -51,7 +60,6 @@ export function modifyCardInStorage(targetDiv, targetSection, newTitle, newCapti
 // 수정 버튼 클릭시 수정을 완료하고 알림창에 수정을 했다는 알림 띄우는 함수
 export function finishModification(target) {
   let modBtn = target.querySelector(".modify-button");
-
   modBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -83,5 +91,6 @@ export function cancelModification(target, title, caption) {
     let parentSection = target.closest(".todolist");
 
     parentSection.innerHTML = renderNewSection(title, caption);
+    addEvent(target);
   });
 }

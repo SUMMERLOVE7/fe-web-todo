@@ -42,8 +42,8 @@ function deleteCard(target, $columnCountTarget) {
   deleteCardHistory(columnName, cardTitle);
 
   // 서버부분 코드
-  // const columnIdx = findColumnIndex(columnName);
-  // delData(columnIdx, cardIndex);
+  const columnIdx = findColumnIndex(columnName);
+  delData(columnIdx, cardIndex);
 }
 
 // 위의 함수들을 이벤트 할당하는 부분
