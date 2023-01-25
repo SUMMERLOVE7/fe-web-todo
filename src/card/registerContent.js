@@ -28,12 +28,14 @@ function valid_caption_input(target) {
   }
 }
 
+// 제목이나 내용 미입력시 입력하라는 알림창 띄우는 함수
 function check_input_validity(title, caption) {
   if (valid_title_input(title) === 0 && valid_caption_input(caption) === 0) {
     return 0;
   } else return -1;
 }
 
+// 해당 칼럼의 인덱스를 찾는 함수
 export function findColumnIndex(element) {
   for (let i = 0; i < dataStorage.columns.length; i++) {
     if (element === dataStorage.columns[i].column) {
@@ -42,6 +44,7 @@ export function findColumnIndex(element) {
   }
 }
 
+// 카드 등록시 dataStorage에 저장하는 함수
 async function pushCardIntoStorage(columnName, title, caption) {
   let index = findColumnIndex(columnName);
 
@@ -55,6 +58,7 @@ async function pushCardIntoStorage(columnName, title, caption) {
   // await addData(index);
 }
 
+// 카드 등록하기 위한 모달을 생성하는 함수
 function registerModal(target) {
   let newTitle = "";
   let newContent = "";
@@ -92,6 +96,7 @@ function registerModal(target) {
   addEvent(target);
 }
 
+// 새로운 카드를 생성하는 함수
 export function renderNewSection(newTitle, newContent) {
   return `<div class = 'list-header'> <div class = 'list-title'>${newTitle}</div><div class='caption'>${newContent}
   </div></div><div class='button-container'><button type='button' class='x-content-button'>
@@ -103,6 +108,7 @@ export function renderNewSection(newTitle, newContent) {
   </svg></button></div>`;
 }
 
+// 새롭게 생성된 카드에 이벤트를 할당하는 함수
 export function addEvent(target) {
   let isTarget = target.querySelector(".x-content-button");
   let isPencil = target.querySelector(".modify-content-button");
@@ -117,6 +123,7 @@ export function addEvent(target) {
   });
 }
 
+// 카드를 추가하는 모든 함수를 포함한 함수
 export function addCard(target) {
   const modal = target.closest(".open-modal");
   const title = modal.querySelector(".title-input");
@@ -133,11 +140,13 @@ export function addCard(target) {
   }
 }
 
+// 카드 등록을 취소하는 함수
 export function cancelCardAddition(target) {
   let modal = target.closest(".open-modal");
   closeModal(modal);
 }
 
+// 카드 등록 및 취소 관련 이벤트 함수
 export function manageAddBtnEvent(target) {
   let addBtns = target.querySelectorAll(".add-button");
 

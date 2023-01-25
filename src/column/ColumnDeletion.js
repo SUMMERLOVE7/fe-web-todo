@@ -1,6 +1,7 @@
 import { findColumnIndex } from "../card/registerContent.js";
 import { dataStorage } from "../store.js";
 
+// x 버튼 클릭시 칼럼 삭제하는 함수
 export function deleteColumn(target) {
   const xBtns = target.querySelectorAll(".x-button");
 

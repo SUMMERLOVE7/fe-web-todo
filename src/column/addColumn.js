@@ -7,17 +7,20 @@ import { deleteColumn } from "./ColumnDeletion.js";
 const columnPopup = document.querySelector(".columnPopup");
 export const cancelColBtn = document.querySelector(".undo-column-button");
 
+// 칼럼 추가하는 모달창 초기화하는 함수
 function closePopup() {
   const columnInput = document.querySelector(".new-column-title");
   columnInput.value = "";
   columnPopup.style.display = "none";
 }
 
+// 칼럼 이름 가져오는 함수
 export function getColumnName() {
   let newColumnName = document.querySelector(".new-column-title").value;
   return newColumnName;
 }
 
+// 칼럼 등록하는 함수
 export function registerColumn() {
   const registerColBtn = document.querySelector(".confirm-column-button");
   registerColBtn.addEventListener("click", (e) => {
@@ -27,6 +30,7 @@ export function registerColumn() {
   });
 }
 
+// 칼럼 추가하기 위한 모달 띄우는 함수
 export function openColumnModal() {
   const plusColumnBtn = document.querySelector(".plus-column-button");
 
@@ -35,6 +39,7 @@ export function openColumnModal() {
   });
 }
 
+// 칼럼 추가하고 dataStorage에 삽입하는 함수
 export function addColumn() {
   const columnContainer = document.querySelector(".column-container");
 
@@ -54,6 +59,7 @@ export function addColumn() {
   manageAddBtnEvent(columnContainer);
 }
 
+// 새로운 칼럼 html 코드 생성하는 함수
 export function createColumnHTML(columnTitle) {
   return `<div class="container-title">
     <h3 class="column-name">${columnTitle}</h3>

@@ -1,3 +1,4 @@
+// 카드 드래그 하는 부분
 const columns = document.querySelectorAll(".list-container");
 columns.forEach((column) => {
   new Sortable(column, {
