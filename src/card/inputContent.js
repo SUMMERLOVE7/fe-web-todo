@@ -45,19 +45,7 @@ export function resizeTextareaEvent(target) {
 
   for (let txt of txtarea) {
     txt.style.height = txt.scrollHeight + 16 + "px";
-    txt.addEventListener(
-      "keydown",
-      () => {
-        resizeTextarea(txt);
-      },
-      true
-    );
-    txt.addEventListener(
-      "keyup",
-      () => {
-        resizeTextarea(txt);
-      },
-      true
-    );
+    txt.addEventListener("keydown", () => resizeTextarea(txt), true);
+    txt.addEventListener("keyup", () => resizeTextarea(txt), true);
   }
 }

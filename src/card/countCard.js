@@ -12,7 +12,8 @@ export function updateCount(target) {
   const countContainer = target.querySelector(".count-container");
   const columnName = target.querySelector(".column-name");
   let columnIdx = findColumnIndex(columnName.innerHTML);
-  countContainer.innerHTML = "<div class='count'>" + countCard(columnIdx) + "</div>";
+  countContainer.innerHTML =
+    "<div class='count'>" + countCard(columnIdx) + "</div>";
 }
 
 // 한번에 모든 칼럼의 카드 개수 업데이트 하는 함수

@@ -1,5 +1,5 @@
 import { modData } from "../../server/server.js";
-import { modifyCardHistory } from "../menu/updateMenu.js";
+import { modifyCardHistory, newCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
 import { resizeTextareaEvent, changeLineWithEnter } from "./inputContent.js";
@@ -80,7 +80,10 @@ export function finishModification(target) {
 
     modifyCardInStorage(grandParent, parent, newtitle, newcaption);
     addEvent(grandParent);
-    modifyCardHistory(columnName, newtitle);
+
+    newCardHistory({ columnName, ActionType: "modify", cardTitle: newtitle });
+
+    // modifyCardHistory(columnName, newtitle);
   });
 }
 

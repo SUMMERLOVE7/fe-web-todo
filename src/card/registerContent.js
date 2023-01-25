@@ -91,7 +91,7 @@ function registerModal(target) {
   changeLineWithEnter(content, listCaption);
 
   target.insertBefore(newSection, firstchild);
-  newCardHistory(columnName, newTitle);
+  newCardHistory({ columnName, ActionType: "add", cardTitle: newTitle });
   changeEveryCount();
   addEvent(target);
 }
@@ -113,14 +113,18 @@ export function addEvent(target) {
   let isTarget = target.querySelector(".x-content-button");
   let isPencil = target.querySelector(".modify-content-button");
 
-  target.addEventListener("click", () => {
-    if (isTarget.classList.contains("x-content-button")) {
-      manageContent(isTarget);
-    }
-    if (isPencil.classList.contains("modify-content-button")) {
-      modifyModal(isPencil);
-    }
-  });
+  if (isTarget) manageContent(isTarget);
+
+  if (isPencil) modifyModal(isPencil);
+
+  // target.addEventListener("click", () => {
+  //   if (isTarget.classList.contains("x-content-button")) {
+  //     manageContent(isTarget);
+  //   }
+  //   if (isPencil.classList.contains("modify-content-button")) {
+  //     modifyModal(isPencil);
+  //   }
+  // });
 }
 
 // 카드를 추가하는 모든 함수를 포함한 함수
