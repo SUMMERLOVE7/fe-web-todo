@@ -1,11 +1,11 @@
-import { InputData, BeforeUpdateItem, getId, increaseId } from "./store.js";
+import { InputData, BeforeUpdateItem, getId } from "./store.js";
 
 const makeTodoSection = (items, status) => {
   const created_section = `
         <section class = "${status}">
             <div class = "todo-header">
                 <div class ="todo-header-left">
-                    <h2>${status} </h2>
+                    <h2 class = "todo-column">${status} </h2>
                     <div class="list-count">${items.length}</div>
                 </div>
                 <div class="buttons">
@@ -17,6 +17,7 @@ const makeTodoSection = (items, status) => {
                 ${items
                   .map((item) =>
                     makeListItemTemplate(
+                      item.Id,
                       item.Title,
                       item.Contents.replace(/\r\n|\r|\n/g, "<br>")
                     )
@@ -27,15 +28,15 @@ const makeTodoSection = (items, status) => {
   return created_section;
 };
 
-const makeListItemTemplate = (title, contents) => {
-  const created_item = `<li class="todolist-items" data-id =${getId()}>
+const makeListItemTemplate = (id, title, contents) => {
+  const data_id = getId();
+  const created_item = `<li class="todolist-items" data-id =${id}>
             <div class="todolist-items-header">
-                <h3>${title}</h3>
-            <button class="delete-lst"><i class="fa-solid fa-x" data-id =${getId()}></i></button>
+                <h3 class = "todolist-items-title">${title}</h3>
+            <button class="delete-lst"><i class="fa-solid fa-x" data-id =${id}></i></button>
         </div>
-        <p>${contents}</p>
+        <p class ="todolist-items-contents">${contents}</p>
     </li>`;
-  increaseId();
   return created_item;
 };
 
@@ -73,14 +74,32 @@ const makeInputFormTemplate = () => {
   return created_input_form;
 };
 
-const makeNoticeTemplate = ({ mode, info }) => {
+const makeNoticeTemplate = ({ mode, info, time }) => {
   const created_notice = `
     <li class = "notification-menu-items">
         <h3>@sam</h3>
         <p>${makeNoticeMessageTemplate(mode, info)}</p>
-        <p class = "notification-menu-items-time">1분 전</p>
+        <p class = "notification-menu-items-time">${makeNoticeTimeMessage(
+          time
+        )}</p>
     </li>`;
   return created_notice;
+};
+
+const makeNoticeTimeMessage = (time) => {
+  const now_time = new Date().getTime();
+  const diff_time = now_time - time;
+  let time_message = "";
+  const initial_time_message = "방금 전";
+  const diff_day = Math.round(diff_time / 1000 / 60 / 60 / 24);
+  const diff_hour = Math.round(diff_time / 1000 / 60 / 60);
+  const diff_min = Math.round(diff_time / 1000 / 60);
+  if (diff_day) time_message += diff_day + "일";
+  if (diff_hour) time_message += diff_hour + "시간 ";
+  if (diff_min) time_message += diff_min + "분 ";
+  if (!time_message) return initial_time_message;
+  time_message += "전";
+  return time_message;
 };
 
 const makeNoticeMessageTemplate = (mode, info) => {

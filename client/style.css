@@ -42,6 +42,7 @@ body {
   font-family: "Open Sans", sans-serif;
   cursor: default;
   background-color: var(--color-light-white);
+  user-select: none;
 }
 
 a {
@@ -193,6 +194,8 @@ ul {
   padding: 20px;
   list-style: none;
   background-color: whitesmoke;
+  opacity: 1;
+  outline: none;
 }
 
 .todolist-items-header {
@@ -351,4 +354,15 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dragging {
+  width: 23vw;
+  z-index: 100;
+  position: absolute;
+}
+
+.dragged {
+  opacity: 0.4;
+  outline: 1px solid dodgerblue;
 }
