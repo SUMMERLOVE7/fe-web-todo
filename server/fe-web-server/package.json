@@ -1,0 +1,11 @@
+{
+  "name": "fe-web-server",
+  "version": "1.0.0",
+  "description": "fe-web-todo-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SUMMERLOVE7",
+  "license": "ISC"
+}
