@@ -2,15 +2,15 @@ import { changeLineWithEnter, closeModal } from "./inputContent.js";
 import { dataStorage, Notice } from "../store.js";
 import { manageContent } from "./deleteContent.js";
 import { changeEveryCount } from "./countCard.js";
-import { newCardHistory } from "../menu/updateMenu.js";
 import { modifyModal } from "./modifyContent.js";
 import { addData } from "../../server/server.js";
+import { ADD_ACTION } from "../store.js";
 
-export let contentTodo = document.querySelector(".havetodo-container");
-export let contentDoing = document.querySelector(".doing-container");
-export let contentDone = document.querySelector(".done-container");
+export const contentTodo = document.querySelector(".havetodo-container");
+export const contentDoing = document.querySelector(".doing-container");
+export const contentDone = document.querySelector(".done-container");
 
-function valid_title_input(target) {
+function validTitleInput(target) {
   if (!target.value) {
     alert("제목을 입력해주세요");
     return -1;
@@ -19,7 +19,7 @@ function valid_title_input(target) {
   }
 }
 
-function valid_caption_input(target) {
+function validCaptionInput(target) {
   if (!target.value) {
     alert("내용을 입력해주세요");
     return -1;
@@ -29,8 +29,8 @@ function valid_caption_input(target) {
 }
 
 // 제목이나 내용 미입력시 입력하라는 알림창 띄우는 함수
-function check_input_validity(title, caption) {
-  if (valid_title_input(title) === 0 && valid_caption_input(caption) === 0) {
+function checkInputValidity({ title, caption }) {
+  if (!validTitleInput(title) || !validCaptionInput(caption)) {
     return 0;
   } else return -1;
 }
@@ -60,14 +60,12 @@ async function pushCardIntoStorage(columnName, title, caption) {
 
 // 카드 등록하기 위한 모달을 생성하는 함수
 function registerModal(target) {
-  let newTitle = "";
-  let newContent = "";
   let columnName = target.querySelector(".column-name").innerText;
 
   let title = target.querySelector(".title-input");
   let content = target.querySelector(".caption-input");
-  newTitle = title.value;
-  newContent = content.value;
+  const newTitle = title.value;
+  const newContent = content.value;
 
   pushCardIntoStorage(columnName, newTitle, newContent);
 
@@ -92,14 +90,12 @@ function registerModal(target) {
 
   target.insertBefore(newSection, firstchild);
   Notice.add({
-    ActionType: "add",
+    ActionType: ADD_ACTION,
     columnName: columnName,
     cardTitle: newTitle,
     time: new Date().getTime(),
   });
   Notice.render();
-  console.log("after add Notice", Notice);
-  // newCardHistory({ columnName, ActionType: "add", cardTitle: newTitle });
   changeEveryCount();
   addEvent(target);
 }
@@ -132,38 +128,36 @@ export function addCard(target) {
   const title = modal.querySelector(".title-input");
   const caption = modal.querySelector(".caption-input");
 
-  if (check_input_validity(title, caption) === 0) {
-    let column = target.closest(".list-container");
-    registerModal(column);
-    closeModal(modal);
-    let txtarea = modal.querySelectorAll(".textarea-input");
-    for (let txt of txtarea) {
-      txt.style.height = "auto";
-    }
-  }
+  if (checkInputValidity({ title, caption })) return;
+
+  const column = target.closest(".list-container");
+  registerModal(column);
+  closeModal(modal);
+  const txtarea = [...modal.querySelectorAll(".textarea-input")];
+  txtarea.forEach((txt) => (txt.style.height = "auto"));
 }
 
 // 카드 등록을 취소하는 함수
 export function cancelCardAddition(target) {
-  let modal = target.closest(".open-modal");
+  const modal = target.closest(".open-modal");
   closeModal(modal);
 }
 
 // 카드 등록 및 취소 관련 이벤트 함수
 export function manageAddBtnEvent(target) {
-  let addBtns = target.querySelectorAll(".add-button");
+  const addBtns = [...target.querySelectorAll(".add-button")];
 
-  for (let btn of addBtns) {
+  addBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.preventDefault();
       addCard(btn);
     });
-  }
+  });
 
-  const addBtn = target.querySelectorAll(".cancel-button");
-  for (let btn of addBtn) {
+  const cancelBtns = [...target.querySelectorAll(".cancel-button")];
+  cancelBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       cancelCardAddition(btn);
     });
-  }
+  });
 }

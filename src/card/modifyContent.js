@@ -1,5 +1,3 @@
-import { modData } from "../../server/server.js";
-import { modifyCardHistory, newCardHistory } from "../menu/updateMenu.js";
 import { dataStorage, Notice } from "../store.js";
 import { findCardIndex } from "./deleteContent.js";
 import { resizeTextareaEvent, changeLineWithEnter } from "./inputContent.js";
@@ -8,6 +6,7 @@ import {
   findColumnIndex,
   renderNewSection,
 } from "./registerContent.js";
+import { MODIFY_ACTION } from "../store.js";
 
 // 수정 모달을 생성하는 함수
 export function modifyModal(target) {
@@ -46,7 +45,7 @@ export function modifyCardInStorage(
   newTitle,
   newCaption
 ) {
-  let cardindex = findCardIndex(targetDiv, targetSection);
+  let cardindex = findCardIndex({ targetDiv, targetSection });
   let columnName = targetDiv.querySelector(".column-name");
   let colIndex = findColumnIndex(columnName.innerText);
 
@@ -82,7 +81,7 @@ export function finishModification(target) {
     addEvent(grandParent);
 
     Notice.add({
-      ActionType: "modify",
+      ActionType: MODIFY_ACTION,
       columnName: columnName,
       cardTitle: newtitle,
       time: new Date().getTime(),
@@ -90,7 +89,6 @@ export function finishModification(target) {
 
     Notice.render();
     console.log("after modify Notice", Notice);
-    // newCardHistory({ columnName, ActionType: "modify", cardTitle: newtitle });
   });
 }
 

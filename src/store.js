@@ -58,10 +58,8 @@ export const DeletedItem = {
 
 export const Notice = new Notiification();
 
-//let ID = 0;
-
-// export function idGenerator() {
-//   ID += 1;
-//   return ID;
-// }
-//export default todo_list;
+export const [ADD_ACTION, MODIFY_ACTION, DELETE_ACTION] = [
+  "add",
+  "modify",
+  "delete",
+];

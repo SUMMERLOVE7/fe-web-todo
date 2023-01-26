@@ -1,6 +1,4 @@
-let menuContainer = document.querySelector(".menu-content");
-
-const [ADD_ACTION, MODIFY_ACTION, DELETE_ACTION] = ["add", "modify", "delete"];
+import { ADD_ACTION, MODIFY_ACTION, DELETE_ACTION } from "../store.js";
 
 function NoticeTemplate({ ActionType, columnName, cardTitle, time }) {
   return `
@@ -16,11 +14,13 @@ function NoticeTemplate({ ActionType, columnName, cardTitle, time }) {
 const TimeMessage = (time) => {
   const now_time = new Date().getTime();
   const diff_time = now_time - time;
-  let time_message = "";
-  const initial_time_message = "방금 전";
   const diff_day = Math.round(diff_time / 1000 / 60 / 60 / 24);
   const diff_hour = Math.round(diff_time / 1000 / 60 / 60);
   const diff_min = Math.round(diff_time / 1000 / 60);
+
+  let time_message = "";
+  const initial_time_message = "방금 전";
+
   if (diff_day) time_message += diff_day + "일";
   if (diff_hour && !time_message) time_message += diff_hour + "시간 ";
   if (diff_min && !time_message) time_message += diff_min + "분 ";
@@ -56,62 +56,12 @@ function deleteCardMessage({ columnName, cardTitle }) {
 }
 
 export function newCardHistory({ ActionType, columnName, cardTitle, time }) {
-  // let newDiv = document.createElement("div");
-  // let newClass = document.createAttribute("class");
-  // newClass.value = "menu-card";
-  // newDiv.setAttributeNode(newClass);
-
-  // newDiv.innerHTML = NoticeTemplate({
-  //   ActionType,
-  //   columnName,
-  //   cardTitle,
-  //   time,
-  // });
-
-  const Notice = NoticeTemplate({
+  const History = NoticeTemplate({
     ActionType,
     columnName,
     cardTitle,
     time,
   });
 
-  console.log(Notice);
-
-  return Notice;
-
-  // menuContainer.prepend(newDiv);
-}
-
-export function modifyCardHistory(columnName, cardTitle) {
-  let newDiv = document.createElement("div");
-  let newClass = document.createAttribute("class");
-  newClass.value = "menu-card";
-  newDiv.setAttributeNode(newClass);
-
-  newDiv.innerHTML = `<div class='menu-card'> 
-    <div class='menu-emoji'>&#128526;</div> 
-    <div class='one-menu-card'> 
-      <div class = 'menu-person-name'> @Grace </div> 
-      <div class = 'menu-caption'> ${columnName}의 카드 제목이 ${cardTitle}(으)로 수정되었습니다. </div>
-    </div>
-  </div>`;
-
-  menuContainer.prepend(newDiv);
-}
-
-export function deleteCardHistory(columnName, cardTitle) {
-  let newDiv = document.createElement("div");
-  let newClass = document.createAttribute("class");
-  newClass.value = "menu-card";
-  newDiv.setAttributeNode(newClass);
-
-  newDiv.innerHTML = `<div class='menu-card'> 
-    <div class='menu-emoji'>&#128526;</div> 
-    <div class='one-menu-card'> 
-      <div class = 'menu-person-name'> @Grace </div> 
-      <div class = 'menu-caption'> ${columnName} 칼럼의 ${cardTitle} 카드가 삭제되었습니다. </div>
-    </div>
-  </div>`;
-
-  menuContainer.prepend(newDiv);
+  return History;
 }

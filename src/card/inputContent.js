@@ -6,16 +6,16 @@ export function showModal(target) {
 
 // + 버튼 클릭시 카드 추가 모달 띄우는 함수
 export function openModal(target) {
-  const plusBtns = target.querySelectorAll(".plus-button");
+  const plusBtns = [...target.querySelectorAll(".plus-button")];
 
-  for (let plus of plusBtns) {
+  plusBtns.forEach((plus) => {
     plus.addEventListener("click", () => {
       const column = plus.closest(".list-container");
       const modal = column.querySelector(".open-modal");
       modal.style.width = "280px";
       showModal(modal);
     });
-  }
+  });
 }
 
 // 취소 버튼을 클릭하거나 카드 등록 후 모달창 초기화하는 부분
@@ -35,17 +35,18 @@ export function changeLineWithEnter(inputHeight, target) {
 
 // 사용자의 입력값에 해당하는 높이값으로 설정하는 함수
 export function resizeTextarea(object) {
-  object.style.height = "auto";
-  object.style.height = object.scrollHeight + "px";
+  let height = object.style.height;
+  height = "auto";
+  height = object.scrollHeight + "px";
 }
 
 // 사용자가 엔터를 입력하거나 지우면 그에 따라 줄바꿈 이벤트를 할당하는 함수
 export function resizeTextareaEvent(target) {
-  let txtarea = target.querySelectorAll(".textarea-input");
+  const txtarea = [...target.querySelectorAll(".textarea-input")];
 
-  for (let txt of txtarea) {
+  txtarea.forEach((txt) => {
     txt.style.height = txt.scrollHeight + 16 + "px";
     txt.addEventListener("keydown", () => resizeTextarea(txt), true);
     txt.addEventListener("keyup", () => resizeTextarea(txt), true);
-  }
+  });
 }

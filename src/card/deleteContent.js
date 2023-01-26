@@ -1,26 +1,26 @@
 import { delData } from "../../server/server.js";
-import { newCardHistory } from "../menu/updateMenu.js";
 import { dataStorage, DeletedItem, Notice } from "../store.js";
 import { updateCount } from "./countCard.js";
 import { findColumnIndex } from "./registerContent.js";
+import { DELETE_ACTION } from "../store.js";
 
-export let deleteContent = document.querySelectorAll(".x-content-button");
-export let deletePopup = document.querySelector(".delPopup");
-export let deletePopupBtn = document.querySelector(".del-popup");
-export let cancelDelBtn = document.querySelector(".undo-popup");
+export const deleteContent = document.querySelectorAll(".x-content-button");
+export const deletePopup = document.querySelector(".delPopup");
+export const deletePopupBtn = document.querySelector(".del-popup");
+export const cancelDelBtn = document.querySelector(".undo-popup");
 
 // 카드 삭제할 때, x 버튼에 마우스 호버시 빨간색으로 색깔 변경
 function hoverRed(target) {
-  let parentDiv = target.parentElement;
-  let grandParentSection = parentDiv.parentElement;
+  const parentDiv = target.parentElement;
+  const grandParentSection = parentDiv.parentElement;
   grandParentSection.style.borderColor = "red";
   grandParentSection.style.backgroundColor = "seashell";
 }
 
 // 카드 삭제할 때, x 버튼에 마우스 아웃시 빨간색에서 다시 원래 색깔로 변경
 function mouseOut(target) {
-  let parentDiv = target.parentElement;
-  let grandParentSection = parentDiv.parentElement;
+  const parentDiv = target.parentElement;
+  const grandParentSection = parentDiv.parentElement;
   grandParentSection.style.borderColor = "white";
   grandParentSection.style.backgroundColor = "white";
 }
@@ -60,27 +60,28 @@ export function rmDelPopup() {
 function deleteList(target) {
   const $columnCountTarget = target.closest(".list-container");
   if (!$columnCountTarget) return;
-  deleteCard(target, $columnCountTarget);
+  deleteCard({ target, $columnCountTarget });
   target.remove();
   updateCount($columnCountTarget);
 }
 
 // 칼럼에서 카드 삭제 시 삭제되었다는 알림 띄우기 및 dataStorage에서 카드 삭제
-function deleteCard(target, $columnCountTarget) {
+function deleteCard({ target, $columnCountTarget }) {
   const columnName =
     $columnCountTarget?.querySelector(".column-name").innerText;
-  const cardIndex = findCardIndex($columnCountTarget, target);
+  const cardIndex = findCardIndex({
+    targetDiv: $columnCountTarget,
+    targetSection: target,
+  });
   const cardTitle = target.querySelector(".list-title").innerText;
-  deleteCardFromStorage(columnName, cardIndex);
+  deleteCardFromStorage({ columnName, cardIndex });
   Notice.add({
-    ActionType: "delete",
+    ActionType: DELETE_ACTION,
     columnName: columnName,
     cardTitle: cardTitle,
     time: new Date().getTime(),
   });
-  console.log("after delete Notice", Notice);
   Notice.render();
-  // newCardHistory({ ActionType: "delete", columnName, cardTitle });
 
   // 서버부분 코드
   const columnIdx = findColumnIndex(columnName);
@@ -88,7 +89,7 @@ function deleteCard(target, $columnCountTarget) {
 }
 
 // 카드에서 수정, 삭제 등 여러 작업시 해당 칼럼에서 선택한 카드의 인덱스 찾는 함수
-export function findCardIndex(targetDiv, targetSection) {
+export function findCardIndex({ targetDiv, targetSection }) {
   const cards = [...targetDiv.querySelectorAll(".todolist")];
   const card = targetSection;
   const idx = cards.findIndex((ele) => ele === card);
@@ -96,7 +97,7 @@ export function findCardIndex(targetDiv, targetSection) {
 }
 
 // dataStorage에서 카드를 삭제하는 함수
-function deleteCardFromStorage(columnName, cardIndex) {
+function deleteCardFromStorage({ columnName, cardIndex }) {
   const index = findColumnIndex(columnName);
   dataStorage.columns[index].cards.splice(cardIndex, 1);
 }
