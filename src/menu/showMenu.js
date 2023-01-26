@@ -1,16 +1,19 @@
-export let menuBtn = document.querySelector(".menu-button");
-let menuScreen = document.querySelector(".menu-screen");
-export let closeMenuBtn = document.querySelector(".close-button");
+import { multiSelector } from "../helper/commonFunction.js";
+
+const [menuBtn, menuScreen, closeMenuBtn] = 
+  multiSelector([".menu-button", ".menu-screen", ".close-button"]);
 
 // 알림창 보여주는 함수
-export function showMenu() {
+function showMenu() {
   menuScreen.style.display = "block";
-  menuScreen.classList.add("show");
   menuBtn.style.display = "none";
+  menuScreen.classList.add("show");
 }
 
 // 알림창 닫는 함수
-export function closeMenu() {
+function closeMenu() {
   menuScreen.style.display = "none";
   menuBtn.style.display = "block";
 }
+
+export { menuBtn, closeMenuBtn, showMenu, closeMenu }

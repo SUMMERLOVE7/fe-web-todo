@@ -1,52 +1,28 @@
-let menuContainer = document.querySelector(".menu-content");
+import { newCardLogTemplate, updateCardLogTemplate, deleteCardLogTemplate } from "../template/menuLog.js";
 
-export function newCardHistory(columnName, cardTitle) {
-  let newDiv = document.createElement("div");
-  let newClass = document.createAttribute("class");
-  newClass.value = "menu-card";
-  newDiv.setAttributeNode(newClass);
+const menuContainer = document.querySelector(".menu-content");
 
-  newDiv.innerHTML = `<div class='menu-card'> 
-    <div class='menu-emoji'>&#128526;</div> 
-    <div class='one-menu-card'> 
-      <div class = 'menu-person-name'> @Grace </div> 
-      <div class = 'menu-caption'> ${columnName}에 ${cardTitle}이/가 추가되었습니다. </div>
-    </div>
-  </div>`;
+const getMenuLogNode = (templateHTML) => {
+  const newDiv = document.createElement("div");
+  newDiv.classList.add("menu-card");
+  newDiv.innerHTML = templateHTML;
 
+  return newDiv;
+}
+
+function newCardHistory(columnName, cardTitle) {
+  const newDiv = getMenuLogNode(newCardLogTemplate(columnName, cardTitle));
   menuContainer.prepend(newDiv);
 }
 
-export function modifyCardHistory(columnName, cardTitle) {
-  let newDiv = document.createElement("div");
-  let newClass = document.createAttribute("class");
-  newClass.value = "menu-card";
-  newDiv.setAttributeNode(newClass);
-
-  newDiv.innerHTML = `<div class='menu-card'> 
-    <div class='menu-emoji'>&#128526;</div> 
-    <div class='one-menu-card'> 
-      <div class = 'menu-person-name'> @Grace </div> 
-      <div class = 'menu-caption'> ${columnName}의 카드 제목이 ${cardTitle}(으)로 수정되었습니다. </div>
-    </div>
-  </div>`;
-
+function modifyCardHistory(columnName, cardTitle) {
+  const newDiv = getMenuLogNode(updateCardLogTemplate(columnName, cardTitle));
   menuContainer.prepend(newDiv);
 }
 
-export function deleteCardHistory(columnName, cardTitle) {
-  let newDiv = document.createElement("div");
-  let newClass = document.createAttribute("class");
-  newClass.value = "menu-card";
-  newDiv.setAttributeNode(newClass);
-
-  newDiv.innerHTML = `<div class='menu-card'> 
-    <div class='menu-emoji'>&#128526;</div> 
-    <div class='one-menu-card'> 
-      <div class = 'menu-person-name'> @Grace </div> 
-      <div class = 'menu-caption'> ${columnName} 칼럼의 ${cardTitle} 카드가 삭제되었습니다. </div>
-    </div>
-  </div>`;
-
+function deleteCardHistory(columnName, cardTitle) {
+  const newDiv = getMenuLogNode(deleteCardLogTemplate(columnName, cardTitle));
   menuContainer.prepend(newDiv);
 }
+
+export { newCardHistory, modifyCardHistory, deleteCardHistory }
