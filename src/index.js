@@ -7,9 +7,9 @@ import { openModal, resizeTextareaEvent } from "./card/inputContent.js";
 import { openColumnModal, registerColumn, cancelColBtn } from "./column/addColumn.js";
 import { deleteColumn } from "./column/ColumnDeletion.js";
 import { getData } from "../server/server.js";
-import { addEvent } from "./helper/commonFunction.js";
+import { addEvent, changeCSS } from "./helper/commonFunction.js";
 
-let modifyContent = document.querySelectorAll(".modify-content-button");
+const modifyContent = document.querySelectorAll(".modify-content-button");
 
 window.onload = function (e) {
   closeMenu();
@@ -26,7 +26,7 @@ window.onload = function (e) {
 
 addEvent(menuBtn, [() => showMenu()]);
 addEvent(closeMenuBtn, [() => closeMenu()]);
-addEvent(cancelDelBtn, [() => deletePopup.style.display = "none"]);
+addEvent(cancelDelBtn, [() => changeCSS(deletePopup, "display", "none")]);
 addEvent(cancelColBtn, [() =>closePopup()]);
 
 // 서버 부분 코드

@@ -7,7 +7,6 @@ const [menuBtn, menuScreen, closeMenuBtn] =
 function showMenu() {
   changeCSS(menuScreen, "display", "block");
   changeCSS(menuBtn, "display", "none");
-  menuBtn.style.display = "none";
   menuScreen.classList.add("show");
 }
 

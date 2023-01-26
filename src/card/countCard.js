@@ -3,10 +3,7 @@ import { findColumnIndex } from "./registerContent.js";
 import { pipe } from "../helper/commonFunction.js";
 
 // store.js의 dataStorage에 저장된 카드 갯수 카운트
-const countCard = (index) => pipe(
-  () => dataStorage.columns[index].cards.length,
-  (count) => count
-)();
+const countCard = (index) => dataStorage.columns[index].cards.length;
 
 // index.html의 카드 개수 업데이트하는 함수
 const updateCount = (target) => pipe(

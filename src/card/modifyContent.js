@@ -36,9 +36,9 @@ function modifyCardInStorage(targetDiv, targetSection, newTitle, newCaption) {
 // 수정 버튼 클릭시 수정을 완료하고 알림창에 수정을 했다는 알림 띄우는 함수
 function finishModification(target) {
   let modBtn = target.querySelector(".modify-button");
-  addEvent(modBtn, [() => {
-      e.preventDefault();
-
+  addEvent(modBtn, [
+    (event) => event.preventDefault(),
+    () => {
       let parent = target.closest(".todolist");
       let title = parent.querySelector(".title-input");
       let content = parent.querySelector(".caption-input");
@@ -57,7 +57,8 @@ function finishModification(target) {
       modifyCardInStorage(grandParent, parent, newtitle, newcaption);
       addEventToCard(grandParent);
       modifyCardHistory(columnName, newtitle);
-  }]);
+    }
+  ]);
 }
 
 // 수정을 취소하는 함수

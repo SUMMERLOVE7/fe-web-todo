@@ -1,5 +1,5 @@
 import { findColumnIndex } from "../card/registerContent.js";
-import { addEvent, pipe } from "../helper/commonFunction.js";
+import { addEvent } from "../helper/commonFunction.js";
 import { dataStorage } from "../store.js";
 
 NodeList.prototype.forEach = Array.prototype.forEach;
