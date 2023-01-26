@@ -51,9 +51,7 @@ class Notiification {
 }
 
 export const DeletedItem = {
-  columnName: null,
-  cardIndex: null,
-  cardTitle: null,
+  target: null,
 };
 
 export const Notice = new Notiification();

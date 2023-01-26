@@ -6,6 +6,7 @@ import {
   cancelDelBtn,
   deletePopup,
   deletePopupBtn,
+  rmDelPopup,
 } from "./card/deleteContent.js";
 import { dataStorage } from "./store.js";
 import { modifyModal } from "./card/modifyContent.js";
@@ -51,9 +52,9 @@ cancelColBtn.addEventListener("click", () => {
   closePopup();
 });
 
-// deletePopupBtn.addEventListener("click", ({ target, currentTarget }) => {
-//   rmDelPopup();
-// });
+deletePopupBtn.addEventListener("click", ({ target, currentTarget }) => {
+  rmDelPopup();
+});
 
 // 서버 부분 코드
 await getData();

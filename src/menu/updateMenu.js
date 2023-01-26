@@ -44,19 +44,8 @@ export function newCardHistory({ ActionType, columnName, cardTitle }) {
   let newClass = document.createAttribute("class");
   newClass.value = "menu-card";
   newDiv.setAttributeNode(newClass);
-  console.log("Action", ActionType);
-  console.log("columnName", columnName);
-  console.log("cardTitle", cardTitle);
 
   newDiv.innerHTML = NoticeTemplate({ ActionType, columnName, cardTitle });
-
-  // newDiv.innerHTML = `<div class='menu-card'>
-  //   <div class='menu-emoji'>&#128526;</div>
-  //   <div class='one-menu-card'>
-  //     <div class = 'menu-person-name'> @Grace </div>
-  //     <div class = 'menu-caption'> ${columnName}에 ${cardTitle}이/가 추가되었습니다. </div>
-  //   </div>
-  // </div>`;
 
   menuContainer.prepend(newDiv);
 }

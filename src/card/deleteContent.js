@@ -25,32 +25,6 @@ function mouseOut(target) {
   grandParentSection.style.backgroundColor = "white";
 }
 
-// 칼럼에서 카드 삭제 및 카드 개수 업데이트
-function deleteList(target) {
-  console.log("target", target);
-  const $columnCountTarget = target.closest(".list-container");
-  if (!$columnCountTarget) return;
-  deleteCard(target, $columnCountTarget);
-  target.remove();
-  updateCount($columnCountTarget);
-}
-
-// 칼럼에서 카드 삭제 시 삭제되었다는 알림 띄우기 및 dataStorage에서 카드 삭제
-function deleteCard(target, $columnCountTarget) {
-  console.log("$columnCountTarget", $columnCountTarget);
-  const columnName =
-    $columnCountTarget?.querySelector(".column-name").innerText;
-  const cardIndex = findCardIndex($columnCountTarget, target);
-  const cardTitle = target.querySelector(".list-title").innerText;
-  deleteCardFromStorage(columnName, cardIndex);
-  newCardHistory({ ActionType: "delete", columnName, cardTitle });
-  // deleteCardHistory(columnName, cardTitle);
-
-  // 서버부분 코드
-  const columnIdx = findColumnIndex(columnName);
-  delData(columnIdx, cardIndex);
-}
-
 // 위의 함수들을 이벤트 할당하는 부분
 export function manageContent(target) {
   target.addEventListener("mouseover", () => hoverRed(target));
@@ -61,36 +35,48 @@ export function manageContent(target) {
     const $cardTarget = e.target.closest(".todolist");
 
     if (!$cardTarget) return;
+    setDeletedItem($cardTarget);
     showPopup(deletePopup);
-    rmDelPopup($cardTarget);
   });
+}
+
+function setDeletedItem(target) {
+  DeletedItem.target = target;
 }
 
 // 기타 여러 모달창 띄우는 함수
 export function showPopup(target) {
   target.style.display = "block";
   target.classList.add("show");
-  // deletePopup.addEventListener("click", () => {
-  //   console.log("target2", target);
-  //   target.style.display = "block";
-  //   target.classList.add("show");
-  // });
 }
 
-// 카드 삭제 취소시 모달창 안보이게 하는 부분
-function rmDelPopup($target) {
-  // deleteList($target);
-  // deletePopup.style.display = "none";
-
-  deleteList($target);
+// delete할 데이터 삭제
+export function rmDelPopup() {
+  deleteList(DeletedItem.target);
   deletePopup.style.display = "none";
+}
 
-  // deletePopupBtn.addEventListener("click", ({ target, currentTarget }) => {
-  //   if (target !== currentTarget) return;
-  //   console.log(target);
-  //   deleteList($target);
-  //   deletePopup.style.display = "none";
-  // });
+// 칼럼에서 카드 삭제 및 카드 개수 업데이트
+function deleteList(target) {
+  const $columnCountTarget = target.closest(".list-container");
+  if (!$columnCountTarget) return;
+  deleteCard(target, $columnCountTarget);
+  target.remove();
+  updateCount($columnCountTarget);
+}
+
+// 칼럼에서 카드 삭제 시 삭제되었다는 알림 띄우기 및 dataStorage에서 카드 삭제
+function deleteCard(target, $columnCountTarget) {
+  const columnName =
+    $columnCountTarget?.querySelector(".column-name").innerText;
+  const cardIndex = findCardIndex($columnCountTarget, target);
+  const cardTitle = target.querySelector(".list-title").innerText;
+  deleteCardFromStorage(columnName, cardIndex);
+  newCardHistory({ ActionType: "delete", columnName, cardTitle });
+
+  // 서버부분 코드
+  const columnIdx = findColumnIndex(columnName);
+  delData(columnIdx, cardIndex);
 }
 
 // 카드에서 수정, 삭제 등 여러 작업시 해당 칼럼에서 선택한 카드의 인덱스 찾는 함수
