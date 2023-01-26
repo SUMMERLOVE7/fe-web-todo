@@ -1,7 +1,7 @@
 import { showPopup } from "../card/deleteContent.js";
 import { openModal } from "../card/inputContent.js";
 import { manageAddBtnEvent } from "../card/registerContent.js";
-import { addEvent, multiSelector, pipe } from "../helper/commonFunction.js";
+import { addEvent, changeCSS, multiSelector, pipe } from "../helper/commonFunction.js";
 import { dataStorage } from "../store.js";
 import { columnTemplate } from "../template/column.js";
 import { deleteColumn } from "./ColumnDeletion.js";
@@ -11,7 +11,7 @@ const [columnPopup, cancelColBtn] = multiSelector([".columnPopup", ".undo-column
 // 칼럼 추가하는 모달창 초기화하는 함수
 const closePopup = () => pipe(
   ($columnInput) => $columnInput.value = "",
-  () => columnPopup.style.display = "none"
+  () => changeCSS(columnPopup, "display", "none")
 )(document.querySelector(".new-column-title"));
 
 // 칼럼 이름 가져오는 함수
@@ -40,7 +40,6 @@ function addColumn() {
   const newColumnName = getColumnName();
 
   newDiv.classList.add("list-container");
-  newDiv.setAttributeNode(newClass);
   newDiv.innerHTML = createColumnHTML(newColumnName);
   columnContainer.appendChild(newDiv);
 

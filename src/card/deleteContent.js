@@ -1,31 +1,28 @@
 import { delData } from "../../server/server.js";
-import { multiSelector, pipe } from "../helper/commonFunction.js";
+import { multiSelector, pipe, addEvent, changeCSS } from "../helper/commonFunction.js";
 import { deleteCardHistory } from "../menu/updateMenu.js";
 import { dataStorage } from "../store.js";
 import { updateCount } from "./countCard.js";
 import { findColumnIndex } from "./registerContent.js";
-import { addEvent } from "../helper/commonFunction.js";
 
 const deleteContent = document.querySelectorAll(".x-content-button");
 const [deletePopup, deletePopupBtn, cancelDelBtn] = multiSelector([".delPopup", ".del-popup", ".undo-popup"])
 
 // 카드 삭제할 때, x 버튼에 마우스 호버시 빨간색으로 색깔 변경
 const hoverRed = (target) => pipe(
-  (parentDiv) => parentDiv.parentElement,
   (section) => {
-    section.style.borderColor = "red";
-    section.style.backgroundColor = "seashell";
+    changeCSS(section, "borderColor", "red");
+    changeCSS(section, "backgroundColor", "seashell");
   }
-)(target.parentElement);
+)(target.parentElement.parentElement);
 
 // 카드 삭제할 때, x 버튼에 마우스 아웃시 빨간색에서 다시 원래 색깔로 변경
 const mouseOut = (target) => pipe(
-  (parentDiv) => parentDiv.parentElement,
   (section) => {
-    section.style.borderColor = "white";
-    section.style.backgroundColor = "white";
+    changeCSS(section, "borderColor", "white");
+    changeCSS(section, "backgroundColor", "white");
   }
-)(target.parentElement);
+)(target.parentElement.parentElement);
 
 // 칼럼에서 카드 삭제 및 카드 개수 업데이트
 const deleteList = (target) => {
@@ -63,15 +60,15 @@ function manageContent(target) {
 }
 
 // 기타 여러 모달창 띄우는 함수
-function showPopup(target) {
-  target.style.display = "block";
-  target.classList.add("show");
-}
+const showPopup = (target) => pipe(
+  () => changeCSS(target, "display", "block"),
+  () => target.classList.add("show")
+);
 
 // 카드 삭제 취소시 모달창 안보이게 하는 부분
 const rmDelPopup = (target) => addEvent(deletePopupBtn, [
   () => deleteList(target),
-  () => deletePopup.style.display = "none"
+  () => changeCSS(deletePopup, "display", "none"),
 ]);
 
 // 카드에서 수정, 삭제 등 여러 작업시 해당 칼럼에서 선택한 카드의 인덱스 찾는 함수

@@ -1,3 +1,5 @@
+NodeList.prototype.forEach = Array.prototype.forEach;
+
 const columns = document.querySelectorAll(".list-container");
 columns.forEach((column) => new Sortable(column, {
   group: "shared",

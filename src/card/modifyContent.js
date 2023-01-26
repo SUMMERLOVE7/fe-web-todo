@@ -30,7 +30,6 @@ function modifyCardInStorage(targetDiv, targetSection, newTitle, newCaption) {
   dataStorage.columns[colIndex].cards[cardindex].title = newTitle;
   dataStorage.columns[colIndex].cards[cardindex].caption = newCaption;
 
-  // 서버 부분 코드
   modData(colIndex);
 }
 

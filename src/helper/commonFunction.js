@@ -10,4 +10,6 @@ const addEvent = ($target, callBackArray, eventType="click") => {
 
 const multiSelector = (queryArray) => queryArray.map((query) => document.querySelector(query));
 
-export { pipe, addEvent, multiSelector }
+const changeCSS = ($target, key, value) => $target.style[key] = value;
+
+export { pipe, addEvent, multiSelector, changeCSS }

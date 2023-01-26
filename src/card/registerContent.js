@@ -6,38 +6,33 @@ import { newCardHistory } from "../menu/updateMenu.js";
 import { modifyModal } from "./modifyContent.js";
 import { addData } from "../../server/server.js";
 import { newCardTemplate } from "../template/card.js";
-import { addEvent, pipe } from "../helper/commonFunction.js";
+import { addEvent, multiSelector, pipe } from "../helper/commonFunction.js";
 
 NodeList.prototype.forEach = Array.prototype.forEach;
 
-let contentTodo = document.querySelector(".havetodo-container");
-let contentDoing = document.querySelector(".doing-container");
-let contentDone = document.querySelector(".done-container");
+const [contentTodo, contentDoing, contentDone] = 
+  multiSelector([".havetodo-container", ".doing-container", ".done-container"]);
 
 function valid_title_input(target) {
   if (!target.value) {
     alert("제목을 입력해주세요");
     return -1;
-  } else {
-    return 0;
-  }
+  } 
+  return 0;
 }
 
 function valid_caption_input(target) {
   if (!target.value) {
     alert("내용을 입력해주세요");
     return -1;
-  } else {
-    return 0;
-  }
+  } 
+  return 0;
 }
 
 // 제목이나 내용 미입력시 입력하라는 알림창 띄우는 함수
-function check_input_validity(title, caption) {
-  if (valid_title_input(title) === 0 && valid_caption_input(caption) === 0) {
-    return 0;
-  } else return -1;
-}
+const check_input_validity = (title, caption) => 
+  valid_title_input(title) === 0 && valid_caption_input(caption) === 0 ?
+    0 : -1;
 
 // 해당 칼럼의 인덱스를 찾는 함수
 function findColumnIndex(element) {
@@ -76,20 +71,11 @@ function registerModal(target) {
   pushCardIntoStorage(columnName, newTitle, newContent);
 
   let newSection = document.createElement("section");
-  let newClass = document.createAttribute("class");
-
-  newClass.value = "todolist";
-  newSection.setAttributeNode(newClass);
-
-  const newDraggable = document.createAttribute("draggable");
-  newDraggable.value = "true";
-  newSection.setAttributeNode(newDraggable);
-
+  newSection.classList.add("todolist", "draggable");
   newSection.innerHTML = renderNewSection(newTitle, newContent);
 
-  let firstchild = target.querySelector(".todolist");
-  let listTitle = newSection.querySelector(".list-title");
-  let listCaption = newSection.querySelector(".caption");
+  const [firstchild, listTitle, listCaption] = 
+    multiSelector([".todolist", ".list-title", ".caption"]);
 
   changeLineWithEnter(title, listTitle);
   changeLineWithEnter(content, listCaption);
