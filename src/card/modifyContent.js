@@ -45,7 +45,7 @@ export function modifyCardInStorage(targetDiv, targetSection, newTitle, newCapti
   dataStorage.columns[colIndex].cards[cardindex].caption = newCaption;
 
   // 서버 부분 코드
-  // modData(colIndex);
+  modData(colIndex);
 }
 
 // 수정 버튼 클릭시 수정을 완료하고 알림창에 수정을 했다는 알림 띄우는 함수

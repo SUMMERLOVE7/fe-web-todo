@@ -55,7 +55,7 @@ async function pushCardIntoStorage(columnName, title, caption) {
   });
 
   // 서버부분 코드
-  // await addData(index);
+  await addData(index);
 }
 
 // 카드 등록하기 위한 모달을 생성하는 함수

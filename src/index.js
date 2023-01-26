@@ -42,4 +42,4 @@ cancelColBtn.addEventListener("click", () => {
 });
 
 // 서버 부분 코드
-// await getData();
+await getData();
