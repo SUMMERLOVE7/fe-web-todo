@@ -1,5 +1,5 @@
 import { changeLineWithEnter, closeModal } from "./inputContent.js";
-import { dataStorage } from "../store.js";
+import { dataStorage, Notice } from "../store.js";
 import { manageContent } from "./deleteContent.js";
 import { changeEveryCount } from "./countCard.js";
 import { newCardHistory } from "../menu/updateMenu.js";
@@ -91,7 +91,15 @@ function registerModal(target) {
   changeLineWithEnter(content, listCaption);
 
   target.insertBefore(newSection, firstchild);
-  newCardHistory({ columnName, ActionType: "add", cardTitle: newTitle });
+  Notice.add({
+    ActionType: "add",
+    columnName: columnName,
+    cardTitle: newTitle,
+    time: new Date().getTime(),
+  });
+  Notice.render();
+  console.log("after add Notice", Notice);
+  // newCardHistory({ columnName, ActionType: "add", cardTitle: newTitle });
   changeEveryCount();
   addEvent(target);
 }
@@ -116,15 +124,6 @@ export function addEvent(target) {
   if (isTarget) manageContent(isTarget);
 
   if (isPencil) modifyModal(isPencil);
-
-  // target.addEventListener("click", () => {
-  //   if (isTarget.classList.contains("x-content-button")) {
-  //     manageContent(isTarget);
-  //   }
-  //   if (isPencil.classList.contains("modify-content-button")) {
-  //     modifyModal(isPencil);
-  //   }
-  // });
 }
 
 // 카드를 추가하는 모든 함수를 포함한 함수

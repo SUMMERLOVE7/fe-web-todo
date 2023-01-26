@@ -2,16 +2,32 @@ let menuContainer = document.querySelector(".menu-content");
 
 const [ADD_ACTION, MODIFY_ACTION, DELETE_ACTION] = ["add", "modify", "delete"];
 
-function NoticeTemplate({ ActionType, columnName, cardTitle }) {
-  return `<div class='menu-card'> 
+function NoticeTemplate({ ActionType, columnName, cardTitle, time }) {
+  return `
+  <div class='menu-card'> 
   <div class='menu-emoji'>&#128526;</div> 
   <div class='one-menu-card'> 
     <div class = 'menu-person-name'> @Grace </div> 
     ${NoticeMessage({ ActionType, columnName, cardTitle })}
-    <div>1분전<div>
+    <div class = 'menu-time'>${TimeMessage(time)}</div>
   </div>
-</div>`;
+  </div>`;
 }
+const TimeMessage = (time) => {
+  const now_time = new Date().getTime();
+  const diff_time = now_time - time;
+  let time_message = "";
+  const initial_time_message = "방금 전";
+  const diff_day = Math.round(diff_time / 1000 / 60 / 60 / 24);
+  const diff_hour = Math.round(diff_time / 1000 / 60 / 60);
+  const diff_min = Math.round(diff_time / 1000 / 60);
+  if (diff_day) time_message += diff_day + "일";
+  if (diff_hour && !time_message) time_message += diff_hour + "시간 ";
+  if (diff_min && !time_message) time_message += diff_min + "분 ";
+  if (!time_message) return initial_time_message;
+  time_message += "전";
+  return time_message;
+};
 
 function NoticeMessage({ ActionType, columnName, cardTitle }) {
   if (ActionType === ADD_ACTION)
@@ -39,15 +55,31 @@ function deleteCardMessage({ columnName, cardTitle }) {
   return deleteActionMessage;
 }
 
-export function newCardHistory({ ActionType, columnName, cardTitle }) {
-  let newDiv = document.createElement("div");
-  let newClass = document.createAttribute("class");
-  newClass.value = "menu-card";
-  newDiv.setAttributeNode(newClass);
+export function newCardHistory({ ActionType, columnName, cardTitle, time }) {
+  // let newDiv = document.createElement("div");
+  // let newClass = document.createAttribute("class");
+  // newClass.value = "menu-card";
+  // newDiv.setAttributeNode(newClass);
 
-  newDiv.innerHTML = NoticeTemplate({ ActionType, columnName, cardTitle });
+  // newDiv.innerHTML = NoticeTemplate({
+  //   ActionType,
+  //   columnName,
+  //   cardTitle,
+  //   time,
+  // });
 
-  menuContainer.prepend(newDiv);
+  const Notice = NoticeTemplate({
+    ActionType,
+    columnName,
+    cardTitle,
+    time,
+  });
+
+  console.log(Notice);
+
+  return Notice;
+
+  // menuContainer.prepend(newDiv);
 }
 
 export function modifyCardHistory(columnName, cardTitle) {

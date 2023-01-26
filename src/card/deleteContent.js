@@ -1,6 +1,6 @@
 import { delData } from "../../server/server.js";
-import { deleteCardHistory, newCardHistory } from "../menu/updateMenu.js";
-import { dataStorage, DeletedItem } from "../store.js";
+import { newCardHistory } from "../menu/updateMenu.js";
+import { dataStorage, DeletedItem, Notice } from "../store.js";
 import { updateCount } from "./countCard.js";
 import { findColumnIndex } from "./registerContent.js";
 
@@ -72,7 +72,15 @@ function deleteCard(target, $columnCountTarget) {
   const cardIndex = findCardIndex($columnCountTarget, target);
   const cardTitle = target.querySelector(".list-title").innerText;
   deleteCardFromStorage(columnName, cardIndex);
-  newCardHistory({ ActionType: "delete", columnName, cardTitle });
+  Notice.add({
+    ActionType: "delete",
+    columnName: columnName,
+    cardTitle: cardTitle,
+    time: new Date().getTime(),
+  });
+  console.log("after delete Notice", Notice);
+  Notice.render();
+  // newCardHistory({ ActionType: "delete", columnName, cardTitle });
 
   // 서버부분 코드
   const columnIdx = findColumnIndex(columnName);

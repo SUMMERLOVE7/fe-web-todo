@@ -32,7 +32,8 @@ header {
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
   background: #0075de;
   /* up */
-  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5),
+    0px 2px 4px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
 }
 
@@ -84,7 +85,8 @@ header {
   width: 200px;
   font-size: 15px;
   */
-  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px rgba(204, 204, 204, 0.5),
+    0px 2px 4px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
   /* Note: backdrop-filter has minimal browser support */
   border-radius: 6px;
@@ -161,6 +163,12 @@ header {
 
 .menu-caption {
   margin-left: 10px;
+}
+
+.menu-time {
+  margin-left: 10px;
+  font-weight: 20px;
+  color: gray;
 }
 
 .close-button {

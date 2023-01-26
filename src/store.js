@@ -1,3 +1,5 @@
+import { newCardHistory } from "./menu/updateMenu.js";
+
 export const dataStorage = {
   columns: [
     {
@@ -40,9 +42,9 @@ class Notiification {
     this.notices = [];
   }
   render() {
-    const notice_ul = document.querySelector(".notification-menu ul");
-    notice_ul.innerHTML =
-      `${this.notices.map((notice) => makeNoticeTemplate(notice)).join("")}` ||
+    const menuContainer = document.querySelector(".menu-content");
+    menuContainer.innerHTML =
+      `${this.notices.map((notice) => newCardHistory(notice)).join("")}` ||
       `<h2>알림이 없습니다.<h2>`;
   }
   add(info) {
