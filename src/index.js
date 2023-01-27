@@ -41,8 +41,8 @@ window.onload = function (e) {
   registerColumn();
 };
 
-menuBtn.addEventListener("click", () => showMenu());
-closeMenuBtn.addEventListener("click", () => closeMenu());
+menuBtn.addEventListener("click", showMenu);
+closeMenuBtn.addEventListener("click", closeMenu);
 
 cancelDelBtn.addEventListener("click", () => {
   deletePopup.style.display = "none";
